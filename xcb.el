@@ -204,6 +204,7 @@
                        (plist-put (process-plist process) 'connection obj))
     (set-process-coding-system process 'binary 'binary)
     (set-process-filter process #'xcb:-connection-setup-filter)
+    (set-process-sentinel process #'xcb:-connection-sentinel)
     (process-send-string                ;send setup packet
      process
      (apply #'unibyte-string
@@ -266,6 +267,11 @@
                     (slot-value obj 'reason)))
             (x (error "Unrecognized setup status: %d" x)))))
       (setf (slot-value connection 'lock) nil))))
+
+(defun xcb:-connection-sentinel (process _event)
+  "Process sentinel used to teardown the connection on disconnect."
+  (unless (process-live-p process)
+    (xcb:disconnect (plist-get (process-plist process) 'connection))))
 
 (cl-defmethod xcb:-convert-sequence ((obj xcb:connection) sequence16)
   "Convert 16-bit sequence number SEQUENCE16 (read from a packet).
@@ -419,7 +425,7 @@ Concurrency is disabled as it breaks the orders of errors, replies and events."
 (cl-defmethod xcb:disconnect ((obj xcb:connection))
   "Disconnect from X server."
   (when (slot-value obj 'connected)
-    (xcb:flush obj)
+    (ignore-errors (xcb:flush obj))
     (delete-process (slot-value obj 'process))
     ;; Reset every slot to its default value
     (let ((slots (eieio-class-slots 'xcb:connection)))
