@@ -7,7 +7,7 @@
 ;; Version: 0.18
 ;; Package-Requires: ((emacs "26.1"))
 ;; Keywords: unix
-;; URL: https://github.com/ch11ng/xelb
+;; URL: https://github.com/emacs-exwm/xelb
 
 ;; This file is part of GNU Emacs.
 
