@@ -5,7 +5,7 @@
 ;; Author: Chris Feng <chris.w.feng@gmail.com>
 ;; Maintainer: Adrián Medraño Calvo <adrian@medranocalvo.com>, Steven Allen <steven@stebalien.com>, Daniel Mendler <mail@daniel-mendler.de>
 ;; Version: 0.18
-;; Package-Requires: ((emacs "24.4") (cl-generic "0.2"))
+;; Package-Requires: ((emacs "26.1"))
 ;; Keywords: unix
 ;; URL: https://github.com/ch11ng/xelb
 
