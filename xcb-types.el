@@ -54,7 +54,8 @@
 (require 'xcb-debug)
 
 (define-minor-mode xcb:debug
-  "Debug-logging enabled if non-nil"
+  "Debug-logging enabled if non-nil."
+  :group 'debug
   :global t)
 
 (defmacro xcb:-log (&optional format-string &rest objects)
