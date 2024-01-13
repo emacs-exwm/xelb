@@ -72,34 +72,6 @@ FORMAT-STRING is a string specifying the message to output, as in
                         ,@objects)
      nil))
 
-;; Backport some functions to Emacs 24
-
-(eval-and-compile
-  (unless (fboundp 'eieio-class-slots)
-    (defun eieio-class-slots (class)
-      (let* ((tmp (get class 'eieio-class-definition))
-             (names (aref tmp 5))
-             (initforms (aref tmp 6))
-             (types (aref tmp 8))
-             result)
-        (dotimes (i (length names))
-          (setq result (nconc result (list (vector (elt names i)
-                                                   (elt initforms i)
-                                                   (elt types i))))))
-        result))))
-
-(eval-and-compile
-  (unless (fboundp 'eieio-slot-descriptor-name)
-    (defsubst eieio-slot-descriptor-name (slot) (aref slot 0))))
-
-(eval-and-compile
-  (unless (fboundp 'cl--slot-descriptor-initform)
-    (defsubst cl--slot-descriptor-initform (slot) (aref slot 1))))
-
-(eval-when-compile
-  (unless (fboundp 'cl--slot-descriptor-type)
-    (defsubst cl--slot-descriptor-type (slot) (aref slot 2))))
-
 ;;;; Utility functions
 
 (defsubst xcb:-pack-u1 (value)
