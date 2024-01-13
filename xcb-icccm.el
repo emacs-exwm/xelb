@@ -86,7 +86,7 @@ The value of these atoms will be available in `xcb:Atom' namespace."
 
 (defclass xcb:icccm:SendEvent (xcb:SendEvent)
   ((propagate :initform 0)
-   (event-mask :initform xcb:EventMask:NoEvent))
+   (event-mask :initform 'xcb:EventMask:NoEvent))
   :documentation "A fork of `xcb:SendEvent' to send ICCCM client messages.")
 
 (defclass xcb:icccm:--ClientMessage (xcb:--struct)
@@ -96,7 +96,7 @@ The value of these atoms will be available in `xcb:Atom' namespace."
 (defclass xcb:icccm:-ClientMessage
   (xcb:icccm:--ClientMessage xcb:ClientMessage)
   ((format :initform 32)
-   (type :initform xcb:Atom:WM_PROTOCOLS)
+   (type :initform 'xcb:Atom:WM_PROTOCOLS)
    (protocol :type xcb:ATOM)                 ;new slot
    (time :initarg :time :type xcb:TIMESTAMP) ;new slot
    (pad~0 :initform 12 :type xcb:-pad))      ;new slot
@@ -104,12 +104,12 @@ The value of these atoms will be available in `xcb:Atom' namespace."
 protocol and time.")
 
 (defclass xcb:icccm:WM_DELETE_WINDOW (xcb:icccm:-ClientMessage)
-  ((protocol :initform xcb:Atom:WM_DELETE_WINDOW)
-   (time :initform xcb:Time:CurrentTime))
+  ((protocol :initform 'xcb:Atom:WM_DELETE_WINDOW)
+   (time :initform 'xcb:Time:CurrentTime))
   :documentation "Delete a window using the WM_DELETE_WINDOW client message.")
 
 (defclass xcb:icccm:WM_TAKE_FOCUS (xcb:icccm:-ClientMessage)
-  ((protocol :initform xcb:Atom:WM_TAKE_FOCUS))
+  ((protocol :initform 'xcb:Atom:WM_TAKE_FOCUS))
   :documentation "Set a focus using the WM_TAKE_FOCUS client message.
 
 A valid timestamp (rather than `xcb:Time:CurrentTime') must be supplied.")
@@ -167,7 +167,7 @@ This method automatically format the value as 8, 16 or 32 bits array."
     retval))
 
 (defclass xcb:icccm:-ChangeProperty (xcb:ChangeProperty)
-  ((mode :initform xcb:PropMode:Replace)
+  ((mode :initform 'xcb:PropMode:Replace)
    (format :initform 32)
    (data :initform nil))
   :documentation "Change an ICCCM property.")
@@ -193,7 +193,7 @@ This method automatically sets the data length."
 ;;;; Abstract classes for getting/changing text properties
 
 (defclass xcb:icccm:-GetProperty-text (xcb:icccm:-GetProperty)
-  ((type :initform xcb:GetPropertyType:Any))
+  ((type :initform 'xcb:GetPropertyType:Any))
   :documentation "Get an ICCCM text property (request part).")
 
 (defclass xcb:icccm:-GetProperty-text~reply (xcb:icccm:-GetProperty~reply)
@@ -224,7 +224,7 @@ This method automatically decodes the value (as string)."
     retval))
 
 (defclass xcb:icccm:-ChangeProperty-text (xcb:icccm:-ChangeProperty)
-  ((type :initform xcb:Atom:STRING)     ;may be changed
+  ((type :initform 'xcb:Atom:STRING)     ;may be changed
    (format :initform 8))
   :documentation "Change an ICCCM text property.")
 ;;
@@ -331,19 +331,19 @@ whose fields are explicitly listed out."
 
 ;; WM_NAME
 (defclass xcb:icccm:get-WM_NAME (xcb:icccm:-GetProperty-text)
-  ((property :initform xcb:Atom:WM_NAME)))
+  ((property :initform 'xcb:Atom:WM_NAME)))
 (defclass xcb:icccm:get-WM_NAME~reply (xcb:icccm:-GetProperty-text~reply)
   nil)
 (defclass xcb:icccm:set-WM_NAME (xcb:icccm:-ChangeProperty-text)
-  ((property :initform xcb:Atom:WM_NAME)))
+  ((property :initform 'xcb:Atom:WM_NAME)))
 
 ;; WM_ICON_NAME
 (defclass xcb:icccm:get-WM_ICON_NAME (xcb:icccm:-GetProperty-text)
-  ((property :initform xcb:Atom:WM_ICON_NAME)))
+  ((property :initform 'xcb:Atom:WM_ICON_NAME)))
 (defclass xcb:icccm:get-WM_ICON_NAME~reply (xcb:icccm:-GetProperty-text~reply)
   nil)
 (defclass xcb:icccm:set-WM_ICON_NAME (xcb:icccm:-ChangeProperty-text)
-  ((property :initform xcb:Atom:WM_ICON_NAME)))
+  ((property :initform 'xcb:Atom:WM_ICON_NAME)))
 
 ;; WM_SIZE_HINTS
 (defconst xcb:icccm:WM_SIZE_HINTS:USPosition  1)
@@ -378,25 +378,25 @@ whose fields are explicitly listed out."
    (win-gravity :initarg :win-gravity :initform 0 :type xcb:-ignore)))
 ;;
 (defclass xcb:icccm:get-WM_SIZE_HINTS (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:WM_SIZE_HINTS)
-   (type :initform xcb:Atom:WM_SIZE_HINTS)
+  ((property :initform 'xcb:Atom:WM_SIZE_HINTS)
+   (type :initform 'xcb:Atom:WM_SIZE_HINTS)
    (long-length :initform 18)))         ;fixed
 (defclass xcb:icccm:get-WM_SIZE_HINTS~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:icccm:-WM_SIZE_HINTS)
   nil)
 (defclass xcb:icccm:set-WM_SIZE_HINTS
   (xcb:icccm:-ChangeProperty-explicit xcb:icccm:-WM_SIZE_HINTS)
-  ((property :initform xcb:Atom:WM_SIZE_HINTS)
-   (type :initform xcb:Atom:WM_SIZE_HINTS)))
+  ((property :initform 'xcb:Atom:WM_SIZE_HINTS)
+   (type :initform 'xcb:Atom:WM_SIZE_HINTS)))
 
 ;; WM_NORMAL_HINTS
 (defclass xcb:icccm:get-WM_NORMAL_HINTS (xcb:icccm:get-WM_SIZE_HINTS)
-  ((property :initform xcb:Atom:WM_NORMAL_HINTS)))
+  ((property :initform 'xcb:Atom:WM_NORMAL_HINTS)))
 (defclass xcb:icccm:get-WM_NORMAL_HINTS~reply
   (xcb:icccm:get-WM_SIZE_HINTS~reply)
   nil)
 (defclass xcb:icccm:set-WM_NORMAL_HINTS (xcb:icccm:set-WM_SIZE_HINTS)
-  ((property :initform xcb:Atom:WM_NORMAL_HINTS)))
+  ((property :initform 'xcb:Atom:WM_NORMAL_HINTS)))
 
 ;; WM_HINTS
 (defconst xcb:icccm:WM_HINTS:InputHint 1)
@@ -422,21 +422,21 @@ whose fields are explicitly listed out."
 ;;
 (defclass xcb:icccm:get-WM_HINTS (xcb:icccm:-GetProperty-explicit)
   ;; (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:WM_HINTS)
-   (type :initform xcb:Atom:WM_HINTS)
+  ((property :initform 'xcb:Atom:WM_HINTS)
+   (type :initform 'xcb:Atom:WM_HINTS)
    (long-length :initform 9)))          ;fixed
 (defclass xcb:icccm:get-WM_HINTS~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:icccm:-WM_HINTS)
   nil)
 (defclass xcb:icccm:set-WM_HINTS
   (xcb:icccm:-ChangeProperty-explicit xcb:icccm:-WM_HINTS)
-  ((property :initform xcb:Atom:WM_HINTS)
-   (type :initform xcb:Atom:WM_HINTS)))
+  ((property :initform 'xcb:Atom:WM_HINTS)
+   (type :initform 'xcb:Atom:WM_HINTS)))
 
 ;; WM_CLASS
 (defclass xcb:icccm:get-WM_CLASS (xcb:icccm:-GetProperty-text)
-  ((property :initform xcb:Atom:WM_CLASS)
-   (type :initform xcb:Atom:STRING)))
+  ((property :initform 'xcb:Atom:WM_CLASS)
+   (type :initform 'xcb:Atom:STRING)))
 (defclass xcb:icccm:get-WM_CLASS~reply (xcb:icccm:-GetProperty-text~reply)
   ((instance-name :type xcb:-ignore)
    (class-name :type xcb:-ignore)))
@@ -452,8 +452,8 @@ whose fields are explicitly listed out."
     retval))
 ;;
 (defclass xcb:icccm:set-WM_CLASS (xcb:icccm:-ChangeProperty-text)
-  ((property :initform xcb:Atom:WM_CLASS)
-   (type :initform xcb:Atom:STRING)
+  ((property :initform 'xcb:Atom:WM_CLASS)
+   (type :initform 'xcb:Atom:STRING)
    (instance-name :initarg :instance-name :type xcb:-ignore)
    (class-name :initarg :class-name :type xcb:-ignore)))
 ;;
@@ -464,44 +464,44 @@ whose fields are explicitly listed out."
 
 ;; WM_TRANSIENT_FOR
 (defclass xcb:icccm:get-WM_TRANSIENT_FOR (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:WM_TRANSIENT_FOR)
-   (type :initform xcb:Atom:WINDOW)
+  ((property :initform 'xcb:Atom:WM_TRANSIENT_FOR)
+   (type :initform 'xcb:Atom:WINDOW)
    (long-length :initform 1)))
 (defclass xcb:icccm:get-WM_TRANSIENT_FOR~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:icccm:set-WM_TRANSIENT_FOR (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:WM_TRANSIENT_FOR)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:WM_TRANSIENT_FOR)
+   (type :initform 'xcb:Atom:WINDOW)))
 
 ;; WM_PROTOCOLS
 (defclass xcb:icccm:get-WM_PROTOCOLS (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:WM_PROTOCOLS)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:WM_PROTOCOLS)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:icccm:get-WM_PROTOCOLS~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:icccm:set-WM_PROTOCOLS (xcb:icccm:-ChangeProperty)
-  ((type :initform xcb:Atom:ATOM)
+  ((type :initform 'xcb:Atom:ATOM)
    (format :initform 32)))
 
 ;; WM_COLORMAP_WINDOWS
 (defclass xcb:icccm:get-WM_COLORMAP_WINDOWS (xcb:icccm:-GetProperty)
-  ((type :initform xcb:Atom:WINDOW)))
+  ((type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:icccm:get-WM_COLORMAP_WINDOWS~reply
   (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:icccm:set-WM_COLORMAP_WINDOWS (xcb:icccm:-ChangeProperty)
-  ((type :initform xcb:Atom:WINDOW)
+  ((type :initform 'xcb:Atom:WINDOW)
    (format :initform 32)))
 
 ;; WM_CLIENT_MACHINE
 (defclass xcb:icccm:get-WM_CLIENT_MACHINE (xcb:icccm:-GetProperty-text)
-  ((property :initform xcb:Atom:WM_CLIENT_MACHINE)))
+  ((property :initform 'xcb:Atom:WM_CLIENT_MACHINE)))
 (defclass xcb:icccm:get-WM_CLIENT_MACHINE~reply
   (xcb:icccm:-GetProperty-text~reply)
   nil)
 (defclass xcb:icccm:set-WM_CLIENT_MACHINE (xcb:icccm:-ChangeProperty-text)
-  ((property :initform xcb:Atom:WM_CLIENT_MACHINE)))
+  ((property :initform 'xcb:Atom:WM_CLIENT_MACHINE)))
 
 ;;;; Window Manager Properties
 
@@ -515,16 +515,16 @@ whose fields are explicitly listed out."
    (icon :initarg :icon :type xcb:-ignore)))
 ;;
 (defclass xcb:icccm:get-WM_STATE (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:WM_STATE)
-   (type :initform xcb:Atom:WM_STATE)
+  ((property :initform 'xcb:Atom:WM_STATE)
+   (type :initform 'xcb:Atom:WM_STATE)
    (long-length :initform 2)))
 (defclass xcb:icccm:get-WM_STATE~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:icccm:-WM_STATE)
   nil)
 (defclass xcb:icccm:set-WM_STATE
   (xcb:icccm:-ChangeProperty-explicit xcb:icccm:-WM_STATE)
-  ((property :initform xcb:Atom:WM_STATE)
-   (type :initform xcb:Atom:WM_STATE)))
+  ((property :initform 'xcb:Atom:WM_STATE)
+   (type :initform 'xcb:Atom:WM_STATE)))
 
 ;; WM_ICON_SIZE
 (defclass xcb:icccm:-WM_ICON_SIZE (xcb:--struct)
@@ -536,16 +536,16 @@ whose fields are explicitly listed out."
    (height-inc :initarg :height-inc :type xcb:-ignore)))
 ;;
 (defclass xcb:icccm:get-WM_ICON_SIZE (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:WM_ICON_SIZE)
-   (type :initform xcb:Atom:WM_ICON_SIZE)
+  ((property :initform 'xcb:Atom:WM_ICON_SIZE)
+   (type :initform 'xcb:Atom:WM_ICON_SIZE)
    (long-length :initform 6)))
 (defclass xcb:icccm:get-WM_ICON_SIZE~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:icccm:-WM_ICON_SIZE)
   nil)
 (defclass xcb:icccm:set-WM_ICON_SIZE
   (xcb:icccm:-ChangeProperty-explicit xcb:icccm:-WM_ICON_SIZE)
-  ((property :initform xcb:Atom:WM_ICON_SIZE)
-   (type :initform xcb:Atom:WM_ICON_SIZE)))
+  ((property :initform 'xcb:Atom:WM_ICON_SIZE)
+   (type :initform 'xcb:Atom:WM_ICON_SIZE)))
 
 
 

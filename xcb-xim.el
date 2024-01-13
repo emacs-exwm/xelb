@@ -332,7 +332,7 @@ Consider let-bind it rather than change its global value."))
 ;;;; Error notification
 
 (defclass xim:error (xim:-request)
-  ((~major-opcode :initform xim:opcode:error)
+  ((~major-opcode :initform 'xim:opcode:error)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (flag :initarg :flag :type xim:BITMASK16)
@@ -369,7 +369,7 @@ Consider let-bind it rather than change its global value."))
 ;;;; Connection establishment
 
 (defclass xim:connect (xim:-request)
-  ((~major-opcode :initform xim:opcode:connect)
+  ((~major-opcode :initform 'xim:opcode:connect)
    (byte-order :initarg :byte-order :type xcb:-u1)
    (pad~0 :initform 1 :type xcb:-pad)
    (major-version :initarg :major-version :type xcb:CARD16)
@@ -384,7 +384,7 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:connect-byte-order:lsb-first #x6c)
 
 (defclass xim:auth-required (xim:-request)
-  ((~major-opcode :initform xim:opcode:auth-required)
+  ((~major-opcode :initform 'xim:opcode:auth-required)
    (index :initarg :index :type xcb:CARD8)
    (pad~0 :initform 3 :type xcb:-pad)
    (length :initarg :length :type xcb:-u2)
@@ -395,7 +395,7 @@ Consider let-bind it rather than change its global value."))
    (pad~1 :initform '(xim:PADDING (slot-value length)) :type xcb:-pad)))
 
 (defclass xim:auth-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:auth-reply)
+  ((~major-opcode :initform 'xim:opcode:auth-reply)
    (length :initarg :length :type xcb:-u2)
    (pad~0 :initform 2 :type xcb:-pad)
    (data :initarg :data :type xcb:-ignore)
@@ -404,7 +404,7 @@ Consider let-bind it rather than change its global value."))
    (pad~1 :initform '(xim:PADDING (xcb:-fieldref 'length)) :type xcb:-pad)))
 
 (defclass xim:auth-next (xim:-request)
-  ((~major-opcode :initform xim:opcode:auth-next)
+  ((~major-opcode :initform 'xim:opcode:auth-next)
    (length :initarg :length :type xcb:-u2)
    (pad~0 :initform 2 :type xcb:-pad)
    (data :initarg :data :type xcb:-ignore)
@@ -413,7 +413,7 @@ Consider let-bind it rather than change its global value."))
    (pad~1 :initform '(xim:PADDING (xcb:-fieldref 'length)) :type xcb:-pad)))
 
 (defclass xim:auth-setup (xim:-request)
-  ((~major-opcode :initform xim:opcode:auth-setup)
+  ((~major-opcode :initform 'xim:opcode:auth-setup)
    (number :initarg :number :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (names :initarg :names :type xcb:-ignore)
@@ -421,29 +421,29 @@ Consider let-bind it rather than change its global value."))
            :type xcb:-list)))
 
 (defclass xim:auth-ng (xim:-request)
-  ((~major-opcode :initform xim:opcode:auth-ng)))
+  ((~major-opcode :initform 'xim:opcode:auth-ng)))
 
 (defclass xim:connect-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:connect-reply)
+  ((~major-opcode :initform 'xim:opcode:connect-reply)
    ;; Default to version 1.0
    (major-version :initarg :major-version :initform 1 :type xcb:CARD16)
    (minor-version :initarg :minor-version :initform 0 :type xcb:CARD16)))
 
 (defclass xim:disconnect (xim:-request)
-  ((~major-opcode :initform xim:opcode:disconnect)))
+  ((~major-opcode :initform 'xim:opcode:disconnect)))
 
 (defclass xim:disconnect-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:disconnect-reply)))
+  ((~major-opcode :initform 'xim:opcode:disconnect-reply)))
 
 (defclass xim:open (xim:-request)
-  ((~major-opcode :initform xim:opcode:open)
+  ((~major-opcode :initform 'xim:opcode:open)
    (locale-name :initarg :locale-name :type xim:STR)
    (pad~0 :initform '(xim:PADDING (1+ (slot-value (xcb:-fieldref 'locale-name)
                                                   'length)))
           :type xcb:-pad)))
 
 (defclass xim:open-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:open-reply)
+  ((~major-opcode :initform 'xim:opcode:open-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (im-attrs-length :initarg :im-attrs-length :type xcb:-u2)
    (im-attrs :initarg :im-attrs :type xcb:-ignore)
@@ -484,24 +484,24 @@ Consider let-bind it rather than change its global value."))
     retval))
 
 (defclass xim:close (xim:-request)
-  ((~major-opcode :initform xim:opcode:close)
+  ((~major-opcode :initform 'xim:opcode:close)
    (im-id :initarg :im-id :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)))
 
 (defclass xim:close-reply (xim:close)
-  ((~major-opcode :initform xim:opcode:close-reply)))
+  ((~major-opcode :initform 'xim:opcode:close-reply)))
 
 ;;;; Event flow control
 
 (defclass xim:set-event-mask (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-event-mask)
+  ((~major-opcode :initform 'xim:opcode:set-event-mask)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (forward-event-mask :initarg :forward-event-mask :type xcb:-u4)
    (synchronous-event-mask :initarg :synchronous-event-mask :type xcb:-u4)))
 
 (defclass xim:register-triggerkeys (xim:-request)
-  ((~major-opcode :initform xim:opcode:register-triggerkeys)
+  ((~major-opcode :initform 'xim:opcode:register-triggerkeys)
    (im-id :initarg :im-id :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (on-keys-length :initarg :on-keys-length :type xcb:-u4)
@@ -516,7 +516,7 @@ Consider let-bind it rather than change its global value."))
               :type xcb:-list)))
 
 (defclass xim:trigger-nofity (xim:-request)
-  ((~major-opcode :initform xim:opcode:trigger-notify)
+  ((~major-opcode :initform 'xim:opcode:trigger-notify)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (flag :initarg :flag :type xcb:CARD32)
@@ -528,14 +528,14 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:trigger-nofity-flag:off-keys 1)
 
 (defclass xim:trigger-nofity-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:trigger-notify-reply)
+  ((~major-opcode :initform 'xim:opcode:trigger-notify-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Encoding negotiation
 
 (defclass xim:encoding-negotiation (xim:-request)
-  ((~major-opcode :initform xim:opcode:encoding-negotiation)
+  ((~major-opcode :initform 'xim:opcode:encoding-negotiation)
    (im-id :initarg :im-id :type xcb:CARD16)
    (names-length :initarg :names-length :type xcb:-u2)
    (names :initarg :names :type xcb:-ignore)
@@ -579,7 +579,7 @@ Consider let-bind it rather than change its global value."))
     retval))
 
 (defclass xim:encoding-negotiation-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:encoding-negotiation-reply)
+  ((~major-opcode :initform 'xim:opcode:encoding-negotiation-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (category :initarg :category :type xcb:CARD16)
    (index :initarg :index :type xcb:INT16)
@@ -591,7 +591,7 @@ Consider let-bind it rather than change its global value."))
 ;;;; Query the supported extension protocol list
 
 (defclass xim:query-extension (xim:-request)
-  ((~major-opcode :initform xim:opcode:query-extension)
+  ((~major-opcode :initform 'xim:opcode:query-extension)
    (im-id :initarg :im-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
    (extensions :initarg :extensions :type xcb:-ignore)
@@ -618,7 +618,7 @@ Consider let-bind it rather than change its global value."))
     retval))
 
 (defclass xim:query-extension-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:query-extension-reply)
+  ((~major-opcode :initform 'xim:opcode:query-extension-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
    (extensions :initarg :extensions :type xcb:-ignore)
@@ -646,7 +646,7 @@ Consider let-bind it rather than change its global value."))
 ;;;; Setting IM values
 
 (defclass xim:set-im-values (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-im-values)
+  ((~major-opcode :initform 'xim:opcode:set-im-values)
    (im-id :initarg :im-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
    (im-attributes :initarg :im-attributes :type xcb:-ignore)
@@ -662,14 +662,14 @@ Consider let-bind it rather than change its global value."))
     (cl-call-next-method obj)))
 
 (defclass xim:set-im-values-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-im-values-reply)
+  ((~major-opcode :initform 'xim:opcode:set-im-values-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)))
 
 ;;;; Getting IM values
 
 (defclass xim:get-im-values (xim:-request)
-  ((~major-opcode :initform xim:opcode:get-im-values)
+  ((~major-opcode :initform 'xim:opcode:get-im-values)
    (im-id :initarg :im-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
    (im-attributes-id :initarg :im-attributes-id :type xcb:-ignore)
@@ -678,12 +678,12 @@ Consider let-bind it rather than change its global value."))
                       :type xcb:-list)))
 
 (defclass xim:get-im-values-reply (xim:set-im-values)
-  ((~major-opcode :initform xim:opcode:get-im-values-reply)))
+  ((~major-opcode :initform 'xim:opcode:get-im-values-reply)))
 
 ;;;; Creating an IC
 
 (defclass xim:create-ic (xim:-request)
-  ((~major-opcode :initform xim:opcode:create-ic)
+  ((~major-opcode :initform 'xim:opcode:create-ic)
    (im-id :initarg :im-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
    (ic-attributes :initarg :ic-attributes :type xcb:-ignore)
@@ -710,26 +710,26 @@ Consider let-bind it rather than change its global value."))
     retval))
 
 (defclass xim:create-ic-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:create-ic-reply)
+  ((~major-opcode :initform 'xim:opcode:create-ic-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Destroy the IC
 
 (defclass xim:destroy-ic (xim:-request)
-  ((~major-opcode :initform xim:opcode:destroy-ic)
+  ((~major-opcode :initform 'xim:opcode:destroy-ic)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 (defclass xim:destroy-ic-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:destroy-ic-reply)
+  ((~major-opcode :initform 'xim:opcode:destroy-ic-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Setting IC values
 
 (defclass xim:set-ic-values (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-ic-values)
+  ((~major-opcode :initform 'xim:opcode:set-ic-values)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
@@ -747,14 +747,14 @@ Consider let-bind it rather than change its global value."))
     (cl-call-next-method obj)))
 
 (defclass xim:set-ic-values-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-ic-values-reply)
+  ((~major-opcode :initform 'xim:opcode:set-ic-values-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Getting IC values
 
 (defclass xim:get-ic-values (xim:-request)
-  ((~major-opcode :initform xim:opcode:get-ic-values)
+  ((~major-opcode :initform 'xim:opcode:get-ic-values)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
@@ -766,26 +766,26 @@ Consider let-bind it rather than change its global value."))
           :type xcb:-pad)))
 
 (defclass xim:get-ic-values-reply (xim:set-ic-values)
-  ((~major-opcode :initform xim:opcode:get-ic-values-reply)))
+  ((~major-opcode :initform 'xim:opcode:get-ic-values-reply)))
 
 ;;;; Setting IC focus
 
 (defclass xim:set-ic-focus (xim:-request)
-  ((~major-opcode :initform xim:opcode:set-ic-focus)
+  ((~major-opcode :initform 'xim:opcode:set-ic-focus)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Unsetting IC focus
 
 (defclass xim:unset-ic-focus (xim:-request)
-  ((~major-opcode :initform xim:opcode:unset-ic-focus)
+  ((~major-opcode :initform 'xim:opcode:unset-ic-focus)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Filtering events
 
 (defclass xim:forward-event (xim:-request)
-  ((~major-opcode :initform xim:opcode:forward-event)
+  ((~major-opcode :initform 'xim:opcode:forward-event)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (flag :initarg :flag :type xim:BITMASK16)
@@ -800,19 +800,19 @@ Consider let-bind it rather than change its global value."))
 ;;;; Synchronizing with the IM server
 
 (defclass xim:sync (xim:-request)
-  ((~major-opcode :initform xim:opcode:sync)
+  ((~major-opcode :initform 'xim:opcode:sync)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 (defclass xim:sync-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:sync-reply)
+  ((~major-opcode :initform 'xim:opcode:sync-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;;;; Sending a committed string
 
 (defclass xim:commit (xim:-request)
-  ((~major-opcode :initform xim:opcode:commit)
+  ((~major-opcode :initform 'xim:opcode:commit)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (flag :initarg :flag :type xim:BITMASK16)))
@@ -824,12 +824,12 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:commit-flag:x-lookup-both 6)
 
 (defclass xim:commit-x-lookup-key-sym (xim:commit)
-  ((flag :initform xim:commit-flag:x-lookup-key-sym)
+  ((flag :initform 'xim:commit-flag:x-lookup-key-sym)
    (pad~0 :initform 2 :type xcb:-pad)
    (key-sym :initarg :key-sym :type xcb:KEYSYM)))
 
 (defclass xim:commit-x-lookup-chars (xim:commit)
-  ((flag :initform xim:commit-flag:x-lookup-chars)
+  ((flag :initform 'xim:commit-flag:x-lookup-chars)
    (length :initarg :length :type xcb:-u2)
    (string :initarg :string :type xcb:-ignore)
    (string~ :initform '(name string type xcb:BYTE size (xcb:-fieldref 'length))
@@ -838,19 +838,19 @@ Consider let-bind it rather than change its global value."))
 
 (defclass xim:commit-x-lookup-both (xim:commit-x-lookup-key-sym
                                     xim:commit-x-lookup-chars)
-  ((flag :initform xim:commit-flag:x-lookup-both)
+  ((flag :initform 'xim:commit-flag:x-lookup-both)
    (pad~1 :initform '(xim:PADDING (+ 2 (xcb:-fieldref 'length)))
           :type xcb:-pad)))
 
 ;;;; Reset IC
 
 (defclass xim:reset-ic (xim:-request)
-  ((~major-opcode :initform xim:opcode:reset-ic)
+  ((~major-opcode :initform 'xim:opcode:reset-ic)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 (defclass xim:reset-ic-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:reset-ic-reply)
+  ((~major-opcode :initform 'xim:opcode:reset-ic-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (length :initarg :length :type xcb:-u2)
@@ -864,13 +864,13 @@ Consider let-bind it rather than change its global value."))
 
 ;; Negotiating geometry
 (defclass xim:geometry (xim:-request)
-  ((~major-opcode :initform xim:opcode:geometry)
+  ((~major-opcode :initform 'xim:opcode:geometry)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;; Converting a string
 (defclass xim:str-conversion (xim:-request)
-  ((~major-opcode :initform xim:opcode:str-conversion)
+  ((~major-opcode :initform 'xim:opcode:str-conversion)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (position :initarg :position :type xcb:CARD16)
@@ -897,7 +897,7 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:string-conversion-operation:retrieval 2)
 
 (defclass xim:str-conversion-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:str-conversion-reply)
+  ((~major-opcode :initform 'xim:opcode:str-conversion-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (feedback :initarg :feedback :type xcb:CARD32)
@@ -905,18 +905,18 @@ Consider let-bind it rather than change its global value."))
 
 ;; Preedit callbacks
 (defclass xim:preedit-start (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-start)
+  ((~major-opcode :initform 'xim:opcode:preedit-start)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 (defclass xim:preedit-start-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-start-reply)
+  ((~major-opcode :initform 'xim:opcode:preedit-start-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (return-value :initarg :return-value :type xcb:INT32)))
 
 (defclass xim:preedit-draw (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-draw)
+  ((~major-opcode :initform 'xim:opcode:preedit-draw)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (caret :initarg :caret :type xcb:INT32)
@@ -941,7 +941,7 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:preedit-draw-status:no-feedback 2)
 
 (defclass xim:preedit-caret (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-caret)
+  ((~major-opcode :initform 'xim:opcode:preedit-caret)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (position :initarg :position :type xcb:INT32)
@@ -953,19 +953,19 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:preedit-caret-style:secondary 2)
 
 (defclass xim:preedit-caret-reply (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-caret-reply)
+  ((~major-opcode :initform 'xim:opcode:preedit-caret-reply)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (position :initarg :position :type xcb:CARD32)))
 
 (defclass xim:preedit-done (xim:-request)
-  ((~major-opcode :initform xim:opcode:preedit-done)
+  ((~major-opcode :initform 'xim:opcode:preedit-done)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 ;; Preedit state notify
 (defclass xim:preeditstate (xim:-request)
-  ((~major-opcode :initform xim:opcode:preeditstate)
+  ((~major-opcode :initform 'xim:opcode:preeditstate)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (state :initarg :state :type xim:BITMASK32)))
@@ -976,12 +976,12 @@ Consider let-bind it rather than change its global value."))
 
 ;; Status callbacks
 (defclass xim:status-start (xim:-request)
-  ((~major-opcode :initform xim:opcode:status-start)
+  ((~major-opcode :initform 'xim:opcode:status-start)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 
 (defclass xim:status-draw (xim:-request)
-  ((~major-opcode :initform xim:opcode:status-draw)
+  ((~major-opcode :initform 'xim:opcode:status-draw)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)
    (type :initarg :type :type xcb:CARD32)))
@@ -990,7 +990,7 @@ Consider let-bind it rather than change its global value."))
 (defconst xim:status-draw-type:bitmap 1)
 
 (defclass xim:status-draw-text (xim:status-draw)
-  ((type :initarg :type :initform xim:status-draw-type:text)
+  ((type :initarg :type :initform 'xim:status-draw-type:text)
    (status :initarg :status :type xim:BITMASK32)
    (string-length :initarg :string-length :type xcb:-u2)
    (string :initarg :string :type xcb:-ignore)
@@ -1007,11 +1007,11 @@ Consider let-bind it rather than change its global value."))
               :type xcb:-list)))
 
 (defclass xim:status-draw-bitmap (xim:status-draw)
-  ((type :initarg :type :initform xim:status-draw-type:bitmap)
+  ((type :initarg :type :initform 'xim:status-draw-type:bitmap)
    (pixmap-data :initarg :pixmap-data :type xcb:PIXMAP)))
 
 (defclass xim:status-done (xim:-request)
-  ((~major-opcode :initform xim:opcode:status-done)
+  ((~major-opcode :initform 'xim:opcode:status-done)
    (im-id :initarg :im-id :type xcb:CARD16)
    (ic-id :initarg :ic-id :type xcb:CARD16)))
 

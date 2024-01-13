@@ -169,59 +169,59 @@ EWMH")
 ;;;; Abstract classes for getting/changing (UTF-8) string properties
 
 (defclass xcb:ewmh:-GetProperty-utf8 (xcb:icccm:-GetProperty-text)
-  ((type :initform xcb:Atom:UTF8_STRING))
+  ((type :initform 'xcb:Atom:UTF8_STRING))
   :documentation "Get an EWMH UTF-8 text property (request part).")
 (defclass xcb:ewmh:-GetProperty-utf8~reply (xcb:icccm:-GetProperty-text~reply)
   nil
   :documentation "Get an EWMH UTF-8 text property (reply part).")
 (defclass xcb:ewmh:-ChangeProperty-utf8 (xcb:icccm:-ChangeProperty-text)
-  ((type :initform xcb:Atom:UTF8_STRING))
+  ((type :initform 'xcb:Atom:UTF8_STRING))
   :documentation "Change an EWMH UTF-8 text property.")
 
 ;;;; Root Window Properties (and Related Messages)
 
 ;; _NET_SUPPORTED
 (defclass xcb:ewmh:get-_NET_SUPPORTED (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_SUPPORTED)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_SUPPORTED)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:get-_NET_SUPPORTED~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_SUPPORTED (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_SUPPORTED)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_SUPPORTED)
+   (type :initform 'xcb:Atom:ATOM)))
 
 ;; _NET_CLIENT_LIST
 (defclass xcb:ewmh:get-_NET_CLIENT_LIST (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_CLIENT_LIST)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_CLIENT_LIST)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:get-_NET_CLIENT_LIST~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_CLIENT_LIST (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_CLIENT_LIST)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_CLIENT_LIST)
+   (type :initform 'xcb:Atom:WINDOW)))
 
 ;; _NET_CLIENT_LIST_STACKING
 (defclass xcb:ewmh:get-_NET_CLIENT_LIST_STACKING (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_CLIENT_LIST_STACKING)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_CLIENT_LIST_STACKING)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:get-_NET_CLIENT_LIST_STACKING~reply
   (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_CLIENT_LIST_STACKING (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_CLIENT_LIST_STACKING)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_CLIENT_LIST_STACKING)
+   (type :initform 'xcb:Atom:WINDOW)))
 
 ;; _NET_NUMBER_OF_DESKTOPS
 (defclass xcb:ewmh:get-_NET_NUMBER_OF_DESKTOPS (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_NUMBER_OF_DESKTOPS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_NUMBER_OF_DESKTOPS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_NUMBER_OF_DESKTOPS~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_NUMBER_OF_DESKTOPS
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_NUMBER_OF_DESKTOPS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_NUMBER_OF_DESKTOPS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_DESKTOP_GEOMETRY
 (defclass xcb:ewmh:-_NET_DESKTOP_GEOMETRY (xcb:--struct)
@@ -229,106 +229,106 @@ EWMH")
    (height :initarg :height :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_DESKTOP_GEOMETRY (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_DESKTOP_GEOMETRY)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_GEOMETRY)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 2)))
 (defclass xcb:ewmh:get-_NET_DESKTOP_GEOMETRY~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_DESKTOP_GEOMETRY)
   nil)
 (defclass xcb:ewmh:set-_NET_DESKTOP_GEOMETRY
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_DESKTOP_GEOMETRY)
-  ((property :initform xcb:Atom:_NET_DESKTOP_GEOMETRY)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_GEOMETRY)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_DESKTOP_GEOMETRY
   (xcb:ewmh:-ClientMessage xcb:ewmh:-_NET_DESKTOP_GEOMETRY)
-  ((type :initform xcb:Atom:_NET_DESKTOP_GEOMETRY)))
+  ((type :initform 'xcb:Atom:_NET_DESKTOP_GEOMETRY)))
 
 ;; _NET_DESKTOP_VIEWPORT
 (defclass xcb:ewmh:get-_NET_DESKTOP_VIEWPORT (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_DESKTOP_VIEWPORT)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_VIEWPORT)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_DESKTOP_VIEWPORT~reply
   (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_DESKTOP_VIEWPORT (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_DESKTOP_VIEWPORT)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_VIEWPORT)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_DESKTOP_VIEWPORT (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_DESKTOP_VIEWPORT)
+  ((type :initform 'xcb:Atom:_NET_DESKTOP_VIEWPORT)
    (new-vx :initarg :new-vx :type xcb:CARD32)
    (new-vy :initarg :new-vy :type xcb:CARD32)))
 
 ;; _NET_CURRENT_DESKTOP
 (defclass xcb:ewmh:get-_NET_CURRENT_DESKTOP (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_CURRENT_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_CURRENT_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_CURRENT_DESKTOP~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_CURRENT_DESKTOP (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_CURRENT_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_CURRENT_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_CURRENT_DESKTOP (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_CURRENT_DESKTOP)
+  ((type :initform 'xcb:Atom:_NET_CURRENT_DESKTOP)
    (new-index :initarg :new-index :type xcb:CARD32)
    (timestamp :initarg :timestamp :type xcb:CARD32)))
 
 ;; _NET_DESKTOP_NAMES
 (defclass xcb:ewmh:get-_NET_DESKTOP_NAMES (xcb:ewmh:-GetProperty-utf8)
-  ((property :initform xcb:Atom:_NET_DESKTOP_NAMES)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_NAMES)))
 (defclass xcb:ewmh:get-_NET_DESKTOP_NAMES~reply
   (xcb:ewmh:-GetProperty-utf8~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_DESKTOP_NAMES (xcb:ewmh:-ChangeProperty-utf8)
-  ((property :initform xcb:Atom:_NET_DESKTOP_NAMES)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_NAMES)))
 
 ;; _NET_ACTIVE_WINDOW
 (defclass xcb:ewmh:get-_NET_ACTIVE_WINDOW (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_ACTIVE_WINDOW)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_ACTIVE_WINDOW)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:get-_NET_ACTIVE_WINDOW~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_ACTIVE_WINDOW (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_ACTIVE_WINDOW)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_ACTIVE_WINDOW)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:_NET_ACTIVE_WINDOW (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_ACTIVE_WINDOW)
+  ((type :initform 'xcb:Atom:_NET_ACTIVE_WINDOW)
    (source-indication :initarg :source-indication :type xcb:CARD32)
    (timestamp :initarg :timestamp :type xcb:CARD32)
    (current-active-window :initarg :current-active-window :type xcb:WINDOW)))
 
 ;; _NET_WORKAREA
 (defclass xcb:ewmh:get-_NET_WORKAREA (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WORKAREA)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WORKAREA)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WORKAREA~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WORKAREA (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WORKAREA)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WORKAREA)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_SUPPORTING_WM_CHECK
 (defclass xcb:ewmh:get-_NET_SUPPORTING_WM_CHECK (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_SUPPORTING_WM_CHECK)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_SUPPORTING_WM_CHECK)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:get-_NET_SUPPORTING_WM_CHECK~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_SUPPORTING_WM_CHECK
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_SUPPORTING_WM_CHECK)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_SUPPORTING_WM_CHECK)
+   (type :initform 'xcb:Atom:WINDOW)))
 
 ;; _NET_VIRTUAL_ROOTS
 (defclass xcb:ewmh:get-_NET_VIRTUAL_ROOTS (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_VIRTUAL_ROOTS)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_VIRTUAL_ROOTS)
+   (type :initform 'xcb:Atom:WINDOW)))
 (defclass xcb:ewmh:get-_NET_VIRTUAL_ROOTS~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_VIRTUAL_ROOTS (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_VIRTUAL_ROOTS)
-   (type :initform xcb:Atom:WINDOW)))
+  ((property :initform 'xcb:Atom:_NET_VIRTUAL_ROOTS)
+   (type :initform 'xcb:Atom:WINDOW)))
 
 ;; _NET_DESKTOP_LAYOUT
 ;; Orientations
@@ -347,42 +347,42 @@ EWMH")
    (starting-corner :initarg :starting-corner :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_DESKTOP_LAYOUT (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_DESKTOP_LAYOUT)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_LAYOUT)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 4)))
 (defclass xcb:ewmh:get-_NET_DESKTOP_LAYOUT~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_DESKTOP_LAYOUT)
   nil)
 (defclass xcb:ewmh:set-_NET_DESKTOP_LAYOUT
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_DESKTOP_LAYOUT)
-  ((property :initform xcb:Atom:_NET_DESKTOP_LAYOUT)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_DESKTOP_LAYOUT)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_SHOWING_DESKTOP
 (defclass xcb:ewmh:get-_NET_SHOWING_DESKTOP (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_SHOWING_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_SHOWING_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_SHOWING_DESKTOP~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_SHOWING_DESKTOP (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_SHOWING_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_SHOWING_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_SHOWING_DESKTOP (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_SHOWING_DESKTOP)
+  ((type :initform 'xcb:Atom:_NET_SHOWING_DESKTOP)
    (show :initarg :show :type xcb:CARD32)))
 
 ;;;; Other Root Window Messages
 
 ;; _NET_CLOSE_WINDOW
 (defclass xcb:ewmh:_NET_CLOSE_WINDOW (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_CLOSE_WINDOW)
+  ((type :initform 'xcb:Atom:_NET_CLOSE_WINDOW)
    (timestamp :initarg :timestamp :type xcb:CARD32)
    (source-indication :initarg :source-indication :type xcb:CARD32)))
 
 ;; _NET_MOVERESIZE_WINDOW
 (defclass xcb:ewmh:_NET_MOVERESIZE_WINDOW (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_MOVERESIZE_WINDOW)
+  ((type :initform 'xcb:Atom:_NET_MOVERESIZE_WINDOW)
    (gravity-and-flags :initarg :gravity-and-flags :type xcb:CARD32)
    (x :initarg :x :type xcb:CARD32)
    (y :initarg :y :type xcb:CARD32)
@@ -404,7 +404,7 @@ EWMH")
 (defconst xcb:ewmh:_NET_WM_MOVERESIZE_CANCEL 11)
 ;;
 (defclass xcb:ewmh:_NET_WM_MOVERESIZE (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_WM_MOVERESIZE)
+  ((type :initform 'xcb:Atom:_NET_WM_MOVERESIZE)
    (x-root :initarg :x-root :type xcb:CARD32)
    (y-root :initarg :y-root :type xcb:CARD32)
    (direction :initarg :direction :type xcb:CARD32)
@@ -413,77 +413,77 @@ EWMH")
 
 ;; _NET_RESTACK_WINDOW
 (defclass xcb:ewmh:_NET_RESTACK_WINDOW (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_RESTACK_WINDOW)
+  ((type :initform 'xcb:Atom:_NET_RESTACK_WINDOW)
    (source-indication :initarg :source-indication :type xcb:CARD32)
    (sibling :initarg :sibling :type xcb:WINDOW)
    (detail :initarg :detail :type xcb:CARD32)))
 
 ;; _NET_REQUEST_FRAME_EXTENTS
 (defclass xcb:ewmh:_NET_REQUEST_FRAME_EXTENTS (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_REQUEST_FRAME_EXTENTS)))
+  ((type :initform 'xcb:Atom:_NET_REQUEST_FRAME_EXTENTS)))
 
 ;;;; Application Window Properties
 
 ;; _NET_WM_NAME
 (defclass xcb:ewmh:get-_NET_WM_NAME (xcb:ewmh:-GetProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_NAME)))
 (defclass xcb:ewmh:get-_NET_WM_NAME~reply (xcb:ewmh:-GetProperty-utf8~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_NAME (xcb:ewmh:-ChangeProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_NAME)))
 
 ;; _NET_WM_VISIBLE_NAME
 (defclass xcb:ewmh:get-_NET_WM_VISIBLE_NAME (xcb:ewmh:-GetProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_VISIBLE_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_VISIBLE_NAME)))
 (defclass xcb:ewmh:get-_NET_WM_VISIBLE_NAME~reply
   (xcb:ewmh:-GetProperty-utf8~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_VISIBLE_NAME (xcb:ewmh:-ChangeProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_VISIBLE_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_VISIBLE_NAME)))
 
 ;; _NET_WM_ICON_NAME
 (defclass xcb:ewmh:get-_NET_WM_ICON_NAME (xcb:ewmh:-GetProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_ICON_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_ICON_NAME)))
 (defclass xcb:ewmh:get-_NET_WM_ICON_NAME~reply
   (xcb:ewmh:-GetProperty-utf8~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_ICON_NAME (xcb:ewmh:-ChangeProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_ICON_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_ICON_NAME)))
 
 ;; _NET_WM_VISIBLE_ICON_NAME
 (defclass xcb:ewmh:get-_NET_WM_VISIBLE_ICON_NAME (xcb:ewmh:-GetProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_VISIBLE_ICON_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_VISIBLE_ICON_NAME)))
 (defclass xcb:ewmh:get-_NET_WM_VISIBLE_ICON_NAME~reply
   (xcb:ewmh:-GetProperty-utf8~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_VISIBLE_ICON_NAME
   (xcb:ewmh:-ChangeProperty-utf8)
-  ((property :initform xcb:Atom:_NET_WM_VISIBLE_ICON_NAME)))
+  ((property :initform 'xcb:Atom:_NET_WM_VISIBLE_ICON_NAME)))
 
 ;; _NET_WM_DESKTOP
 (defclass xcb:ewmh:get-_NET_WM_DESKTOP (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_DESKTOP~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_DESKTOP (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_DESKTOP)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_DESKTOP)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_WM_DESKTOP (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_WM_DESKTOP)
+  ((type :initform 'xcb:Atom:_NET_WM_DESKTOP)
    (new-desktop :initarg :new-desktop :type xcb:CARD32)
    (source-indication :initarg :source-indication :type xcb:CARD32)))
 
 ;; _NET_WM_WINDOW_TYPE
 (defclass xcb:ewmh:get-_NET_WM_WINDOW_TYPE (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WM_WINDOW_TYPE)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_WINDOW_TYPE)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:get-_NET_WM_WINDOW_TYPE~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_WINDOW_TYPE (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WM_WINDOW_TYPE)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_WINDOW_TYPE)
+   (type :initform 'xcb:Atom:ATOM)))
 
 ;; _NET_WM_STATE
 (defconst xcb:ewmh:_NET_WM_STATE_REMOVE 0)
@@ -491,15 +491,15 @@ EWMH")
 (defconst xcb:ewmh:_NET_WM_STATE_TOGGLE 2)
 ;;
 (defclass xcb:ewmh:get-_NET_WM_STATE (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WM_STATE)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_STATE)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:get-_NET_WM_STATE~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_STATE (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WM_STATE)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_STATE)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:_NET_WM_STATE (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:_NET_WM_STATE)
+  ((type :initform 'xcb:Atom:_NET_WM_STATE)
    (action :initarg :action :type xcb:CARD32)
    (first-property :initarg :first-property :type xcb:CARD32)
    (second-property :initarg :second-property :type xcb:CARD32)
@@ -507,14 +507,14 @@ EWMH")
 
 ;; _NET_WM_ALLOWED_ACTIONS
 (defclass xcb:ewmh:get-_NET_WM_ALLOWED_ACTIONS (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WM_ALLOWED_ACTIONS)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_ALLOWED_ACTIONS)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:get-_NET_WM_ALLOWED_ACTIONS~reply
   (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_ALLOWED_ACTIONS (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WM_ALLOWED_ACTIONS)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_ALLOWED_ACTIONS)
+   (type :initform 'xcb:Atom:ATOM)))
 
 ;; _NET_WM_STRUT
 (defclass xcb:ewmh:-_NET_WM_STRUT (xcb:--struct)
@@ -524,16 +524,16 @@ EWMH")
    (bottom :initarg :bottom :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_WM_STRUT (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_WM_STRUT)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_WM_STRUT)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 4)))
 (defclass xcb:ewmh:get-_NET_WM_STRUT~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_WM_STRUT)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_STRUT
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_WM_STRUT)
-  ((property :initform xcb:Atom:_NET_WM_STRUT)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_STRUT)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_STRUT_PARTIAL
 (defclass xcb:ewmh:-_NET_WM_STRUT_PARTIAL (xcb:--struct)
@@ -551,16 +551,16 @@ EWMH")
    (bottom-end-x :initarg :bottom-end-x :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_WM_STRUT_PARTIAL (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_WM_STRUT_PARTIAL)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_WM_STRUT_PARTIAL)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 12)))
 (defclass xcb:ewmh:get-_NET_WM_STRUT_PARTIAL~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_WM_STRUT_PARTIAL)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_STRUT_PARTIAL
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_WM_STRUT_PARTIAL)
-  ((property :initform xcb:Atom:_NET_WM_STRUT_PARTIAL)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_STRUT_PARTIAL)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_ICON_GEOMETRY
 (defclass xcb:ewmh:-_NET_WM_ICON_GEOMETRY (xcb:--struct)
@@ -570,70 +570,70 @@ EWMH")
    (height :initarg :height :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_WM_ICON_GEOMETRY (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_WM_ICON_GEOMETRY)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_WM_ICON_GEOMETRY)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 4)))
 (defclass xcb:ewmh:get-_NET_WM_ICON_GEOMETRY~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_WM_ICON_GEOMETRY)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_ICON_GEOMETRY
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_WM_ICON_GEOMETRY)
-  ((property :initform xcb:Atom:_NET_WM_ICON_GEOMETRY)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_ICON_GEOMETRY)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_ICON
 (defclass xcb:ewmh:-get-_NET_WM_ICON (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WM_ICON)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_ICON)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:-get-_NET_WM_ICON~reply (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:-set-_NET_WM_ICON (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WM_ICON)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_ICON)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_PID
 (defclass xcb:ewmh:get-_NET_WM_PID (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_PID)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_PID)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_PID~reply (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_PID (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_PID)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_PID)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_HANDLED_ICONS
 (defclass xcb:ewmh:get-_NET_WM_HANDLED_ICONS (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_HANDLED_ICONS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_HANDLED_ICONS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_HANDLED_ICONS~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_HANDLED_ICONS (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_HANDLED_ICONS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_HANDLED_ICONS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_USER_TIME
 (defclass xcb:ewmh:get-_NET_WM_USER_TIME (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_USER_TIME)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_USER_TIME)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_USER_TIME~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_USER_TIME (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_USER_TIME)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_USER_TIME)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_USER_TIME_WINDOW
 (defclass xcb:ewmh:get-_NET_WM_USER_TIME_WINDOW (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_USER_TIME_WINDOW)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_USER_TIME_WINDOW)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_USER_TIME_WINDOW~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_USER_TIME_WINDOW
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_USER_TIME_WINDOW)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_USER_TIME_WINDOW)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_FRAME_EXTENTS
 (defclass xcb:ewmh:-_NET_FRAME_EXTENTS (xcb:--struct)
@@ -643,54 +643,54 @@ EWMH")
    (bottom :initarg :bottom :type xcb:-ignore)))
 ;;
 (defclass xcb:ewmh:get-_NET_FRAME_EXTENTS (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_FRAME_EXTENTS)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_FRAME_EXTENTS)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 4)))
 (defclass xcb:ewmh:get-_NET_FRAME_EXTENTS~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_FRAME_EXTENTS)
   nil)
 (defclass xcb:ewmh:set-_NET_FRAME_EXTENTS
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_FRAME_EXTENTS)
-  ((property :initform xcb:Atom:_NET_FRAME_EXTENTS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_FRAME_EXTENTS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_OPAQUE_REGION
 (defclass xcb:ewmh:get-_NET_WM_OPAQUE_REGION (xcb:icccm:-GetProperty)
-  ((property :initform xcb:Atom:_NET_WM_OPAQUE_REGION)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_OPAQUE_REGION)
+   (type :initform 'xcb:Atom:ATOM)))
 (defclass xcb:ewmh:get-_NET_WM_OPAQUE_REGION~reply
   (xcb:icccm:-GetProperty~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_OPAQUE_REGION (xcb:icccm:-ChangeProperty)
-  ((property :initform xcb:Atom:_NET_WM_OPAQUE_REGION)
-   (type :initform xcb:Atom:ATOM)))
+  ((property :initform 'xcb:Atom:_NET_WM_OPAQUE_REGION)
+   (type :initform 'xcb:Atom:ATOM)))
 
 ;; _NET_WM_BYPASS_COMPOSITOR
 (defclass xcb:ewmh:get-_NET_WM_BYPASS_COMPOSITOR
   (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_BYPASS_COMPOSITOR)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_BYPASS_COMPOSITOR)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:get-_NET_WM_BYPASS_COMPOSITOR~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_BYPASS_COMPOSITOR
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_WM_BYPASS_COMPOSITOR)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_BYPASS_COMPOSITOR)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;;;; Window Manager Protocols
 
 ;; _NET_WM_PING
 (defclass xcb:ewmh:_NET_WM_PING (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:WM_PROTOCOLS)
-   (protocol :initform xcb:Atom:_NET_WM_PING :type xcb:CARD32)
+  ((type :initform 'xcb:Atom:WM_PROTOCOLS)
+   (protocol :initform 'xcb:Atom:_NET_WM_PING :type xcb:CARD32)
    (timestamp :initarg :timestamp :type xcb:CARD32)
    (client-window :initarg :client-window :type xcb:WINDOW)))
 
 ;; _NET_WM_SYNC_REQUEST
 (defclass xcb:ewmh:_NET_WM_SYNC_REQUEST (xcb:ewmh:-ClientMessage)
-  ((type :initform xcb:Atom:WM_PROTOCOLS)
-   (protocol :initform xcb:Atom:_NET_WM_SYNC_REQUEST :type xcb:CARD32)
+  ((type :initform 'xcb:Atom:WM_PROTOCOLS)
+   (protocol :initform 'xcb:Atom:_NET_WM_SYNC_REQUEST :type xcb:CARD32)
    (timestamp :initarg :timestamp :type xcb:CARD32)
    (low :initarg :low :type xcb:CARD32)
    (high :initarg :high :type xcb:CARD32)))
@@ -702,8 +702,8 @@ EWMH")
 ;;
 (defclass xcb:ewmh:get-_NET_WM_SYNC_REQUEST_COUNTER
   (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_WM_SYNC_REQUEST_COUNTER)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_WM_SYNC_REQUEST_COUNTER)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 2)))
 (defclass xcb:ewmh:get-_NET_WM_SYNC_REQUEST_COUNTER~reply
   (xcb:icccm:-GetProperty-explicit~reply
@@ -711,8 +711,8 @@ EWMH")
   nil)
 (defclass xcb:ewmh:set-_NET_WM_SYNC_REQUEST_COUNTER
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_WM_SYNC_REQUEST_COUNTER)
-  ((property :initform xcb:Atom:_NET_WM_SYNC_REQUEST_COUNTER)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_SYNC_REQUEST_COUNTER)
+   (type :initform 'xcb:Atom:CARDINAL)))
 
 ;; _NET_WM_FULLSCREEN_MONITORS
 (defclass xcb:ewmh:-_NET_WM_FULLSCREEN_MONITORS (xcb:--struct)
@@ -723,19 +723,19 @@ EWMH")
 ;;
 (defclass xcb:ewmh:get-_NET_WM_FULLSCREEN_MONITORS
   (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)
+   (type :initform 'xcb:Atom:CARDINAL)
    (long-length :initform 4)))
 (defclass xcb:ewmh:get-_NET_WM_FULLSCREEN_MONITORS~reply
   (xcb:icccm:-GetProperty-explicit~reply xcb:ewmh:-_NET_WM_FULLSCREEN_MONITORS)
   nil)
 (defclass xcb:ewmh:set-_NET_WM_FULLSCREEN_MONITORS
   (xcb:icccm:-ChangeProperty-explicit xcb:ewmh:-_NET_WM_FULLSCREEN_MONITORS)
-  ((property :initform xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:ewmh:_NET_WM_FULLSCREEN_MONITORS
   (xcb:ewmh:-ClientMessage xcb:ewmh:-_NET_WM_FULLSCREEN_MONITORS)
-  ((type :initform xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)))
+  ((type :initform 'xcb:Atom:_NET_WM_FULLSCREEN_MONITORS)))
 
 ;;;; Other Properties
 

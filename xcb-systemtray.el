@@ -68,25 +68,25 @@ This method must be called before using any other method in this module."
 
 (defclass xcb:systemtray:SendEvent (xcb:SendEvent)
   ((propagate :initform 0)
-   (event-mask :initform xcb:EventMask:NoEvent))
+   (event-mask :initform 'xcb:EventMask:NoEvent))
   :documentation "Send system tray opcode message.")
 
 (defclass xcb:systemtray:-ClientMessage
   (xcb:icccm:--ClientMessage xcb:ClientMessage)
   ((format :initform 32)
-   (type :initform xcb:Atom:_NET_SYSTEM_TRAY_OPCODE)
+   (type :initform 'xcb:Atom:_NET_SYSTEM_TRAY_OPCODE)
    (time :initarg :time :type xcb:TIMESTAMP)   ;new slot
    (opcode :initarg :opcode :type xcb:CARD32)) ;new slot
   :documentation "An system tray opcode message.")
 
 (defclass xcb:systemtray:REQUEST-DOCK (xcb:systemtray:-ClientMessage)
-  ((opcode :initform xcb:systemtray:opcode:REQUEST-DOCK)
+  ((opcode :initform 'xcb:systemtray:opcode:REQUEST-DOCK)
    (id :initarg :id :type xcb:CARD32)
    (pad~0 :initform 8 :type xcb:-pad))
   :documentation "Dock a tray icon.")
 
 (defclass xcb:systemtray:BEGIN-MESSAGE (xcb:systemtray:-ClientMessage)
-  ((opcode :initform xcb:systemtray:opcode:BEGIN-MESSAGE)
+  ((opcode :initform 'xcb:systemtray:opcode:BEGIN-MESSAGE)
    (timeout :initarg :timeout :type xcb:TIMESTAMP)
    (length :initarg :length :type xcb:CARD32)
    (id :initarg :id :type xcb:CARD32))
@@ -95,12 +95,12 @@ This method must be called before using any other method in this module."
 (defclass xcb:systemtray:MESSAGE-DATA
   (xcb:icccm:--ClientMessage xcb:ClientMessage)
   ((format :initform 8)
-   (type :initform xcb:Atom:_NET_SYSTEM_TRAY_MESSAGE_DATA)
+   (type :initform 'xcb:Atom:_NET_SYSTEM_TRAY_MESSAGE_DATA)
    (data~ :initform '(name data type xcb:CARD8 size 20) :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:systemtray:CANCEL-MESSAGE (xcb:systemtray:-ClientMessage)
-  ((opcode :initform xcb:systemtray:opcode:CANCEL-MESSAGE)
+  ((opcode :initform 'xcb:systemtray:opcode:CANCEL-MESSAGE)
    (id :initarg :id :type xcb:CARD32)
    (pad~0 :initform 8 :type xcb:-pad))
   :documentation "Cancel balloon message.")
@@ -111,28 +111,28 @@ This method must be called before using any other method in this module."
 
 (defclass xcb:xembed:get-_NET_SYSTEM_TRAY_ORIENTATION
   (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_SYSTEM_TRAY_ORIENTATION)
-   (type :initform xcb:Atom:CARDINAL)))
+  ((property :initform 'xcb:Atom:_NET_SYSTEM_TRAY_ORIENTATION)
+   (type :initform 'xcb:Atom:CARDINAL)))
 (defclass xcb:xembed:get-_NET_SYSTEM_TRAY_ORIENTATION~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:xembed:set-_NET_SYSTEM_TRAY_ORIENTATION
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_SYSTEM_TRAY_ORIENTATION)
-   (type :initform xcb:Atom:CARDINAL)
+  ((property :initform 'xcb:Atom:_NET_SYSTEM_TRAY_ORIENTATION)
+   (type :initform 'xcb:Atom:CARDINAL)
    (format :initform 32)))
 
 (defclass xcb:xembed:get-_NET_SYSTEM_TRAY_VISUAL
   (xcb:icccm:-GetProperty-single)
-  ((property :initform xcb:Atom:_NET_SYSTEM_TRAY_VISUAL)
-   (type :initform xcb:Atom:VISUALID)))
+  ((property :initform 'xcb:Atom:_NET_SYSTEM_TRAY_VISUAL)
+   (type :initform 'xcb:Atom:VISUALID)))
 (defclass xcb:xembed:get-_NET_SYSTEM_TRAY_VISUAL~reply
   (xcb:icccm:-GetProperty-single~reply)
   nil)
 (defclass xcb:xembed:set-_NET_SYSTEM_TRAY_VISUAL
   (xcb:icccm:-ChangeProperty-single)
-  ((property :initform xcb:Atom:_NET_SYSTEM_TRAY_VISUAL)
-   (type :initform xcb:Atom:VISUALID)
+  ((property :initform 'xcb:Atom:_NET_SYSTEM_TRAY_VISUAL)
+   (type :initform 'xcb:Atom:VISUALID)
    (format :initform 32)))
 
 

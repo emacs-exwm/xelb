@@ -72,48 +72,48 @@ This method must be called before using any other method in this module."
 (defconst xcb:xembed:MAPPED 1)
 
 (defclass xcb:xembed:get-_XEMBED_INFO (xcb:icccm:-GetProperty-explicit)
-  ((property :initform xcb:Atom:_XEMBED_INFO)
-   (type :initform xcb:Atom:_XEMBED_INFO)))
+  ((property :initform 'xcb:Atom:_XEMBED_INFO)
+   (type :initform 'xcb:Atom:_XEMBED_INFO)))
 (defclass xcb:xembed:get-_XEMBED_INFO~reply
   (xcb:icccm:-GetProperty-explicit~reply)
   ((version :type xcb:-ignore)
    (flags :type xcb:-ignore)))
 (defclass xcb:xembed:set-_XEMBED_INFO (xcb:icccm:-ChangeProperty-explicit)
-  ((property :initform xcb:Atom:_XEMBED_INFO)
-   (type :initform xcb:Atom:_XEMBED_INFO)
+  ((property :initform 'xcb:Atom:_XEMBED_INFO)
+   (type :initform 'xcb:Atom:_XEMBED_INFO)
    (format :initform 32)
    (version :initarg :version :type xcb:-ignore)
    (flags :initarg :flags :type xcb:-ignore)))
 
 (defclass xcb:xembed:SendEvent (xcb:SendEvent)
   ((propagate :initform 0)
-   (event-mask :initform xcb:EventMask:NoEvent))
+   (event-mask :initform 'xcb:EventMask:NoEvent))
   :documentation "Send XEmbed message.")
 
 (defclass xcb:xembed:-ClientMessage
   (xcb:icccm:--ClientMessage xcb:ClientMessage)
   ((format :initform 32)
-   (type :initform xcb:Atom:_XEMBED)
+   (type :initform 'xcb:Atom:_XEMBED)
    (time :initarg :time :type xcb:TIMESTAMP)               ;new slot
    (opcode :initarg :opcode :type xcb:CARD32)              ;new slot
    (detail :initarg :detail :initform 0 :type xcb:CARD32)) ;new slot
   :documentation "An XEmbed client message.")
 
 (defclass xcb:xembed:EMBEDDED-NOTIFY (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:EMBEDDED-NOTIFY)
+  ((opcode :initform 'xcb:xembed:opcode:EMBEDDED-NOTIFY)
    (embedder :initarg :embedder :type xcb:WINDOW)
    (version :initarg :version :type xcb:CARD32)))
 
 (defclass xcb:xembed:WINDOW-ACTIVATE (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:WINDOW-ACTIVATE)
+  ((opcode :initform 'xcb:xembed:opcode:WINDOW-ACTIVATE)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 (defclass xcb:xembed:WINDOW-DEACTIVATE (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:WINDOW-DEACTIVATE)
+  ((opcode :initform 'xcb:xembed:opcode:WINDOW-DEACTIVATE)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 (defclass xcb:xembed:REQUEST-FOCUS (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:REQUEST-FOCUS)
+  ((opcode :initform 'xcb:xembed:opcode:REQUEST-FOCUS)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 ;; Details for xcb:xembed:FOCUS-IN.
@@ -127,21 +127,21 @@ This method must be called before using any other method in this module."
 (defconst xcb:xembed:DIRECTION:LEFT-RIGHT 2)
 
 (defclass xcb:xembed:FOCUS-IN (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:FOCUS-IN)
+  ((opcode :initform 'xcb:xembed:opcode:FOCUS-IN)
    (direction :initarg :direction :initform 0 :type xcb:CARD32)
    (pad~0 :initform 4 :type xcb:-pad)))
 
 (defclass xcb:xembed:FOCUS-OUT (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:FOCUS-OUT)
+  ((opcode :initform 'xcb:xembed:opcode:FOCUS-OUT)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 (defclass xcb:xembed:FOCUS-NEXT (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:FOCUS-NEXT)
+  ((opcode :initform 'xcb:xembed:opcode:FOCUS-NEXT)
    (direction :initarg :direction :initform 0 :type xcb:CARD32)
    (pad~0 :initform 4 :type xcb:-pad)))
 
 (defclass xcb:xembed:FOCUS-PREV (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:FOCUS-PREV)
+  ((opcode :initform 'xcb:xembed:opcode:FOCUS-PREV)
    (direction :initarg :direction :initform 0 :type xcb:CARD32)
    (pad~0 :initform 4 :type xcb:-pad)))
 
@@ -153,28 +153,28 @@ This method must be called before using any other method in this module."
 (defconst xcb:xembed:MODIFIER:HYPER   16)
 
 (defclass xcb:xembed:REGISTER-ACCELERATOR (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:REGISTER-ACCELERATOR)
+  ((opcode :initform 'xcb:xembed:opcode:REGISTER-ACCELERATOR)
    (keysym :initarg :keysym :type xcb:KEYSYM)
    (modifier :initarg :modifier :type xcb:CARD32)))
 
 (defclass xcb:xembed:UNREGISTER-ACCELERATOR (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:UNREGISTER-ACCELERATOR)
+  ((opcode :initform 'xcb:xembed:opcode:UNREGISTER-ACCELERATOR)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 ;; Flags for XEMBED-ACTIVATE-ACCELERATOR.
 (defconst xcb:xembed:ACCELERATOR:OVERLOADED 1)
 
 (defclass xcb:xembed:ACTIVATE-ACCELERATOR (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:ACTIVATE-ACCELERATOR)
+  ((opcode :initform 'xcb:xembed:opcode:ACTIVATE-ACCELERATOR)
    (flags :initarg :flags :type xcb:CARD32)
    (pad~0 :initform 4 :type xcb:-pad)))
 
 (defclass xcb:xembed:MODALITY-ON (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:MODALITY-ON)
+  ((opcode :initform 'xcb:xembed:opcode:MODALITY-ON)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 (defclass xcb:xembed:MODALITY-OFF (xcb:xembed:-ClientMessage)
-  ((opcode :initform xcb:xembed:opcode:MODALITY-OFF)
+  ((opcode :initform 'xcb:xembed:opcode:MODALITY-OFF)
    (pad~0 :initform 8 :type xcb:-pad)))
 
 
