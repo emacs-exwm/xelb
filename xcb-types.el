@@ -370,8 +370,8 @@ FORMAT-STRING is a string specifying the message to output, as in
 (defmacro xcb:deftypealias (new-type old-type)
   "Define NEW-TYPE as an alias of type OLD-TYPE.
 
-Also the fundamental type is stored in 'the xcb--typealias' variable
-property (for internal use only)."
+Also the fundamental type is stored in the `xcb--typealias'
+variable property (for internal use only)."
   `(progn
      ;; FIXME: `new-type' should probably just not be eval'd at all,
      ;; but that requires changing all callers not to quote their arg.
