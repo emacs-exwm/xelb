@@ -709,7 +709,7 @@ and the second the consumed length."
   ((~code :type xcb:-u1))
   :documentation "Event type.")
 ;; Implemented in 'xcb.el'
-(cl-defgeneric xcb:-error-or-event-class->number ((obj xcb:connection) class))
+(cl-defgeneric xcb:-error-or-event-class->number (obj class))
 ;;
 (cl-defmethod xcb:marshal ((obj xcb:-event) connection &optional sequence)
   "Return the byte-array representation of event OBJ.
