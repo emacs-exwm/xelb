@@ -1719,13 +1719,6 @@
    (want :initarg :want :type xcb:CARD16)
    (load :initarg :load :type xcb:BOOL)
    (pad~0 :initform 1 :type xcb:-pad)))
-(eval-and-compile
-  (when
-      (< emacs-major-version 25)
-    (fset 'xcb:-defclass
-	  (symbol-function 'defclass))
-    (defmacro defclass
-	(&rest _args))))
 (defclass xcb:xkb:GetKbdByName~reply
   (xcb:-reply)
   ((deviceID :initarg :deviceID :type xcb:CARD8)
@@ -1986,11 +1979,6 @@
    (baseColorNdx :initarg :baseColorNdx :type xcb:CARD8)
    (labelColorNdx :initarg :labelColorNdx :type xcb:CARD8)
    (labelFont :initarg :labelFont :type xcb:xkb:CountedString16)))
-(eval-and-compile
-  (when
-      (< emacs-major-version 25)
-    (fset 'defclass
-	  (symbol-function 'xcb:-defclass))))
 
 (defclass xcb:xkb:GetDeviceInfo
   (xcb:-request)

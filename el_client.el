@@ -40,7 +40,7 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl-lib))
+(require 'cl-lib)
 (require 'eieio)
 (require 'pp)
 
@@ -48,9 +48,6 @@
 (require 'xcb-types nil t)
 
 ;;;; Variables
-
-(defconst xelb-excluded-replies<25 '(xcb:xkb:GetKbdByName~reply)
-  "Excluded replies for Emacs < 25 (they're too long to load/compile).")
 
 (defvar xelb-prefix "xcb:" "Namespace of this module.")
 
@@ -415,12 +412,6 @@ The `combine-adjacent' attribute is simply ignored."
                `(cl-defmethod xcb:marshal ((obj ,name)) nil
                               ,@expressions
                               (cl-call-next-method obj)))
-            ,(when (memq reply-name xelb-excluded-replies<25)
-               ;; Redefine `defclass' as no-op.
-               '(eval-and-compile
-                  (when (< emacs-major-version 25)
-                    (fset 'xcb:-defclass (symbol-function 'defclass))
-                    (defmacro defclass (&rest _args)))))
             ;; The optional reply body
             ,(when reply-name
                (delq nil reply-contents)
@@ -428,12 +419,7 @@ The `combine-adjacent' attribute is simply ignored."
                (setcdr reply-contents (append '((~sequence :type xcb:CARD16)
                                                 (length :type xcb:CARD32))
                                               (cdr reply-contents)))
-               `(defclass ,reply-name (xcb:-reply) ,reply-contents))
-            ,(when (memq reply-name xelb-excluded-replies<25)
-               ;; Bring back the original defination of `defclass'.
-               '(eval-and-compile
-                  (when (< emacs-major-version 25)
-                    (fset 'defclass (symbol-function 'xcb:-defclass)))))))))
+               `(defclass ,reply-name (xcb:-reply) ,reply-contents))))))
 
 (defun xelb-parse-event (node)
   "Parse <event>."
