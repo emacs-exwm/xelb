@@ -585,10 +585,6 @@ Return 0 if conversion fails."
         ,@(make-list 64 nil)]
   "Emacs event representations of XF86keysym (#x1008ff00 - #x1008ffff).")
 
-(cl-defmethod xcb:keysyms:event->keysym ((obj xcb:connection) event)
-  (declare (obsolete nil "27"))
-  (car (xcb:keysyms:event->keysyms obj event)))
-
 (cl-defmethod xcb:keysyms:event->keysyms ((obj xcb:connection) event)
   "Translate Emacs key event EVENT to list of (keysym . mod-mask).
 
