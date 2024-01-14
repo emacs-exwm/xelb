@@ -64,6 +64,8 @@
 
 (defvar xelb-request-fields nil "Fields in the current request.")
 
+(defconst xelb-xproto-namespace "xproto:" "The namespace of the core protocol.")
+
 ;;;; Helper functions
 
 (defsubst xelb-node-name (node)
@@ -74,32 +76,27 @@
   "Return the attribute ATTR of node NODE."
   (cdr (assoc attr (cadr node))))
 
+(defsubst xelb-resolve-type (name)
+  "Resolve NAME relative to the current module."
+  (if (string-prefix-p xelb-xproto-namespace name)
+      ;; Defined explicitly.
+      (or (intern-soft (concat "xcb:" (substring name (length xelb-xproto-namespace))))
+          (error "Undefined type: %s" name))
+    (or
+     ;; defined by this extension
+     (intern-soft (concat xelb-prefix name))
+     ;; defined by the core protocol
+     (intern-soft (concat "xcb:" name))
+     ;; Defined by an imported extension.
+     (cl-dolist (i xelb-imports)
+       (when-let ((type (intern-soft (concat i name))))
+         (cl-return type)))
+     ;; Not defined.
+     (error "Undefined type: %s" name))))
+
 (defsubst xelb-node-type (node)
   "Return the type of node NODE."
-  (let ((type-name (xelb-node-attr node 'type))
-        type)
-    (if (string-match ":" type-name)
-        ;; Defined explicitly.
-        (if (setq type
-                  (intern-soft (concat "xcb:"
-                                       (replace-regexp-in-string "^xproto:" ""
-                                                                 type-name))))
-            type
-          (error "Undefined type: %s" type-name))
-      (if (setq type (or (intern-soft (concat xelb-prefix type-name))
-                         (intern-soft (concat "xcb:" type-name))))
-          ;; Defined by the core protocol or this extension.
-          type
-        (catch 'break
-          (dolist (i xelb-imports)
-            (setq type (intern-soft (concat i type-name)))
-            (when type
-              (throw 'break type))))
-        (if type
-            ;; Defined by an imported extension.
-            type
-          ;; Not defined.
-          (error "Undefined type: %s" type-name))))))
+  (xelb-resolve-type (xelb-node-attr node 'type)))
 
 (defsubst xelb-escape-name (name)
   "Replace underscores in NAME with dashes."
@@ -362,9 +359,7 @@ an `xelb-auto-padding' attribute."
 (defun xelb-parse-typedef (node)
   "Parse <typedef>."
   (let* ((oldname (xelb-node-attr node 'oldname))
-         (oldname (or (intern-soft (concat xelb-prefix oldname))
-                      (intern-soft (concat "xcb:" oldname))
-                      (intern (concat xelb-prefix oldname))))
+         (oldname (xelb-resolve-type oldname))
          (newname (intern (concat xelb-prefix
                                   (xelb-node-attr node 'newname)))))
     `((xcb:deftypealias ',newname ',oldname))))
@@ -464,9 +459,7 @@ The `combine-adjacent' attribute is simply ignored."
   "Parse <eventcopy>."
   (let* ((name (intern (concat xelb-prefix (xelb-node-attr node 'name))))
          (refname (xelb-node-attr node 'ref))
-         (refname (or (intern-soft (concat xelb-prefix refname))
-                      (intern-soft (concat "xcb:" refname))
-                      (intern (concat xelb-prefix refname))))
+         (refname (xelb-resolve-type refname))
          (xge (child-of-class-p refname 'xcb:-generic-event))
          (event-number (string-to-number (xelb-node-attr node 'number))))
     (if xge
@@ -481,9 +474,7 @@ The `combine-adjacent' attribute is simply ignored."
   "Parse <errorcopy>."
   (let* ((name (intern (concat xelb-prefix (xelb-node-attr node 'name))))
          (refname (xelb-node-attr node 'ref))
-         (refname (or (intern-soft (concat xelb-prefix refname))
-                      (intern-soft (concat "xcb:" refname))
-                      (intern (concat xelb-prefix refname))))
+         (refname (xelb-resolve-type refname))
          (error-number (string-to-number (xelb-node-attr node 'number))))
     (setq xelb-error-alist (nconc xelb-error-alist `((,error-number . ,name))))
     `((defclass ,name (xcb:-error ,refname) ;Shadow the method of ref
@@ -684,9 +675,7 @@ The `combine-adjacent' attribute is simply ignored."
   "Parse <enumref>."
   (let ((name (concat (xelb-node-attr node 'ref) ":"
                       (xelb-node-subnode node))))
-    (symbol-value (or (intern-soft (concat xelb-prefix name))
-                      (intern-soft (concat "xcb:" name))
-                      (intern (concat xelb-prefix name))))))
+    (symbol-value (xelb-resolve-type name))))
 
 (defun xelb-parse-unop (node)
   "Parse <unop>."
