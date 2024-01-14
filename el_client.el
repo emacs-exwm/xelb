@@ -120,8 +120,9 @@ an `xelb-auto-padding' attribute."
   (let ((subnodes (cddr node)))
     (when mark-auto-padding
       ;; Remove all <comment>'s and <doc>'s
-      (cl-delete-if (lambda (i) (or (eq 'comment (car i)) (eq 'doc (car i))))
-                    subnodes)
+      (setq subnodes
+            (cl-delete-if (lambda (i) (or (eq 'comment (car i)) (eq 'doc (car i))))
+                          subnodes))
       (dotimes (i (1- (length subnodes)))
         (when (and (eq 'list (xelb-node-name (elt subnodes i)))
                    (pcase (xelb-node-name (elt subnodes (1+ i)))
