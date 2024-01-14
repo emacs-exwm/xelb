@@ -346,6 +346,65 @@ FORMAT-STRING is a string specifying the message to output, as in
         value
       (- value 4294967296.))))          ;treated as float for 32-bit
 
+(defsubst xcb:-f64-to-binary64 (value)
+  "Encode a 64-bit float VALUE as a binary64 (IEEE 754)."
+  (let* ((sigexp (frexp value))
+         (exp (+ (cdr sigexp) 1022))
+         (frac (abs (car sigexp)))
+         (isneg (< (copysign 1.0 (car sigexp)) 0)) ; use `copysign' to detect -0.0
+         (signmask (if isneg #x8000000000000000 0)))
+    (+ (cond ((zerop frac) 0)                                          ; 0
+             ((isnan frac) #xff0000000000001)                          ; NaN
+             ((or (>= exp 2047) (= frac 1e+INF)) #x7ff0000000000000)   ; Inf
+             ((<= exp 0) (ash (round (ldexp frac 52)) exp))            ; Subnormal
+             (t (+ (ash exp 52) (logand #xfffffffffffff
+                                        (round (ldexp frac 53))))))    ; Normal
+       signmask)))
+
+(defsubst xcb:-f32-to-binary32 (value)
+  "Encode a 32-bit float VALUE as a binary32 (IEEE 754)."
+  (let* ((sigexp (frexp value))
+         (exp (+ (cdr sigexp) 126))
+         (frac (abs (car sigexp)))
+         (isneg (< (copysign 1.0 (car sigexp)) 0)) ; use `copysign' to detect -0.0
+         (signmask (if isneg #x80000000 0)))
+    (+ (cond ((zerop frac) 0)                                                ; 0
+             ((isnan frac) #x7f800001)                                       ; NaN
+             ((or (>= exp 255) (= frac 1e+INF)) #x7f800000)                  ; Inf
+             ((<= exp 0) (ash (round (ldexp frac 23)) exp))                  ; Subnormal
+             (t (+ (ash exp 23) (logand #x7fffff (round (ldexp frac 24)))))) ; Normal
+       signmask)))
+
+(defsubst xcb:-binary64-to-f64 (value)
+  "Decode binary64 VALUE into a float."
+  (let ((sign (pcase (ash value -63)
+                (0 +0.0)
+                (1 -0.0)
+                (_ (error "[XCB] Value too large for a float64: %d" value))))
+        (exp (logand 2047 (ash value -52)))
+        (frac (logand #xfffffffffffff value)))
+    (copysign ; Use copysign, not multiplication, to deal with +/- NAN.
+     (pcase exp
+       (2047 (if (zerop frac) 1e+INF 1e+NaN))                 ; INF/NAN
+       (0    (ldexp frac -1074))                              ; Subnormal
+       (_    (ldexp (+ #x10000000000000 frac) (- exp 1075)))) ; Normal
+     sign)))
+
+(defsubst xcb:-binary32-to-f32 (value)
+  "Decode binary32 VALUE into a float."
+  (let ((sign (pcase (ash value -31)
+                (0 +0.0)
+                (1 -0.0)
+                (_ (error "[XCB] Value too large for a float32: %d" value))))
+        (exp (logand 255 (ash value -23)))
+        (frac (logand #x7fffff value)))
+    (copysign ; Use copysign, not multiplication, to deal with +/- NAN.
+     (pcase exp
+       (255 (if (zerop frac) 1e+INF 1e+NaN))        ; INF/NAN
+       (0   (ldexp frac -149))                      ; Subnormal
+       (_   (ldexp (+ #x800000 frac) (- exp 150)))) ; Normal
+     sign)))
+
 (defmacro xcb:-fieldref (field)
   "Evaluate a <fieldref> field."
   `(slot-value obj ,field))
@@ -389,6 +448,9 @@ variable property (for internal use only)."
 (cl-deftype xcb:-u4 () t)
 ;; 8 B unsigned integer
 (cl-deftype xcb:-u8 () t)
+;; floats & doubles
+(cl-deftype xcb:-f32 () t)
+(cl-deftype xcb:-f64 () t)
 ;; <pad>
 (cl-deftype xcb:-pad () t)
 ;; <pad> with align attribute
@@ -413,6 +475,8 @@ variable property (for internal use only)."
 (xcb:deftypealias 'xcb:CARD32 'xcb:-u4)
 (xcb:deftypealias 'xcb:CARD64 'xcb:-u8)
 (xcb:deftypealias 'xcb:BOOL 'xcb:-u1)
+(xcb:deftypealias 'xcb:float 'xcb:-f32)
+(xcb:deftypealias 'xcb:double 'xcb:-f64)
 
 ;;;; Struct type
 
@@ -475,6 +539,12 @@ The optional POS argument indicates current byte index of the field (used by
      (if (slot-value obj '~lsb) (xcb:-pack-i4-lsb value) (xcb:-pack-i4 value)))
     (`xcb:-u8
      (if (slot-value obj '~lsb) (xcb:-pack-u8-lsb value) (xcb:-pack-u8 value)))
+    (`xcb:-f32
+     (let ((value (xcb:-f32-to-binary32 value)))
+       (if (slot-value obj '~lsb) (xcb:-pack-u4-lsb value) (xcb:-pack-u4 value))))
+    (`xcb:-f64
+     (let ((value (xcb:-f64-to-binary64 value)))
+       (if (slot-value obj '~lsb) (xcb:-pack-u8-lsb value) (xcb:-pack-u8 value))))
     (`xcb:void (vector value))
     (`xcb:-pad
      (unless (integerp value)
@@ -604,6 +674,16 @@ and the second the consumed length."
                         (xcb:-unpack-u8-lsb data offset)
                       (xcb:-unpack-u8 data offset))
                     8))
+    (`xcb:-f32 (list (xcb:-binary32-to-f32
+                      (if (slot-value obj '~lsb)
+                          (xcb:-unpack-u4-lsb data offset)
+                        (xcb:-unpack-u4 data offset)))
+                      4))
+    (`xcb:-f64 (list (xcb:-binary64-to-f64
+                      (if (slot-value obj '~lsb)
+                          (xcb:-unpack-u8-lsb data offset)
+                        (xcb:-unpack-u8 data offset)))
+                      8))
     (`xcb:void (list (aref data offset) 1))
     (`xcb:-pad
      (unless (integerp initform)
