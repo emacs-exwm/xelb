@@ -494,6 +494,7 @@ The `combine-adjacent' attribute is simply ignored."
     (`pad (xelb-parse-pad node))
     (`required_start_align (xelb-parse-required_start_align node))
     (`field (xelb-parse-field node))
+    (`length (xelb-parse-length node))
     (`fd (xelb-parse-fd node))
     (`list (xelb-parse-list node))
     (`exprfield (xelb-parse-exprfield node))
@@ -530,6 +531,11 @@ The `combine-adjacent' attribute is simply ignored."
   (let* ((name (intern (xelb-node-attr-escape node 'name)))
          (type (xelb-node-type node)))
     `((,name :initarg ,(intern (concat ":" (symbol-name name))) :type ,type))))
+
+(defun xelb-parse-length (node)
+  "Parse <length>."
+  (let ((length (xelb-parse-expression (xelb-node-subnode node))))
+  `((~size :initform ',length))))
 
 (defun xelb-parse-fd (node)
   "Parse <fd>."

@@ -498,7 +498,8 @@ Consider let-bind it rather than change its global value."))
 (defclass xcb:-struct (xcb:--struct)
   ((~lsb :initarg :~lsb
          :initform (symbol-value 'xcb:lsb) ;see `eieio-default-eval-maybe'
-         :type xcb:-ignore))
+         :type xcb:-ignore)
+   (~size :initform nil :type xcb:-ignore))
   :documentation "Struct type.")
 
 (cl-defmethod xcb:marshal ((obj xcb:-struct))
@@ -639,7 +640,11 @@ The optional argument CTX is for <paramref>."
           (setq result (+ result (cadr tmp)))
           (when (eq type 'xcb:-switch) ;xcb:-switch always finishes a struct
             (throw 'break 'nil)))))
-    result))
+    (if-let ((size (slot-value obj '~size)))
+        ;; Let the struct compute it's size if a length field is specified. This lets us skip
+        ;; unknown fields.
+        (eval (slot-value obj '~size) `((obj . ,obj)))
+      result)))
 
 (cl-defmethod xcb:-unmarshal-field ((obj xcb:-struct) type data offset
                                     initform &optional ctx total-length)
