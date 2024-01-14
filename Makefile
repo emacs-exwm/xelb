@@ -1,6 +1,6 @@
 PROTO_PATH := /usr/share/xcb
 
-EXTENSIONS := bigreq composite damage dpms dri2 dri3 ge glx present randr \
+EXTENSIONS := bigreq composite damage dbe dpms dri2 dri3 ge glx present randr \
 record render res screensaver shape shm sync xc_misc xevie xf86dri \
 xf86vidmode xfixes xinerama xinput xkb xprint xselinux xtest xvmc xv
 

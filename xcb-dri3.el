@@ -29,7 +29,7 @@
 (defconst xcb:dri3:-extension-xname "DRI3")
 (defconst xcb:dri3:-extension-name "DRI3")
 (defconst xcb:dri3:-major-version 1)
-(defconst xcb:dri3:-minor-version 2)
+(defconst xcb:dri3:-minor-version 3)
 
 (require 'xcb-xproto)
 
@@ -199,6 +199,13 @@
 		    (xcb:-fieldref 'nfd))
 	     :type xcb:-list)
    (buffers :initarg :buffers :type xcb:-ignore)))
+
+(defclass xcb:dri3:SetDRMDeviceInUse
+  (xcb:-request)
+  ((~opcode :initform 9 :type xcb:-u1)
+   (window :initarg :window :type xcb:WINDOW)
+   (drmMajor :initarg :drmMajor :type xcb:CARD32)
+   (drmMinor :initarg :drmMinor :type xcb:CARD32)))
 
 
 
