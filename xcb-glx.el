@@ -45,9 +45,9 @@
 
 (xcb:deftypealias 'xcb:glx:DRAWABLE 'xcb:-u4)
 
-(xcb:deftypealias 'xcb:glx:FLOAT32 'xcb:glx:float)
+(xcb:deftypealias 'xcb:glx:FLOAT32 'xcb:float)
 
-(xcb:deftypealias 'xcb:glx:FLOAT64 'xcb:glx:double)
+(xcb:deftypealias 'xcb:glx:FLOAT64 'xcb:double)
 
 (xcb:deftypealias 'xcb:glx:BOOL32 'xcb:CARD32)
 
@@ -575,6 +575,7 @@
 				(xcb:-fieldref 'gl-str-len))
 			 :type xcb:-list)
    (gl-extension-string :initarg :gl-extension-string :type xcb:-ignore)
+   (pad~0 :initform 4 :type xcb:-pad-align)
    (glx-extension-string~ :initform
 			  '(name glx-extension-string type xcb:char size
 				 (xcb:-fieldref 'glx-str-len))
@@ -619,6 +620,7 @@
 				(xcb:-fieldref 'gl-str-len))
 			 :type xcb:-list)
    (gl-extension-string :initarg :gl-extension-string :type xcb:-ignore)
+   (pad~0 :initform 4 :type xcb:-pad-align)
    (glx-extension-string~ :initform
 			  '(name glx-extension-string type xcb:char size
 				 (xcb:-fieldref 'glx-str-len))

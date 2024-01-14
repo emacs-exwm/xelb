@@ -28,7 +28,7 @@
 
 (defconst xcb:xfixes:-extension-xname "XFIXES")
 (defconst xcb:xfixes:-extension-name "XFixes")
-(defconst xcb:xfixes:-major-version 5)
+(defconst xcb:xfixes:-major-version 6)
 (defconst xcb:xfixes:-minor-version 0)
 
 (require 'xcb-xproto)
@@ -418,6 +418,25 @@
   (xcb:-request)
   ((~opcode :initform 32 :type xcb:-u1)
    (barrier :initarg :barrier :type xcb:xfixes:BARRIER)))
+
+(defconst xcb:xfixes:ClientDisconnectFlags:Default 0)
+(defconst xcb:xfixes:ClientDisconnectFlags:Terminate 1)
+
+(defclass xcb:xfixes:SetClientDisconnectMode
+  (xcb:-request)
+  ((~opcode :initform 33 :type xcb:-u1)
+   (disconnect-mode :initarg :disconnect-mode :type xcb:CARD32)))
+
+(defclass xcb:xfixes:GetClientDisconnectMode
+  (xcb:-request)
+  ((~opcode :initform 34 :type xcb:-u1)))
+(defclass xcb:xfixes:GetClientDisconnectMode~reply
+  (xcb:-reply)
+  ((pad~0 :initform 1 :type xcb:-pad)
+   (~sequence :type xcb:CARD16)
+   (length :type xcb:CARD32)
+   (disconnect-mode :initarg :disconnect-mode :type xcb:CARD32)
+   (pad~1 :initform 20 :type xcb:-pad)))
 
 (defconst xcb:xfixes:error-number-class-alist
   '((0 . xcb:xfixes:BadRegion))

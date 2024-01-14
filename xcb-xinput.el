@@ -29,7 +29,7 @@
 (defconst xcb:xinput:-extension-xname "XInputExtension")
 (defconst xcb:xinput:-extension-name "Input")
 (defconst xcb:xinput:-major-version 2)
-(defconst xcb:xinput:-minor-version 3)
+(defconst xcb:xinput:-minor-version 4)
 
 (require 'xcb-xfixes)
 
@@ -1642,6 +1642,7 @@
 (defconst xcb:xinput:DeviceClassType:Valuator 2)
 (defconst xcb:xinput:DeviceClassType:Scroll 3)
 (defconst xcb:xinput:DeviceClassType:Touch 8)
+(defconst xcb:xinput:DeviceClassType:Gesture 9)
 
 (defconst xcb:xinput:DeviceType:MasterPointer 1)
 (defconst xcb:xinput:DeviceType:MasterKeyboard 2)
@@ -1710,6 +1711,14 @@
    (mode :initarg :mode :type xcb:CARD8)
    (num-touches :initarg :num-touches :type xcb:CARD8)))
 
+(defclass xcb:xinput:GestureClass
+  (xcb:-struct)
+  ((type :initarg :type :type xcb:CARD16)
+   (len :initarg :len :type xcb:CARD16)
+   (sourceid :initarg :sourceid :type xcb:xinput:DeviceId)
+   (num-touches :initarg :num-touches :type xcb:CARD8)
+   (pad~0 :initform 1 :type xcb:-pad)))
+
 (defclass xcb:xinput:ValuatorClass
   (xcb:-struct)
   ((type :initarg :type :type xcb:CARD16)
@@ -1726,7 +1735,11 @@
 
 (defclass xcb:xinput:DeviceClass
   (xcb:-struct)
-  ((type :initarg :type :type xcb:CARD16)
+  ((~size :initform
+	  '(*
+	    (xcb:-fieldref 'len)
+	    4))
+   (type :initarg :type :type xcb:CARD16)
    (len :initarg :len :type xcb:CARD16)
    (sourceid :initarg :sourceid :type xcb:xinput:DeviceId)
    (data :initform
@@ -1742,7 +1755,9 @@
 	    ((3)
 	     pad~4 number* scroll-type pad~5 flags increment)
 	    ((8)
-	     mode* num-touches)))
+	     mode* num-touches)
+	    ((9)
+	     num-touches* pad~6)))
 	 :type xcb:-switch)
    (pad~0 :initform
 	  [4 2]
@@ -1791,7 +1806,9 @@
    (flags :initarg :flags :type xcb:CARD32)
    (increment :initarg :increment :type xcb:xinput:FP3232)
    (mode* :initarg :mode* :type xcb:CARD8)
-   (num-touches :initarg :num-touches :type xcb:CARD8)))
+   (num-touches :initarg :num-touches :type xcb:CARD8)
+   (num-touches* :initarg :num-touches* :type xcb:CARD8)
+   (pad~6 :initform 1 :type xcb:-pad)))
 
 (defclass xcb:xinput:XIDeviceInfo
   (xcb:-struct)
@@ -1916,6 +1933,8 @@
 (defconst xcb:xinput:GrabType:Enter 2)
 (defconst xcb:xinput:GrabType:FocusIn 3)
 (defconst xcb:xinput:GrabType:TouchBegin 4)
+(defconst xcb:xinput:GrabType:GesturePinchBegin 5)
+(defconst xcb:xinput:GrabType:GestureSwipeBegin 6)
 
 (defclass xcb:xinput:GrabModifierInfo
   (xcb:-struct)
@@ -2775,6 +2794,74 @@
   (xcb:-event xcb:xinput:BarrierHit)
   ((~evtype :initform 26)))
 
+(defconst xcb:xinput:GesturePinchEventFlags:GesturePinchCancelled 1)
+
+(defclass xcb:xinput:GesturePinchBegin
+  (xcb:-generic-event)
+  ((~evtype :initform 27)
+   (deviceid :initarg :deviceid :type xcb:xinput:DeviceId)
+   (time :initarg :time :type xcb:TIMESTAMP)
+   (detail :initarg :detail :type xcb:CARD32)
+   (root :initarg :root :type xcb:WINDOW)
+   (event :initarg :event :type xcb:WINDOW)
+   (child :initarg :child :type xcb:WINDOW)
+   (root-x :initarg :root-x :type xcb:xinput:FP1616)
+   (root-y :initarg :root-y :type xcb:xinput:FP1616)
+   (event-x :initarg :event-x :type xcb:xinput:FP1616)
+   (event-y :initarg :event-y :type xcb:xinput:FP1616)
+   (delta-x :initarg :delta-x :type xcb:xinput:FP1616)
+   (delta-y :initarg :delta-y :type xcb:xinput:FP1616)
+   (delta-unaccel-x :initarg :delta-unaccel-x :type xcb:xinput:FP1616)
+   (delta-unaccel-y :initarg :delta-unaccel-y :type xcb:xinput:FP1616)
+   (scale :initarg :scale :type xcb:xinput:FP1616)
+   (delta-angle :initarg :delta-angle :type xcb:xinput:FP1616)
+   (sourceid :initarg :sourceid :type xcb:xinput:DeviceId)
+   (pad~0 :initform 2 :type xcb:-pad)
+   (mods :initarg :mods :type xcb:xinput:ModifierInfo)
+   (group :initarg :group :type xcb:xinput:GroupInfo)
+   (flags :initarg :flags :type xcb:CARD32)))
+
+(defclass xcb:xinput:GesturePinchUpdate
+  (xcb:-event xcb:xinput:GesturePinchBegin)
+  ((~evtype :initform 28)))
+
+(defclass xcb:xinput:GesturePinchEnd
+  (xcb:-event xcb:xinput:GesturePinchBegin)
+  ((~evtype :initform 29)))
+
+(defconst xcb:xinput:GestureSwipeEventFlags:GestureSwipeCancelled 1)
+
+(defclass xcb:xinput:GestureSwipeBegin
+  (xcb:-generic-event)
+  ((~evtype :initform 30)
+   (deviceid :initarg :deviceid :type xcb:xinput:DeviceId)
+   (time :initarg :time :type xcb:TIMESTAMP)
+   (detail :initarg :detail :type xcb:CARD32)
+   (root :initarg :root :type xcb:WINDOW)
+   (event :initarg :event :type xcb:WINDOW)
+   (child :initarg :child :type xcb:WINDOW)
+   (root-x :initarg :root-x :type xcb:xinput:FP1616)
+   (root-y :initarg :root-y :type xcb:xinput:FP1616)
+   (event-x :initarg :event-x :type xcb:xinput:FP1616)
+   (event-y :initarg :event-y :type xcb:xinput:FP1616)
+   (delta-x :initarg :delta-x :type xcb:xinput:FP1616)
+   (delta-y :initarg :delta-y :type xcb:xinput:FP1616)
+   (delta-unaccel-x :initarg :delta-unaccel-x :type xcb:xinput:FP1616)
+   (delta-unaccel-y :initarg :delta-unaccel-y :type xcb:xinput:FP1616)
+   (sourceid :initarg :sourceid :type xcb:xinput:DeviceId)
+   (pad~0 :initform 2 :type xcb:-pad)
+   (mods :initarg :mods :type xcb:xinput:ModifierInfo)
+   (group :initarg :group :type xcb:xinput:GroupInfo)
+   (flags :initarg :flags :type xcb:CARD32)))
+
+(defclass xcb:xinput:GestureSwipeUpdate
+  (xcb:-event xcb:xinput:GestureSwipeBegin)
+  ((~evtype :initform 31)))
+
+(defclass xcb:xinput:GestureSwipeEnd
+  (xcb:-event xcb:xinput:GestureSwipeBegin)
+  ((~evtype :initform 32)))
+
 (defclass xcb:xinput:EventForSend
   (xcb:-event)
   nil)
@@ -2873,7 +2960,13 @@
     (23 . xcb:xinput:RawTouchUpdate)
     (24 . xcb:xinput:RawTouchEnd)
     (25 . xcb:xinput:BarrierHit)
-    (26 . xcb:xinput:BarrierLeave))
+    (26 . xcb:xinput:BarrierLeave)
+    (27 . xcb:xinput:GesturePinchBegin)
+    (28 . xcb:xinput:GesturePinchUpdate)
+    (29 . xcb:xinput:GesturePinchEnd)
+    (30 . xcb:xinput:GestureSwipeBegin)
+    (31 . xcb:xinput:GestureSwipeUpdate)
+    (32 . xcb:xinput:GestureSwipeEnd))
   "(xge-number . event-class) alist.")
 
 

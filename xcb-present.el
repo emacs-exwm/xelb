@@ -29,7 +29,7 @@
 (defconst xcb:present:-extension-xname "Present")
 (defconst xcb:present:-extension-name "Present")
 (defconst xcb:present:-major-version 1)
-(defconst xcb:present:-minor-version 2)
+(defconst xcb:present:-minor-version 3)
 
 (require 'xcb-xproto)
 
@@ -55,11 +55,13 @@
 (defconst xcb:present:Option:Copy 2)
 (defconst xcb:present:Option:UST 4)
 (defconst xcb:present:Option:Suboptimal 8)
+(defconst xcb:present:Option:AsyncMayTear 16)
 
 (defconst xcb:present:Capability:None 0)
 (defconst xcb:present:Capability:Async 1)
 (defconst xcb:present:Capability:Fence 2)
 (defconst xcb:present:Capability:UST 4)
+(defconst xcb:present:Capability:AsyncMayTear 8)
 
 (defconst xcb:present:CompleteKind:Pixmap 0)
 (defconst xcb:present:CompleteKind:NotifyMSC 1)

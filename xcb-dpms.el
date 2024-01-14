@@ -28,8 +28,10 @@
 
 (defconst xcb:dpms:-extension-xname "DPMS")
 (defconst xcb:dpms:-extension-name "DPMS")
-(defconst xcb:dpms:-major-version 0)
-(defconst xcb:dpms:-minor-version 0)
+(defconst xcb:dpms:-major-version 1)
+(defconst xcb:dpms:-minor-version 2)
+
+(require 'xcb-xproto)
 
 (defclass xcb:dpms:GetVersion
   (xcb:-request)
@@ -104,6 +106,26 @@
    (power-level :initarg :power-level :type xcb:CARD16)
    (state :initarg :state :type xcb:BOOL)
    (pad~1 :initform 21 :type xcb:-pad)))
+
+(defconst xcb:dpms:EventMask:InfoNotify 1)
+
+(defclass xcb:dpms:SelectInput
+  (xcb:-request)
+  ((~opcode :initform 8 :type xcb:-u1)
+   (event-mask :initarg :event-mask :type xcb:CARD32)))
+
+(defclass xcb:dpms:InfoNotify
+  (xcb:-generic-event)
+  ((~evtype :initform 0)
+   (pad~0 :initform 2 :type xcb:-pad)
+   (timestamp :initarg :timestamp :type xcb:TIMESTAMP)
+   (power-level :initarg :power-level :type xcb:CARD16)
+   (state :initarg :state :type xcb:BOOL)
+   (pad~1 :initform 21 :type xcb:-pad)))
+
+(defconst xcb:dpms:xge-number-class-alist
+  '((0 . xcb:dpms:InfoNotify))
+  "(xge-number . event-class) alist.")
 
 
 

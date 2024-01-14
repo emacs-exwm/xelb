@@ -97,6 +97,7 @@
 			 (xcb:-fieldref 'printerNameLen))
 		  :type xcb:-list)
    (printer-name :initarg :printer-name :type xcb:-ignore)
+   (pad~0 :initform 4 :type xcb:-pad-align)
    (locale~ :initform
 	    '(name locale type xcb:xprint:STRING8 size
 		   (xcb:-fieldref 'localeLen))
@@ -130,6 +131,7 @@
 			(xcb:-fieldref 'printerNameLen))
 		 :type xcb:-list)
    (printerName :initarg :printerName :type xcb:-ignore)
+   (pad~0 :initform 4 :type xcb:-pad-align)
    (locale~ :initform
 	    '(name locale type xcb:xprint:STRING8 size
 		   (xcb:-fieldref 'localeLen))
@@ -198,11 +200,13 @@
 		 (xcb:-fieldref 'len-data))
 	  :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)
+   (pad~0 :initform 4 :type xcb:-pad-align)
    (doc-format~ :initform
 		'(name doc-format type xcb:xprint:STRING8 size
 		       (xcb:-fieldref 'len-fmt))
 		:type xcb:-list)
    (doc-format :initarg :doc-format :type xcb:-ignore)
+   (pad~1 :initform 4 :type xcb:-pad-align)
    (options~ :initform
 	     '(name options type xcb:xprint:STRING8 size
 		    (xcb:-fieldref 'len-options))
