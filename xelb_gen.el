@@ -1,4 +1,4 @@
-;;; el_client.el --- XELB Code Generator  -*- lexical-binding: t -*-
+;;; xelb_gen.el --- XELB Code Generator  -*- lexical-binding: t; no-byte-compile: t -*-
 
 ;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
 
@@ -43,9 +43,6 @@
 (require 'cl-lib)
 (require 'eieio)
 (require 'pp)
-
-;; Only used to eliminate compile warnings when distributed.
-(require 'xcb-types nil t)
 
 ;;;; Variables
 
@@ -719,11 +716,11 @@ The `combine-adjacent' attribute is simply ignored."
 (setq edebug-all-forms t)
 
 (if (not argv)
-    (error "Usage: xelb_gen.el <protocol.xml> [additional_load_paths]")
+    (error "Usage: emacs -Q --script el_client.el <protocol.xml> [additional_load_paths]")
   (add-to-list 'load-path default-directory)
   (dolist (i (cdr argv))
     (add-to-list 'load-path i))
   (require 'xcb-types)
   (xelb-parse (car argv)))
 
-;;; el_client.el ends here
+;;; xelb_gen.el ends here
