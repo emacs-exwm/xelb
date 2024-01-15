@@ -1,0 +1,32 @@
+# melpazoid <https://github.com/riscy/melpazoid> build checks.
+
+name: melpazoid
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with: { python-version: 3.11 }
+    - name: Install
+      run: |
+        sudo apt-get install emacs && emacs --version
+        git clone https://github.com/riscy/melpazoid.git ~/melpazoid
+        pip install ~/melpazoid
+    - name: Run
+      env:
+        LOCAL_REPO: ${{ github.workspace }}
+        # RECIPE is your recipe as written for MELPA:
+        RECIPE: (xelb :repo "emacs-exwm/xelb" :fetcher github)
+        # set this to false (or remove it) if the package isn't on MELPA:
+        EXIST_OK: false
+      run: echo $GITHUB_REF && make -C ~/melpazoid
