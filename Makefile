@@ -1,6 +1,4 @@
-PROTO_PATH := ../xcb-proto/src
-
-EMACS_BIN := emacs -Q
+PROTO_PATH := /usr/share/xcb
 
 EXTENSIONS := bigreq composite damage dpms dri2 dri3 ge glx present randr \
 record render res screensaver shape shm sync xc_misc xevie xf86dri \
@@ -13,7 +11,7 @@ all: clean $(LIBS)
 
 xcb-%.el: $(PROTO_PATH)/%.xml
 	@echo -n "\n"Generating $@...
-	@$(EMACS_BIN) --script ./el_client.el $< > $@
+	@./xelb-gen $< > $@
 
 $(EXT_LIBS): xcb-xproto.el
 
