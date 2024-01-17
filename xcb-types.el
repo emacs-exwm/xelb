@@ -519,6 +519,14 @@ Consider let-bind it rather than change its global value."))
                                                     (length result))))
           (when (eq type 'xcb:-switch) ;xcb:-switch always finishes a struct
             (throw 'break 'nil)))))
+    ;; If we specify a size, verify that it matches the actual size.
+    (when-let* ((size-exp (slot-value obj '~size))
+                (size (eval size-exp `((obj . ,obj)))))
+      (unless (length= result size)
+        (error "[XCB] Unexpected size for type %s: got %d, expected %d"
+               (type-of obj)
+               (length result)
+               size)))
     result))
 
 (cl-defmethod xcb:-marshal-field ((obj xcb:-struct) type value &optional pos)
@@ -640,11 +648,21 @@ The optional argument CTX is for <paramref>."
           (setq result (+ result (cadr tmp)))
           (when (eq type 'xcb:-switch) ;xcb:-switch always finishes a struct
             (throw 'break 'nil)))))
-    (if-let ((size (slot-value obj '~size)))
-        ;; Let the struct compute it's size if a length field is specified. This lets us skip
-        ;; unknown fields.
-        (eval (slot-value obj '~size) `((obj . ,obj)))
-      result)))
+    ;; Let the struct compute it's size if a length field is specified. This lets us skip unknown
+    ;; fields.
+    (when-let* ((size-exp (slot-value obj '~size))
+                (size (eval size-exp `((obj . ,obj)))))
+      ;; Make sure the stated size is reasonable.
+      (cond
+       ((< size result)
+        (error "[XCB] Object of type `%s' specified a size (%d) less than the number of bytes read (%d)"
+               (type-of obj) size result))
+       ((length< byte-array (- size result))
+        (error "[XCB] Object of type `%s' specified a size (%d) greater than the size of the input (%d)"
+               (type-of obj) size (+ result (length byte-array)))))
+      ;; Skip any additional bytes.
+      (setq result size))
+    result))
 
 (cl-defmethod xcb:-unmarshal-field ((obj xcb:-struct) type data offset
                                     initform &optional ctx total-length)
@@ -868,8 +886,12 @@ This result is converted from the first bounded slot."
                                       (slot-value obj name)))
         (when (> (length tmp) (length result))
           (setq result tmp))))
-    (when (> size (length result))
+    (cond
+     ((length< result size)
       (setq result (vconcat result (make-vector (- size (length result)) 0))))
+     ((length> result size)
+      (error "[XCB] Marshaled enum `%s' is larger than its declared size (%d > %d)"
+             (type-of obj) (length result) size)))
     result))
 ;;
 (cl-defmethod xcb:unmarshal ((obj xcb:-union) byte-array &optional ctx
