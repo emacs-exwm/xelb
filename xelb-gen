@@ -1,4 +1,5 @@
-;;; el_client.el --- XELB Code Generator  -*- lexical-binding: t -*-
+#!/usr/bin/env -S emacs -Q --script
+;;; xelb-gen --- XELB Code Generator  -*- lexical-binding: t; no-byte-compile: t -*-
 
 ;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
 
@@ -21,7 +22,7 @@
 
 ;;; Commentary:
 
-;; 'el_client' is responsible for converting XCB XML description files into
+;; 'xelb-gen' is responsible for converting XCB XML description files into
 ;; Elisp libraries.  Here are a few design guidelines:
 ;; + The generated codes should be human-readable and conform to the Elisp
 ;;   coding conventions.  Names mentioned in X specifications are preferred.
@@ -726,4 +727,4 @@ The `combine-adjacent' attribute is simply ignored."
   (require 'xcb-types)
   (xelb-parse (car argv)))
 
-;;; el_client.el ends here
+;;; xelb-gen ends here
