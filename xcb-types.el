@@ -415,10 +415,7 @@ FORMAT-STRING is a string specifying the message to output, as in
 
 (defsubst xcb:-popcount (mask)
   "Return the popcount of integer MASK."
-  (apply #'+ (mapcar (lambda (i)
-                       (logand (lsh mask i) 1))
-                     ;; 32-bit number assumed (CARD32)
-                     (eval-when-compile (number-sequence -31 0)))))
+  (logcount mask))
 
 (defsubst xcb:-request-class->reply-class (request)
   "Return the reply class corresponding to the request class REQUEST."
