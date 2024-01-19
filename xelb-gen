@@ -468,7 +468,7 @@ The `combine-adjacent' attribute is simply ignored."
               (nconc xelb-xge-alist `((,event-number . ,name))))
       (setq xelb-event-alist
             (nconc xelb-event-alist `((,event-number . ,name)))))
-    `((defclass ,name (xcb:-event ,refname) ;Shadow the method of ref.
+    `((defclass ,name (,refname) ;Shadow the method of ref.
         ((,(if xge '~evtype '~code) :initform ,event-number))))))
 
 (defun xelb-parse-errorcopy (node)

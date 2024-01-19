@@ -310,7 +310,7 @@
    (pad~0 :initform 1 :type xcb:-pad)))
 
 (defclass xcb:KeyRelease
-  (xcb:-event xcb:KeyPress)
+  (xcb:KeyPress)
   ((~code :initform 3)))
 
 (defconst xcb:ButtonMask:1 256)
@@ -338,7 +338,7 @@
    (pad~0 :initform 1 :type xcb:-pad)))
 
 (defclass xcb:ButtonRelease
-  (xcb:-event xcb:ButtonPress)
+  (xcb:ButtonPress)
   ((~code :initform 5)))
 
 (defconst xcb:Motion:Normal 0)
@@ -393,7 +393,7 @@
    (same-screen-focus :initarg :same-screen-focus :type xcb:BYTE)))
 
 (defclass xcb:LeaveNotify
-  (xcb:-event xcb:EnterNotify)
+  (xcb:EnterNotify)
   ((~code :initform 8)))
 
 (defclass xcb:FocusIn
@@ -406,7 +406,7 @@
    (pad~0 :initform 3 :type xcb:-pad)))
 
 (defclass xcb:FocusOut
-  (xcb:-event xcb:FocusIn)
+  (xcb:FocusIn)
   ((~code :initform 10)))
 
 (defclass xcb:KeymapNotify
@@ -597,7 +597,7 @@
    (pad~2 :initform 3 :type xcb:-pad)))
 
 (defclass xcb:CirculateRequest
-  (xcb:-event xcb:CirculateNotify)
+  (xcb:CirculateNotify)
   ((~code :initform 27)))
 
 (defconst xcb:Property:NewValue 0)
