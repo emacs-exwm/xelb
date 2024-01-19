@@ -2174,19 +2174,19 @@
    (device-id :initarg :device-id :type xcb:CARD8)))
 
 (defclass xcb:xinput:DeviceKeyRelease
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 2)))
 
 (defclass xcb:xinput:DeviceButtonPress
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 3)))
 
 (defclass xcb:xinput:DeviceButtonRelease
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 4)))
 
 (defclass xcb:xinput:DeviceMotionNotify
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 5)))
 
 (defclass xcb:xinput:DeviceFocusIn
@@ -2201,15 +2201,15 @@
    (pad~0 :initform 18 :type xcb:-pad)))
 
 (defclass xcb:xinput:DeviceFocusOut
-  (xcb:-event xcb:xinput:DeviceFocusIn)
+  (xcb:xinput:DeviceFocusIn)
   ((~code :initform 7)))
 
 (defclass xcb:xinput:ProximityIn
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 8)))
 
 (defclass xcb:xinput:ProximityOut
-  (xcb:-event xcb:xinput:DeviceKeyPress)
+  (xcb:xinput:DeviceKeyPress)
   ((~code :initform 9)))
 
 (defconst xcb:xinput:ClassesReportedMask:OutOfProximity 128)
@@ -2380,7 +2380,7 @@
    (axisvalues :initarg :axisvalues :type xcb:-ignore)))
 
 (defclass xcb:xinput:KeyRelease
-  (xcb:-event xcb:xinput:KeyPress)
+  (xcb:xinput:KeyPress)
   ((~evtype :initform 3)))
 
 (defconst xcb:xinput:PointerEventFlags:PointerEmulated 65536)
@@ -2432,11 +2432,11 @@
    (axisvalues :initarg :axisvalues :type xcb:-ignore)))
 
 (defclass xcb:xinput:ButtonRelease
-  (xcb:-event xcb:xinput:ButtonPress)
+  (xcb:xinput:ButtonPress)
   ((~evtype :initform 5)))
 
 (defclass xcb:xinput:Motion
-  (xcb:-event xcb:xinput:ButtonPress)
+  (xcb:xinput:ButtonPress)
   ((~evtype :initform 6)))
 
 (defconst xcb:xinput:NotifyMode:Normal 0)
@@ -2482,15 +2482,15 @@
    (buttons :initarg :buttons :type xcb:-ignore)))
 
 (defclass xcb:xinput:Leave
-  (xcb:-event xcb:xinput:Enter)
+  (xcb:xinput:Enter)
   ((~evtype :initform 8)))
 
 (defclass xcb:xinput:FocusIn
-  (xcb:-event xcb:xinput:Enter)
+  (xcb:xinput:Enter)
   ((~evtype :initform 9)))
 
 (defclass xcb:xinput:FocusOut
-  (xcb:-event xcb:xinput:Enter)
+  (xcb:xinput:Enter)
   ((~evtype :initform 10)))
 
 (defconst xcb:xinput:HierarchyMask:MasterAdded 1)
@@ -2585,7 +2585,7 @@
    (axisvalues-raw :initarg :axisvalues-raw :type xcb:-ignore)))
 
 (defclass xcb:xinput:RawKeyRelease
-  (xcb:-event xcb:xinput:RawKeyPress)
+  (xcb:xinput:RawKeyPress)
   ((~evtype :initform 14)))
 
 (defclass xcb:xinput:RawButtonPress
@@ -2635,11 +2635,11 @@
    (axisvalues-raw :initarg :axisvalues-raw :type xcb:-ignore)))
 
 (defclass xcb:xinput:RawButtonRelease
-  (xcb:-event xcb:xinput:RawButtonPress)
+  (xcb:xinput:RawButtonPress)
   ((~evtype :initform 16)))
 
 (defclass xcb:xinput:RawMotion
-  (xcb:-event xcb:xinput:RawButtonPress)
+  (xcb:xinput:RawButtonPress)
   ((~evtype :initform 17)))
 
 (defconst xcb:xinput:TouchEventFlags:TouchPendingEnd 65536)
@@ -2692,11 +2692,11 @@
    (axisvalues :initarg :axisvalues :type xcb:-ignore)))
 
 (defclass xcb:xinput:TouchUpdate
-  (xcb:-event xcb:xinput:TouchBegin)
+  (xcb:xinput:TouchBegin)
   ((~evtype :initform 19)))
 
 (defclass xcb:xinput:TouchEnd
-  (xcb:-event xcb:xinput:TouchBegin)
+  (xcb:xinput:TouchBegin)
   ((~evtype :initform 20)))
 
 (defconst xcb:xinput:TouchOwnershipFlags:None 0)
@@ -2762,11 +2762,11 @@
    (axisvalues-raw :initarg :axisvalues-raw :type xcb:-ignore)))
 
 (defclass xcb:xinput:RawTouchUpdate
-  (xcb:-event xcb:xinput:RawTouchBegin)
+  (xcb:xinput:RawTouchBegin)
   ((~evtype :initform 23)))
 
 (defclass xcb:xinput:RawTouchEnd
-  (xcb:-event xcb:xinput:RawTouchBegin)
+  (xcb:xinput:RawTouchBegin)
   ((~evtype :initform 24)))
 
 (defconst xcb:xinput:BarrierFlags:PointerReleased 1)
@@ -2791,7 +2791,7 @@
    (dy :initarg :dy :type xcb:xinput:FP3232)))
 
 (defclass xcb:xinput:BarrierLeave
-  (xcb:-event xcb:xinput:BarrierHit)
+  (xcb:xinput:BarrierHit)
   ((~evtype :initform 26)))
 
 (defconst xcb:xinput:GesturePinchEventFlags:GesturePinchCancelled 1)
@@ -2822,11 +2822,11 @@
    (flags :initarg :flags :type xcb:CARD32)))
 
 (defclass xcb:xinput:GesturePinchUpdate
-  (xcb:-event xcb:xinput:GesturePinchBegin)
+  (xcb:xinput:GesturePinchBegin)
   ((~evtype :initform 28)))
 
 (defclass xcb:xinput:GesturePinchEnd
-  (xcb:-event xcb:xinput:GesturePinchBegin)
+  (xcb:xinput:GesturePinchBegin)
   ((~evtype :initform 29)))
 
 (defconst xcb:xinput:GestureSwipeEventFlags:GestureSwipeCancelled 1)
@@ -2855,11 +2855,11 @@
    (flags :initarg :flags :type xcb:CARD32)))
 
 (defclass xcb:xinput:GestureSwipeUpdate
-  (xcb:-event xcb:xinput:GestureSwipeBegin)
+  (xcb:xinput:GestureSwipeBegin)
   ((~evtype :initform 31)))
 
 (defclass xcb:xinput:GestureSwipeEnd
-  (xcb:-event xcb:xinput:GestureSwipeBegin)
+  (xcb:xinput:GestureSwipeBegin)
   ((~evtype :initform 32)))
 
 (defclass xcb:xinput:EventForSend
