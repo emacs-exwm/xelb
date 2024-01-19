@@ -186,7 +186,8 @@
                                                 socket)))
       (setq display (frame-parameter nil 'display)
             socket (xcb:display->socket display)))
-    (let* ((process (make-network-process :name "XELB" :remote socket))
+    (let* ((process (make-network-process :name "XELB" :family 'local
+                                          :service socket))
            (auth (if auth-info auth-info (xcb:create-auth-info)))
            (connection (make-instance 'xcb:connection
                                       :process process :display display
