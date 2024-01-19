@@ -74,7 +74,7 @@ Here are some predefined candidates:
 
 (defmacro xcb-debug:-with-debug-buffer (&rest forms)
   "Evaluate FORMS making sure `xcb-debug:buffer' is correctly updated."
-  `(with-current-buffer (get-buffer-create xcb-debug:buffer)
+  `(with-current-buffer (xcb-debug:-get-buffer)
      (let (windows-eob)
        ;; Note windows whose point is at EOB.
        (dolist (w (get-buffer-window-list xcb-debug:buffer t 'nomini))
@@ -98,7 +98,7 @@ the passed OBJECTS.  See `format' for details."
 (defmacro xcb-debug:backtrace ()
   "Print a backtrace to the `xcb-debug:buffer'."
   '(xcb-debug:-with-debug-buffer
-    (let ((standard-output (get-buffer-create xcb-debug:buffer)))
+    (let ((standard-output (xcb-debug:-get-buffer)))
       (backtrace))))
 
 (defmacro xcb-debug:backtrace-on-error (&rest forms)
@@ -106,6 +106,14 @@ the passed OBJECTS.  See `format' for details."
   `(let ((debug-on-error t)
          (debugger (lambda (&rest _) (xcb-debug:backtrace))))
      ,@forms))
+
+(defun xcb-debug:-get-buffer ()
+  "Get or create `xcb-debug:buffer'."
+  (let ((buffer (get-buffer xcb-debug:buffer)))
+    (unless buffer
+      (setq buffer (get-buffer-create xcb-debug:buffer))
+      (buffer-disable-undo buffer))
+    buffer))
 
 (defun xcb-debug:clear ()
   "Clear the debug buffer."
