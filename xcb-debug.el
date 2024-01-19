@@ -77,8 +77,9 @@ Here are some predefined candidates:
   `(with-current-buffer (xcb-debug:-get-buffer)
      (let (windows-eob)
        ;; Note windows whose point is at EOB.
-       (dolist (w (get-buffer-window-list xcb-debug:buffer t 'nomini))
-         (when (= (window-point w) (point-max))
+       (dolist (w (get-buffer-window-list (current-buffer) t 'nomini))
+         (when (and (window-live-p w)
+                    (= (window-point w) (point-max)))
            (push w windows-eob)))
        (save-excursion
          (goto-char (point-max))
