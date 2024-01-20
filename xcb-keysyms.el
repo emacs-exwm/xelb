@@ -322,7 +322,7 @@ FIRST-KEYCODE and COUNT specify the keycode range to update."
           xcb:keysyms:shift-lock-mask 0
           xcb:keysyms:num-lock-mask 0)
     (dolist (row (number-sequence 3 7))
-      (let ((mask (lsh 1 row))
+      (let ((mask (ash 1 row))
             (col 0)
             found-alt-or-meta keycode keysym)
         (while (< col keycodes-per-modifier)
@@ -397,12 +397,12 @@ keycode.  The caller is responsible for checking which modifiers to use."
           (throw 'return '(0 . 0)))
         (setq group (if (null modifiers)
                         0
-                      (logand (lsh modifiers -13) #b11))) ;The 13, 14 bits.
+                      (logand (ash modifiers -13) #b11))) ;The 13, 14 bits.
         ;; Wrap group.
         (when (>= group group-number)
           (pcase (logand group-info #xC0) ;See <XKBstr.h>.
             (`xcb:xkb:GroupsWrap:RedirectIntoRange
-             (setq group (logand #xFF (lsh group-info -4))) ;See <XKBstr.h>.
+             (setq group (logand #xFF (ash group-info -4))) ;See <XKBstr.h>.
              ;; Check if it's also out of range.
              (when (>= group group-number)
                (setq group 0)))
