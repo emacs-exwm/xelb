@@ -413,10 +413,6 @@ FORMAT-STRING is a string specifying the message to output, as in
   "Evaluate a <paramref> field."
   `(slot-value ctx ,field))
 
-(defsubst xcb:-popcount (mask)
-  "Return the popcount of integer MASK."
-  (logcount mask))
-
 (defsubst xcb:-request-class->reply-class (request)
   "Return the reply class corresponding to the request class REQUEST."
   (intern-soft (concat (symbol-name request) "~reply")))

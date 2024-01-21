@@ -592,13 +592,13 @@
    (state :initarg :state :type xcb:CARD32)
    (names~ :initform
 	   '(name names type xcb:ATOM size
-		  (xcb:-popcount
+		  (logcount
 		   (xcb:-fieldref 'namesPresent)))
 	   :type xcb:-list)
    (names :initarg :names :type xcb:-ignore)
    (maps~ :initform
 	  '(name maps type xcb:xkb:IndicatorMap size
-		 (xcb:-popcount
+		 (logcount
 		  (xcb:-fieldref 'mapsPresent)))
 	  :type xcb:-list)
    (maps :initarg :maps :type xcb:-ignore)))
@@ -1181,7 +1181,7 @@
    (behaviors-rtrn :initarg :behaviors-rtrn :type xcb:-ignore)
    (vmods-rtrn~ :initform
 		'(name vmods-rtrn type xcb:CARD8 size
-		       (xcb:-popcount
+		       (logcount
 			(xcb:-fieldref 'virtualMods)))
 		:type xcb:-list)
    (vmods-rtrn :initarg :vmods-rtrn :type xcb:-ignore)
@@ -1274,7 +1274,7 @@
    (behaviors :initarg :behaviors :type xcb:-ignore)
    (vmods~ :initform
 	   '(name vmods type xcb:CARD8 size
-		  (xcb:-popcount
+		  (logcount
 		   (xcb:-fieldref 'virtualMods)))
 	   :type xcb:-list)
    (vmods :initarg :vmods :type xcb:-ignore)
@@ -1321,7 +1321,7 @@
    (si-rtrn :initarg :si-rtrn :type xcb:-ignore)
    (group-rtrn~ :initform
 		'(name group-rtrn type xcb:xkb:ModDef size
-		       (xcb:-popcount
+		       (logcount
 			(xcb:-fieldref 'groupsRtrn)))
 		:type xcb:-list)
    (group-rtrn :initarg :group-rtrn :type xcb:-ignore)))
@@ -1344,7 +1344,7 @@
    (si :initarg :si :type xcb:-ignore)
    (groupMaps~ :initform
 	       '(name groupMaps type xcb:xkb:ModDef size
-		      (xcb:-popcount
+		      (logcount
 		       (xcb:-fieldref 'groups)))
 	       :type xcb:-list)
    (groupMaps :initarg :groupMaps :type xcb:-ignore)))
@@ -1379,7 +1379,7 @@
    (pad~0 :initform 15 :type xcb:-pad)
    (maps~ :initform
 	  '(name maps type xcb:xkb:IndicatorMap size
-		 (xcb:-popcount
+		 (logcount
 		  (xcb:-fieldref 'which)))
 	  :type xcb:-list)
    (maps :initarg :maps :type xcb:-ignore)))
@@ -1392,7 +1392,7 @@
    (which :initarg :which :type xcb:CARD32)
    (maps~ :initform
 	  '(name maps type xcb:xkb:IndicatorMap size
-		 (xcb:-popcount
+		 (logcount
 		  (xcb:-fieldref 'which)))
 	  :type xcb:-list)
    (maps :initarg :maps :type xcb:-ignore)))
@@ -1515,19 +1515,19 @@
    (ktLevelNames :initarg :ktLevelNames :type xcb:-ignore)
    (indicatorNames~ :initform
 		    '(name indicatorNames type xcb:ATOM size
-			   (xcb:-popcount
+			   (logcount
 			    (xcb:-fieldref 'indicators)))
 		    :type xcb:-list)
    (indicatorNames :initarg :indicatorNames :type xcb:-ignore)
    (virtualModNames~ :initform
 		     '(name virtualModNames type xcb:ATOM size
-			    (xcb:-popcount
+			    (logcount
 			     (xcb:-fieldref 'virtualMods)))
 		     :type xcb:-list)
    (virtualModNames :initarg :virtualModNames :type xcb:-ignore)
    (groups~ :initform
 	    '(name groups type xcb:ATOM size
-		   (xcb:-popcount
+		   (logcount
 		    (xcb:-fieldref 'groupNames)))
 	    :type xcb:-list)
    (groups :initarg :groups :type xcb:-ignore)
@@ -1609,19 +1609,19 @@
    (ktLevelNames :initarg :ktLevelNames :type xcb:-ignore)
    (indicatorNames~ :initform
 		    '(name indicatorNames type xcb:ATOM size
-			   (xcb:-popcount
+			   (logcount
 			    (xcb:-fieldref 'indicators)))
 		    :type xcb:-list)
    (indicatorNames :initarg :indicatorNames :type xcb:-ignore)
    (virtualModNames~ :initform
 		     '(name virtualModNames type xcb:ATOM size
-			    (xcb:-popcount
+			    (logcount
 			     (xcb:-fieldref 'virtualMods)))
 		     :type xcb:-list)
    (virtualModNames :initarg :virtualModNames :type xcb:-ignore)
    (groups~ :initform
 	    '(name groups type xcb:ATOM size
-		   (xcb:-popcount
+		   (logcount
 		    (xcb:-fieldref 'groupNames)))
 	    :type xcb:-list)
    (groups :initarg :groups :type xcb:-ignore)
@@ -1813,7 +1813,7 @@
    (behaviors-rtrn :initarg :behaviors-rtrn :type xcb:-ignore)
    (vmods-rtrn~ :initform
 		'(name vmods-rtrn type xcb:CARD8 size
-		       (xcb:-popcount
+		       (logcount
 			(xcb:-fieldref 'virtualMods)))
 		:type xcb:-list)
    (vmods-rtrn :initarg :vmods-rtrn :type xcb:-ignore)
@@ -1852,7 +1852,7 @@
    (si-rtrn :initarg :si-rtrn :type xcb:-ignore)
    (group-rtrn~ :initform
 		'(name group-rtrn type xcb:xkb:ModDef size
-		       (xcb:-popcount
+		       (logcount
 			(xcb:-fieldref 'groupsRtrn)))
 		:type xcb:-list)
    (group-rtrn :initarg :group-rtrn :type xcb:-ignore)
@@ -1930,19 +1930,19 @@
    (ktLevelNames :initarg :ktLevelNames :type xcb:-ignore)
    (indicatorNames~ :initform
 		    '(name indicatorNames type xcb:ATOM size
-			   (xcb:-popcount
+			   (logcount
 			    (xcb:-fieldref 'indicators)))
 		    :type xcb:-list)
    (indicatorNames :initarg :indicatorNames :type xcb:-ignore)
    (virtualModNames~ :initform
 		     '(name virtualModNames type xcb:ATOM size
-			    (xcb:-popcount
+			    (logcount
 			     (xcb:-fieldref 'virtualMods)))
 		     :type xcb:-list)
    (virtualModNames :initarg :virtualModNames :type xcb:-ignore)
    (groups~ :initform
 	    '(name groups type xcb:ATOM size
-		   (xcb:-popcount
+		   (logcount
 		    (xcb:-fieldref 'groupNames)))
 	    :type xcb:-list)
    (groups :initarg :groups :type xcb:-ignore)

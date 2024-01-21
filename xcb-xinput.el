@@ -2370,7 +2370,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2422,7 +2422,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2560,7 +2560,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2575,7 +2575,7 @@
 				   (lambda
 				     (i)
 				     (eval
-				      '(xcb:-popcount obj)
+				      '(logcount obj)
 				      (list
 				       (nconc
 					'(obj)
@@ -2610,7 +2610,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2625,7 +2625,7 @@
 				   (lambda
 				     (i)
 				     (eval
-				      '(xcb:-popcount obj)
+				      '(logcount obj)
 				      (list
 				       (nconc
 					'(obj)
@@ -2682,7 +2682,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2737,7 +2737,7 @@
 			       (lambda
 				 (i)
 				 (eval
-				  '(xcb:-popcount obj)
+				  '(logcount obj)
 				  (list
 				   (nconc
 				    '(obj)
@@ -2752,7 +2752,7 @@
 				   (lambda
 				     (i)
 				     (eval
-				      '(xcb:-popcount obj)
+				      '(logcount obj)
 				      (list
 				       (nconc
 					'(obj)
