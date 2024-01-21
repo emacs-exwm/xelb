@@ -650,7 +650,7 @@ The `combine-adjacent' attribute is simply ignored."
       ("*" `(* ,x ,y))
       ("/" `(/ ,x ,y))
       ("&" `(logand ,x ,y))
-      ("<<" `(lsh ,x ,y))
+      ("<<" `(ash ,x ,y))
       (x (error "Unsupported operator: `%s'" x)))))
 
 (defun xelb-parse-fieldref (node)
@@ -676,7 +676,7 @@ The `combine-adjacent' attribute is simply ignored."
   "Parse <bit>."
   (let ((bit (string-to-number (xelb-node-subnode node))))
     (cl-assert (<= 0 bit 31))
-    (lsh 1 bit)))
+    (ash 1 bit)))
 
 (defun xelb-parse-enumref (node)
   "Parse <enumref>."
