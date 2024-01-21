@@ -704,7 +704,7 @@ The `combine-adjacent' attribute is simply ignored."
 (defun xelb-parse-popcount (node)
   "Parse <popcount>."
   (let ((expression (xelb-parse-expression (xelb-node-subnode node))))
-    `(xcb:-popcount ,expression)))
+    `(logcount ,expression)))
 
 (defun xelb-parse-listelement-ref (_node)
   "Parse <listelement-ref>."
