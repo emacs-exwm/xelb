@@ -633,11 +633,10 @@ The optional argument CTX is for <paramref>."
         (setq type (cl--slot-descriptor-type slot))
         (unless (eq type 'xcb:-ignore)
           (setq slot-name (eieio-slot-descriptor-name slot)
-                tmp (xcb:-unmarshal-field obj type byte-array 0
+                tmp (xcb:-unmarshal-field obj type byte-array result
                                           (eieio-oref-default obj slot-name)
                                           ctx total-length))
           (setf (slot-value obj slot-name) (car tmp))
-          (setq byte-array (substring byte-array (cadr tmp)))
           (setq result (+ result (cadr tmp)))
           (when (eq type 'xcb:-switch) ;xcb:-switch always finishes a struct
             (throw 'break 'nil)))))
@@ -778,12 +777,11 @@ and the second the consumed length."
                    (setq slot-type (cl--slot-descriptor-type slot))
                    (throw 'break nil))))
              (unless (eq slot-type 'xcb:-ignore)
-               (setq tmp (xcb:-unmarshal-field obj slot-type data offset
+               (setq tmp (xcb:-unmarshal-field obj slot-type data (+ offset count)
                                                (eieio-oref-default obj name)
                                                nil total-length))
                (setf (slot-value obj name) (car tmp))
-               (setq count (+ count (cadr tmp)))
-               (setq data (substring data (cadr tmp)))))))
+               (setq count (+ count (cadr tmp)))))))
        (list initform count)))
     ((and x (guard (child-of-class-p x 'xcb:-struct)))
      (let* ((struct-obj (make-instance x))
