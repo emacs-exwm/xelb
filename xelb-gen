@@ -347,7 +347,7 @@ an `xelb-auto-padding' attribute."
                              (expression (xelb-node-subnode i)))
                         (if expression
                             (setq value (xelb-parse-expression expression))
-                          (setq value (1+ value)))
+                          (cl-incf value))
 			;; Omit the rare enums that do not fit in a fixnum in
 			;; 32-bit Emacs, so that the resulting .el and .elc
 			;; files are portable to 32-bit Emacs.  Admittedly

@@ -552,10 +552,10 @@ classes of EVENT (since they have the same event number)."
          (cache (slot-value obj 'request-cache)))
     (when extension-opcode
       (setq msg (vconcat (vector extension-opcode) msg))
-      (setq len (1+ len)))
+      (cl-incf len))
     (when (> 2 (length msg))   ;for short message (e.g. GetInputFocus)
       (setq msg (vconcat msg [0]))
-      (setq len (1+ len)))
+      (cl-incf len))
     (setq msg
           (vconcat (substring msg 0 2)
                    (funcall (if (slot-value request '~lsb) #'xcb:-pack-u2-lsb
