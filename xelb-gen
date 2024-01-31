@@ -180,6 +180,7 @@ an `xelb-auto-padding' attribute."
   "Parse an XCB protocol description file FILE (XML)."
   (let ((pp-escape-newlines nil)        ;do not escape newlines
         (pp-default-function 'pp-28)    ;avoid unecessary churn
+        (load-prefer-newer 't)          ;avoid loading outdated bytecode
         result header)
     (with-temp-buffer
       (insert-file-contents file)
