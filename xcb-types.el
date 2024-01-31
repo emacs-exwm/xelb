@@ -48,7 +48,7 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl-lib))
+(require 'cl-lib) ; cl-coerce
 (require 'cl-generic)
 (require 'eieio)
 (require 'xcb-debug)
