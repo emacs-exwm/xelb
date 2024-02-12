@@ -81,15 +81,6 @@
    (blue :initarg :blue :type xcb:CARD16)
    (alpha :initarg :alpha :initform #xffff :type xcb:CARD16)))
 
-(defclass xcb:xsettings:-ClientMessage
-  (xcb:icccm:--ClientMessage xcb:ClientMessage)
-  ((format :initform 32)
-   (type :initform 'xcb:Atom:MANAGER)
-   (time :initarg :time :type xcb:TIMESTAMP)      ;new slot
-   (selection :initarg :selection :type xcb:ATOM) ;new slot
-   (owner :initarg :owner :type xcb:WINDOW))      ;new slot
-  :documentation "An XSETTINGS client message.")
-
 
 
 (provide 'xcb-xsettings)
