@@ -103,6 +103,15 @@ The value of these atoms will be available in `xcb:Atom' namespace."
   :documentation "An ICCCM client message with data slot replaced by
 protocol and time.")
 
+(defclass xcb:icccm:-ManagerSelection
+  (xcb:icccm:--ClientMessage xcb:ClientMessage)
+  ((format :initform 32)
+   (type :initform 'xcb:Atom:MANAGER)
+   (time :initarg :time :type xcb:TIMESTAMP)      ;new slot
+   (selection :initarg :selection :type xcb:ATOM) ;new slot
+   (owner :initarg :owner :type xcb:WINDOW))      ;new slot
+  :documentation "Announce that selection was successfully acquired.")
+
 (defclass xcb:icccm:WM_DELETE_WINDOW (xcb:icccm:-ClientMessage)
   ((protocol :initform 'xcb:Atom:WM_DELETE_WINDOW)
    (time :initform 'xcb:Time:CurrentTime))
