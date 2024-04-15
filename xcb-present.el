@@ -29,7 +29,7 @@
 (defconst xcb:present:-extension-xname "Present")
 (defconst xcb:present:-extension-name "Present")
 (defconst xcb:present:-major-version 1)
-(defconst xcb:present:-minor-version 3)
+(defconst xcb:present:-minor-version 4)
 
 (require 'xcb-xproto)
 
@@ -38,6 +38,8 @@
 (require 'xcb-xfixes)
 
 (require 'xcb-sync)
+
+(require 'xcb-dri3)
 
 (defconst xcb:present:Event:ConfigureNotify 0)
 (defconst xcb:present:Event:CompleteNotify 1)
@@ -62,6 +64,7 @@
 (defconst xcb:present:Capability:Fence 2)
 (defconst xcb:present:Capability:UST 4)
 (defconst xcb:present:Capability:AsyncMayTear 8)
+(defconst xcb:present:Capability:Syncobj 16)
 
 (defconst xcb:present:CompleteKind:Pixmap 0)
 (defconst xcb:present:CompleteKind:NotifyMSC 1)
@@ -143,6 +146,32 @@
    (~sequence :type xcb:CARD16)
    (length :type xcb:CARD32)
    (capabilities :initarg :capabilities :type xcb:CARD32)))
+
+(defclass xcb:present:PixmapSynced
+  (xcb:-request)
+  ((~opcode :initform 5 :type xcb:-u1)
+   (pad~0 :initform 8 :type xcb:-pad-align)
+   (window :initarg :window :type xcb:WINDOW)
+   (pixmap :initarg :pixmap :type xcb:PIXMAP)
+   (serial :initarg :serial :type xcb:CARD32)
+   (valid :initarg :valid :type xcb:xfixes:REGION)
+   (update :initarg :update :type xcb:xfixes:REGION)
+   (x-off :initarg :x-off :type xcb:INT16)
+   (y-off :initarg :y-off :type xcb:INT16)
+   (target-crtc :initarg :target-crtc :type xcb:randr:CRTC)
+   (acquire-syncobj :initarg :acquire-syncobj :type xcb:dri3:SYNCOBJ)
+   (release-syncobj :initarg :release-syncobj :type xcb:dri3:SYNCOBJ)
+   (acquire-point :initarg :acquire-point :type xcb:CARD64)
+   (release-point :initarg :release-point :type xcb:CARD64)
+   (options :initarg :options :type xcb:CARD32)
+   (pad~1 :initform 4 :type xcb:-pad)
+   (target-msc :initarg :target-msc :type xcb:CARD64)
+   (divisor :initarg :divisor :type xcb:CARD64)
+   (remainder :initarg :remainder :type xcb:CARD64)
+   (notifies~ :initform
+	      '(name notifies type xcb:present:Notify size nil)
+	      :type xcb:-list)
+   (notifies :initarg :notifies :type xcb:-ignore)))
 
 (defclass xcb:present:Generic
   (xcb:-event)

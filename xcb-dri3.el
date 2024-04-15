@@ -29,9 +29,11 @@
 (defconst xcb:dri3:-extension-xname "DRI3")
 (defconst xcb:dri3:-extension-name "DRI3")
 (defconst xcb:dri3:-major-version 1)
-(defconst xcb:dri3:-minor-version 3)
+(defconst xcb:dri3:-minor-version 4)
 
 (require 'xcb-xproto)
+
+(xcb:deftypealias 'xcb:dri3:SYNCOBJ 'xcb:-u4)
 
 (defclass xcb:dri3:QueryVersion
   (xcb:-request)
@@ -206,6 +208,18 @@
    (window :initarg :window :type xcb:WINDOW)
    (drmMajor :initarg :drmMajor :type xcb:CARD32)
    (drmMinor :initarg :drmMinor :type xcb:CARD32)))
+
+(defclass xcb:dri3:ImportSyncobj
+  (xcb:-request)
+  ((~opcode :initform 10 :type xcb:-u1)
+   (syncobj :initarg :syncobj :type xcb:dri3:SYNCOBJ)
+   (drawable :initarg :drawable :type xcb:DRAWABLE)
+   (syncobj-fd :type xcb:fd)))
+
+(defclass xcb:dri3:FreeSyncobj
+  (xcb:-request)
+  ((~opcode :initform 11 :type xcb:-u1)
+   (syncobj :initarg :syncobj :type xcb:dri3:SYNCOBJ)))
 
 
 
