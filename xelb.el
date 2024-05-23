@@ -4,7 +4,7 @@
 
 ;; Author: Chris Feng <chris.w.feng@gmail.com>
 ;; Maintainer: Adrián Medraño Calvo <adrian@medranocalvo.com>, Steven Allen <steven@stebalien.com>, Daniel Mendler <mail@daniel-mendler.de>
-;; Version: 0.18
+;; Version: 0.19
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: unix
 ;; URL: https://github.com/emacs-exwm/xelb
