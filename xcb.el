@@ -375,17 +375,21 @@ Concurrency is disabled as it breaks the orders of errors, replies and events."
                     ;; Too short.
                     (throw 'break nil))
                   (setq listener
-                        (lax-plist-get (slot-value connection 'event-plist)
-                                       (vector (aref cache 1)
-                                               (funcall
-                                                (if xcb:lsb
-                                                    #'xcb:-unpack-u2-lsb
-                                                  #'xcb:-unpack-u2)
-                                                cache 8)))))
+                        (compat-call plist-get
+                                     (slot-value connection 'event-plist)
+                                     (vector (aref cache 1)
+                                             (funcall
+                                              (if xcb:lsb
+                                                  #'xcb:-unpack-u2-lsb
+                                                #'xcb:-unpack-u2)
+                                              cache 8))
+                                     #'equal)))
                  (`xkb
                   (setq listener
-                        (lax-plist-get (slot-value connection 'event-plist)
-                                       (vector (aref cache 1))))))
+                        (compat-call plist-get
+                                     (slot-value connection 'event-plist)
+                                     (vector (aref cache 1))
+                                     #'equal))))
                ;; Conventional events are 32 bytes in size.
                (unless event-length
                  (setq event-length 32))
@@ -465,10 +469,10 @@ classes of EVENT (since they have the same event number)."
             (plist-put plist key
                        (if (child-of-class-p event 'xcb:-generic-event)
                            'xge 'xkb))))
-    (setq listeners (lax-plist-get plist event-number))
+    (setq listeners (compat-call plist-get plist event-number #'equal))
     (setf (slot-value obj 'event-plist)
-          (lax-plist-put plist event-number (append listeners
-                                                    (list listener))))))
+          (compat-call plist-put plist event-number
+                       (append listeners (list listener)) #'equal))))
 
 (cl-defmethod xcb:flush ((obj xcb:connection))
   "Flush request data to X server."
