@@ -48,6 +48,7 @@
 
 ;;; Code:
 
+(require 'compat)
 (require 'cl-lib) ; cl-coerce
 (require 'cl-generic)
 (require 'eieio)
