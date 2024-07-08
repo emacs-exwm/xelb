@@ -5,7 +5,7 @@
 ;; Author: Chris Feng <chris.w.feng@gmail.com>
 ;; Maintainer: Adrián Medraño Calvo <adrian@medranocalvo.com>, Steven Allen <steven@stebalien.com>, Daniel Mendler <mail@daniel-mendler.de>
 ;; Version: 0.20
-;; Package-Requires: ((emacs "27.1") (compat "29.1"))
+;; Package-Requires: ((emacs "27.1") (compat "30"))
 ;; Keywords: unix
 ;; URL: https://github.com/emacs-exwm/xelb
 
