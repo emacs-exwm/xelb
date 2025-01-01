@@ -1,5 +1,6 @@
 ;;; xelb-test.el --- Unit tests for XELB -*- lexical-binding: t -*-
-;; Copyright (C) 2024 Free Software Foundation, Inc.
+
+;; Copyright (C) 2024-2025 Free Software Foundation, Inc.
 
 ;; Author: Steven Allen <steven@stebalien.com>
 

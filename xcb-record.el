@@ -1,6 +1,6 @@
 ;;; xcb-record.el --- X11 Record extension  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
+;; Copyright (C) 2015-2025 Free Software Foundation, Inc.
 
 ;; This file is part of GNU Emacs.
 
