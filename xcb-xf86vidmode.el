@@ -107,9 +107,9 @@
    (pad~2 :initform 12 :type xcb:-pad)
    (privsize :initarg :privsize :type xcb:CARD32)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:ModModeLine
@@ -130,9 +130,9 @@
    (pad~1 :initform 12 :type xcb:-pad)
    (privsize :initarg :privsize :type xcb:CARD32)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:SwitchMode
@@ -157,35 +157,35 @@
    (num-vsync :initarg :num-vsync :type xcb:CARD8)
    (pad~1 :initform 20 :type xcb:-pad)
    (hsync~ :initform
-	   '(name hsync type xcb:xf86vidmode:SYNCRANGE size
-		  (xcb:-fieldref 'num-hsync))
-	   :type xcb:-list)
+           '(name hsync type xcb:xf86vidmode:SYNCRANGE size
+                  (xcb:-fieldref 'num-hsync))
+           :type xcb:-list)
    (hsync :initarg :hsync :type xcb:-ignore)
    (vsync~ :initform
-	   '(name vsync type xcb:xf86vidmode:SYNCRANGE size
-		  (xcb:-fieldref 'num-vsync))
-	   :type xcb:-list)
+           '(name vsync type xcb:xf86vidmode:SYNCRANGE size
+                  (xcb:-fieldref 'num-vsync))
+           :type xcb:-list)
    (vsync :initarg :vsync :type xcb:-ignore)
    (vendor~ :initform
-	    '(name vendor type xcb:char size
-		   (xcb:-fieldref 'vendor-length))
-	    :type xcb:-list)
+            '(name vendor type xcb:char size
+                   (xcb:-fieldref 'vendor-length))
+            :type xcb:-list)
    (vendor :initarg :vendor :type xcb:-ignore)
    (alignment-pad~ :initform
-		   '(name alignment-pad type xcb:void size
-			  (-
-			   (logand
-			    (+
-			     (xcb:-fieldref 'vendor-length)
-			     3)
-			    (lognot 3))
-			   (xcb:-fieldref 'vendor-length)))
-		   :type xcb:-list)
+                   '(name alignment-pad type xcb:void size
+                          (-
+                           (logand
+                            (+
+                             (xcb:-fieldref 'vendor-length)
+                             3)
+                            (lognot 3))
+                           (xcb:-fieldref 'vendor-length)))
+                   :type xcb:-list)
    (alignment-pad :initarg :alignment-pad :type xcb:-ignore)
    (model~ :initform
-	   '(name model type xcb:char size
-		  (xcb:-fieldref 'model-length))
-	   :type xcb:-list)
+           '(name model type xcb:char size
+                  (xcb:-fieldref 'model-length))
+           :type xcb:-list)
    (model :initarg :model :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:LockModeSwitch
@@ -207,9 +207,9 @@
    (modecount :initarg :modecount :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (modeinfo~ :initform
-	      '(name modeinfo type xcb:xf86vidmode:ModeInfo size
-		     (xcb:-fieldref 'modecount))
-	      :type xcb:-list)
+              '(name modeinfo type xcb:xf86vidmode:ModeInfo size
+                     (xcb:-fieldref 'modecount))
+              :type xcb:-list)
    (modeinfo :initarg :modeinfo :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:AddModeLine
@@ -244,9 +244,9 @@
    (after-flags :initarg :after-flags :type xcb:CARD32)
    (pad~3 :initform 12 :type xcb:-pad)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:DeleteModeLine
@@ -268,9 +268,9 @@
    (pad~1 :initform 12 :type xcb:-pad)
    (privsize :initarg :privsize :type xcb:CARD32)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:ValidateModeLine
@@ -292,9 +292,9 @@
    (pad~1 :initform 12 :type xcb:-pad)
    (privsize :initarg :privsize :type xcb:CARD32)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 (defclass xcb:xf86vidmode:ValidateModeLine~reply
   (xcb:-reply)
@@ -323,9 +323,9 @@
    (pad~1 :initform 12 :type xcb:-pad)
    (privsize :initarg :privsize :type xcb:CARD32)
    (private~ :initform
-	     '(name private type xcb:CARD8 size
-		    (xcb:-fieldref 'privsize))
-	     :type xcb:-list)
+             '(name private type xcb:CARD8 size
+                    (xcb:-fieldref 'privsize))
+             :type xcb:-list)
    (private :initarg :private :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:GetViewPort
@@ -365,14 +365,14 @@
    (maxclocks :initarg :maxclocks :type xcb:CARD32)
    (pad~1 :initform 12 :type xcb:-pad)
    (clock~ :initform
-	   '(name clock type xcb:CARD32 size
-		  (*
-		   (- 1
-		      (logand
-		       (xcb:-fieldref 'flags)
-		       1))
-		   (xcb:-fieldref 'clocks)))
-	   :type xcb:-list)
+           '(name clock type xcb:CARD32 size
+                  (*
+                   (- 1
+                      (logand
+                       (xcb:-fieldref 'flags)
+                       1))
+                   (xcb:-fieldref 'clocks)))
+           :type xcb:-list)
    (clock :initarg :clock :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:SetClientVersion
@@ -419,31 +419,31 @@
    (size :initarg :size :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (red~ :initform
-	 '(name red type xcb:CARD16 size
-		(logand
-		 (+
-		  (xcb:-fieldref 'size)
-		  1)
-		 (lognot 1)))
-	 :type xcb:-list)
+         '(name red type xcb:CARD16 size
+                (logand
+                 (+
+                  (xcb:-fieldref 'size)
+                  1)
+                 (lognot 1)))
+         :type xcb:-list)
    (red :initarg :red :type xcb:-ignore)
    (green~ :initform
-	   '(name green type xcb:CARD16 size
-		  (logand
-		   (+
-		    (xcb:-fieldref 'size)
-		    1)
-		   (lognot 1)))
-	   :type xcb:-list)
+           '(name green type xcb:CARD16 size
+                  (logand
+                   (+
+                    (xcb:-fieldref 'size)
+                    1)
+                   (lognot 1)))
+           :type xcb:-list)
    (green :initarg :green :type xcb:-ignore)
    (blue~ :initform
-	  '(name blue type xcb:CARD16 size
-		 (logand
-		  (+
-		   (xcb:-fieldref 'size)
-		   1)
-		  (lognot 1)))
-	  :type xcb:-list)
+          '(name blue type xcb:CARD16 size
+                 (logand
+                  (+
+                   (xcb:-fieldref 'size)
+                   1)
+                  (lognot 1)))
+          :type xcb:-list)
    (blue :initarg :blue :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:SetGammaRamp
@@ -452,31 +452,31 @@
    (screen :initarg :screen :type xcb:CARD16)
    (size :initarg :size :type xcb:CARD16)
    (red~ :initform
-	 '(name red type xcb:CARD16 size
-		(logand
-		 (+
-		  (xcb:-fieldref 'size)
-		  1)
-		 (lognot 1)))
-	 :type xcb:-list)
+         '(name red type xcb:CARD16 size
+                (logand
+                 (+
+                  (xcb:-fieldref 'size)
+                  1)
+                 (lognot 1)))
+         :type xcb:-list)
    (red :initarg :red :type xcb:-ignore)
    (green~ :initform
-	   '(name green type xcb:CARD16 size
-		  (logand
-		   (+
-		    (xcb:-fieldref 'size)
-		    1)
-		   (lognot 1)))
-	   :type xcb:-list)
+           '(name green type xcb:CARD16 size
+                  (logand
+                   (+
+                    (xcb:-fieldref 'size)
+                    1)
+                   (lognot 1)))
+           :type xcb:-list)
    (green :initarg :green :type xcb:-ignore)
    (blue~ :initform
-	  '(name blue type xcb:CARD16 size
-		 (logand
-		  (+
-		   (xcb:-fieldref 'size)
-		   1)
-		  (lognot 1)))
-	  :type xcb:-list)
+          '(name blue type xcb:CARD16 size
+                 (logand
+                  (+
+                   (xcb:-fieldref 'size)
+                   1)
+                  (lognot 1)))
+          :type xcb:-list)
    (blue :initarg :blue :type xcb:-ignore)))
 
 (defclass xcb:xf86vidmode:GetGammaRampSize

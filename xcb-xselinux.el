@@ -51,9 +51,9 @@
   ((~opcode :initform 1 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetDeviceCreateContext
@@ -67,9 +67,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:SetDeviceContext
@@ -78,9 +78,9 @@
    (device :initarg :device :type xcb:CARD32)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetDeviceContext
@@ -95,9 +95,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:SetWindowCreateContext
@@ -105,9 +105,9 @@
   ((~opcode :initform 5 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetWindowCreateContext
@@ -121,9 +121,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetWindowContext
@@ -138,9 +138,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:ListItem
@@ -149,15 +149,15 @@
    (object-context-len :initarg :object-context-len :type xcb:CARD32)
    (data-context-len :initarg :data-context-len :type xcb:CARD32)
    (object-context~ :initform
-		    '(name object-context type xcb:char size
-			   (xcb:-fieldref 'object-context-len))
-		    :type xcb:-list)
+                    '(name object-context type xcb:char size
+                           (xcb:-fieldref 'object-context-len))
+                    :type xcb:-list)
    (object-context :initarg :object-context :type xcb:-ignore)
    (pad~0 :initform 4 :type xcb:-pad-align)
    (data-context~ :initform
-		  '(name data-context type xcb:char size
-			 (xcb:-fieldref 'data-context-len))
-		  :type xcb:-list)
+                  '(name data-context type xcb:char size
+                         (xcb:-fieldref 'data-context-len))
+                  :type xcb:-list)
    (data-context :initarg :data-context :type xcb:-ignore)
    (pad~1 :initform 4 :type xcb:-pad-align)))
 
@@ -166,9 +166,9 @@
   ((~opcode :initform 8 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetPropertyCreateContext
@@ -182,9 +182,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:SetPropertyUseContext
@@ -192,9 +192,9 @@
   ((~opcode :initform 10 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetPropertyUseContext
@@ -208,9 +208,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetPropertyContext
@@ -226,9 +226,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetPropertyDataContext
@@ -244,9 +244,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:ListProperties
@@ -261,9 +261,9 @@
    (properties-len :initarg :properties-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (properties~ :initform
-		'(name properties type xcb:xselinux:ListItem size
-		       (xcb:-fieldref 'properties-len))
-		:type xcb:-list)
+                '(name properties type xcb:xselinux:ListItem size
+                       (xcb:-fieldref 'properties-len))
+                :type xcb:-list)
    (properties :initarg :properties :type xcb:-ignore)))
 
 (defclass xcb:xselinux:SetSelectionCreateContext
@@ -271,9 +271,9 @@
   ((~opcode :initform 15 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetSelectionCreateContext
@@ -287,9 +287,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:SetSelectionUseContext
@@ -297,9 +297,9 @@
   ((~opcode :initform 17 :type xcb:-u1)
    (context-len :initarg :context-len :type xcb:CARD32)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetSelectionUseContext
@@ -313,9 +313,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetSelectionContext
@@ -330,9 +330,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetSelectionDataContext
@@ -347,9 +347,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 (defclass xcb:xselinux:ListSelections
@@ -363,9 +363,9 @@
    (selections-len :initarg :selections-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (selections~ :initform
-		'(name selections type xcb:xselinux:ListItem size
-		       (xcb:-fieldref 'selections-len))
-		:type xcb:-list)
+                '(name selections type xcb:xselinux:ListItem size
+                       (xcb:-fieldref 'selections-len))
+                :type xcb:-list)
    (selections :initarg :selections :type xcb:-ignore)))
 
 (defclass xcb:xselinux:GetClientContext
@@ -380,9 +380,9 @@
    (context-len :initarg :context-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (context~ :initform
-	     '(name context type xcb:char size
-		    (xcb:-fieldref 'context-len))
-	     :type xcb:-list)
+             '(name context type xcb:char size
+                    (xcb:-fieldref 'context-len))
+             :type xcb:-list)
    (context :initarg :context :type xcb:-ignore)))
 
 

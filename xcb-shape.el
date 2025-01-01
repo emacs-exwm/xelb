@@ -83,8 +83,8 @@
    (x-offset :initarg :x-offset :type xcb:INT16)
    (y-offset :initarg :y-offset :type xcb:INT16)
    (rectangles~ :initform
-		'(name rectangles type xcb:RECTANGLE size nil)
-		:type xcb:-list)
+                '(name rectangles type xcb:RECTANGLE size nil)
+                :type xcb:-list)
    (rectangles :initarg :rectangles :type xcb:-ignore)))
 
 (defclass xcb:shape:Mask
@@ -171,9 +171,9 @@
    (rectangles-len :initarg :rectangles-len :type xcb:CARD32)
    (pad~0 :initform 20 :type xcb:-pad)
    (rectangles~ :initform
-		'(name rectangles type xcb:RECTANGLE size
-		       (xcb:-fieldref 'rectangles-len))
-		:type xcb:-list)
+                '(name rectangles type xcb:RECTANGLE size
+                       (xcb:-fieldref 'rectangles-len))
+                :type xcb:-list)
    (rectangles :initarg :rectangles :type xcb:-ignore)))
 
 (defconst xcb:shape:event-number-class-alist

@@ -487,7 +487,7 @@ Consider let-bind it rather than change its global value."))
   (unless (eq fn #'oref-default)
     (xcb:-log "unbound-slot: %s" (list (eieio-class-name class)
                                        (eieio-object-name object)
-			               slot-name fn))))
+                                       slot-name fn))))
 
 (defclass xcb:-struct (xcb:--struct)
   ((~lsb :initarg :~lsb
@@ -577,10 +577,10 @@ The optional POS argument indicates current byte index of the field (used by
        ;; to be converted to a vector of bytes, then the transform can
        ;; be done trivially and much faster by just coercing.
        (if (and (eq list-type 'xcb:BYTE)
-		(eq (type-of data) 'string))
-	   (cl-coerce data 'vector)
-	 (mapconcat (lambda (i) (xcb:-marshal-field obj list-type i))
-		    data []))))
+                (eq (type-of data) 'string))
+           (cl-coerce data 'vector)
+         (mapconcat (lambda (i) (xcb:-marshal-field obj list-type i))
+                    data []))))
     (`xcb:-switch
      (let ((slots (eieio-class-slots (eieio-object-class obj)))
            (expression (plist-get value 'expression))

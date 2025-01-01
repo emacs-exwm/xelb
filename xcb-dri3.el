@@ -131,14 +131,14 @@
    (num-screen-modifiers :initarg :num-screen-modifiers :type xcb:CARD32)
    (pad~2 :initform 16 :type xcb:-pad)
    (window-modifiers~ :initform
-		      '(name window-modifiers type xcb:CARD64 size
-			     (xcb:-fieldref 'num-window-modifiers))
-		      :type xcb:-list)
+                      '(name window-modifiers type xcb:CARD64 size
+                             (xcb:-fieldref 'num-window-modifiers))
+                      :type xcb:-list)
    (window-modifiers :initarg :window-modifiers :type xcb:-ignore)
    (screen-modifiers~ :initform
-		      '(name screen-modifiers type xcb:CARD64 size
-			     (xcb:-fieldref 'num-screen-modifiers))
-		      :type xcb:-list)
+                      '(name screen-modifiers type xcb:CARD64 size
+                             (xcb:-fieldref 'num-screen-modifiers))
+                      :type xcb:-list)
    (screen-modifiers :initarg :screen-modifiers :type xcb:-ignore)))
 
 (defclass xcb:dri3:PixmapFromBuffers
@@ -164,9 +164,9 @@
    (pad~2 :initform 2 :type xcb:-pad)
    (modifier :initarg :modifier :type xcb:CARD64)
    (buffers~ :initform
-	     '(name buffers type xcb:fd size
-		    (xcb:-fieldref 'num-buffers))
-	     :type xcb:-list)
+             '(name buffers type xcb:fd size
+                    (xcb:-fieldref 'num-buffers))
+             :type xcb:-list)
    (buffers :initarg :buffers :type xcb:-ignore)))
 
 (defclass xcb:dri3:BuffersFromPixmap
@@ -187,19 +187,19 @@
    (bpp :initarg :bpp :type xcb:CARD8)
    (pad~2 :initform 6 :type xcb:-pad)
    (strides~ :initform
-	     '(name strides type xcb:CARD32 size
-		    (xcb:-fieldref 'nfd))
-	     :type xcb:-list)
+             '(name strides type xcb:CARD32 size
+                    (xcb:-fieldref 'nfd))
+             :type xcb:-list)
    (strides :initarg :strides :type xcb:-ignore)
    (offsets~ :initform
-	     '(name offsets type xcb:CARD32 size
-		    (xcb:-fieldref 'nfd))
-	     :type xcb:-list)
+             '(name offsets type xcb:CARD32 size
+                    (xcb:-fieldref 'nfd))
+             :type xcb:-list)
    (offsets :initarg :offsets :type xcb:-ignore)
    (buffers~ :initform
-	     '(name buffers type xcb:fd size
-		    (xcb:-fieldref 'nfd))
-	     :type xcb:-list)
+             '(name buffers type xcb:fd size
+                    (xcb:-fieldref 'nfd))
+             :type xcb:-list)
    (buffers :initarg :buffers :type xcb:-ignore)))
 
 (defclass xcb:dri3:SetDRMDeviceInUse

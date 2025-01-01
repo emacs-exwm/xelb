@@ -134,11 +134,11 @@
    (cursor-serial :initarg :cursor-serial :type xcb:CARD32)
    (pad~1 :initform 8 :type xcb:-pad)
    (cursor-image~ :initform
-		  '(name cursor-image type xcb:CARD32 size
-			 (*
-			  (xcb:-fieldref 'width)
-			  (xcb:-fieldref 'height)))
-		  :type xcb:-list)
+                  '(name cursor-image type xcb:CARD32 size
+                         (*
+                          (xcb:-fieldref 'width)
+                          (xcb:-fieldref 'height)))
+                  :type xcb:-list)
    (cursor-image :initarg :cursor-image :type xcb:-ignore)))
 
 (xcb:deftypealias 'xcb:xfixes:REGION 'xcb:-u4)
@@ -154,8 +154,8 @@
   ((~opcode :initform 5 :type xcb:-u1)
    (region :initarg :region :type xcb:xfixes:REGION)
    (rectangles~ :initform
-		'(name rectangles type xcb:RECTANGLE size nil)
-		:type xcb:-list)
+                '(name rectangles type xcb:RECTANGLE size nil)
+                :type xcb:-list)
    (rectangles :initarg :rectangles :type xcb:-ignore)))
 
 (defclass xcb:xfixes:CreateRegionFromBitmap
@@ -194,8 +194,8 @@
   ((~opcode :initform 11 :type xcb:-u1)
    (region :initarg :region :type xcb:xfixes:REGION)
    (rectangles~ :initform
-		'(name rectangles type xcb:RECTANGLE size nil)
-		:type xcb:-list)
+                '(name rectangles type xcb:RECTANGLE size nil)
+                :type xcb:-list)
    (rectangles :initarg :rectangles :type xcb:-ignore)))
 
 (defclass xcb:xfixes:CopyRegion
@@ -257,11 +257,11 @@
    (extents :initarg :extents :type xcb:RECTANGLE)
    (pad~1 :initform 16 :type xcb:-pad)
    (rectangles~ :initform
-		'(name rectangles type xcb:RECTANGLE size
-		       (/
-			(xcb:-fieldref 'length)
-			2))
-		:type xcb:-list)
+                '(name rectangles type xcb:RECTANGLE size
+                       (/
+                        (xcb:-fieldref 'length)
+                        2))
+                :type xcb:-list)
    (rectangles :initarg :rectangles :type xcb:-ignore)))
 
 (defclass xcb:xfixes:SetGCClipRegion
@@ -297,9 +297,9 @@
    (nbytes :initarg :nbytes :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'nbytes))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'nbytes))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:xfixes:GetCursorName
@@ -315,9 +315,9 @@
    (nbytes :initarg :nbytes :type xcb:CARD16)
    (pad~1 :initform 18 :type xcb:-pad)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'nbytes))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'nbytes))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:xfixes:GetCursorImageAndName
@@ -339,16 +339,16 @@
    (nbytes :initarg :nbytes :type xcb:CARD16)
    (pad~1 :initform 2 :type xcb:-pad)
    (cursor-image~ :initform
-		  '(name cursor-image type xcb:CARD32 size
-			 (*
-			  (xcb:-fieldref 'width)
-			  (xcb:-fieldref 'height)))
-		  :type xcb:-list)
+                  '(name cursor-image type xcb:CARD32 size
+                         (*
+                          (xcb:-fieldref 'width)
+                          (xcb:-fieldref 'height)))
+                  :type xcb:-list)
    (cursor-image :initarg :cursor-image :type xcb:-ignore)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'nbytes))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'nbytes))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:xfixes:ChangeCursor
@@ -364,9 +364,9 @@
    (nbytes :initarg :nbytes :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'nbytes))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'nbytes))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:xfixes:ExpandRegion
@@ -409,9 +409,9 @@
    (pad~0 :initform 2 :type xcb:-pad)
    (num-devices :initarg :num-devices :type xcb:CARD16)
    (devices~ :initform
-	     '(name devices type xcb:CARD16 size
-		    (xcb:-fieldref 'num-devices))
-	     :type xcb:-list)
+             '(name devices type xcb:CARD16 size
+                    (xcb:-fieldref 'num-devices))
+             :type xcb:-list)
    (devices :initarg :devices :type xcb:-ignore)))
 
 (defclass xcb:xfixes:DeletePointerBarrier

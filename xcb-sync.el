@@ -69,9 +69,9 @@
    (resolution :initarg :resolution :type xcb:sync:INT64)
    (name-len :initarg :name-len :type xcb:CARD16)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'name-len))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'name-len))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)
    (pad~0 :initform 4 :type xcb:-pad-align)))
 
@@ -126,9 +126,9 @@
    (counters-len :initarg :counters-len :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (counters~ :initform
-	      '(name counters type xcb:sync:SYSTEMCOUNTER size
-		     (xcb:-fieldref 'counters-len))
-	      :type xcb:-list)
+              '(name counters type xcb:sync:SYSTEMCOUNTER size
+                     (xcb:-fieldref 'counters-len))
+              :type xcb:-list)
    (counters :initarg :counters :type xcb:-ignore)))
 
 (defclass xcb:sync:CreateCounter
@@ -157,8 +157,8 @@
   (xcb:-request)
   ((~opcode :initform 7 :type xcb:-u1)
    (wait-list~ :initform
-	       '(name wait-list type xcb:sync:WAITCONDITION size nil)
-	       :type xcb:-list)
+               '(name wait-list type xcb:sync:WAITCONDITION size nil)
+               :type xcb:-list)
    (wait-list :initarg :wait-list :type xcb:-ignore)))
 
 (defclass xcb:sync:ChangeCounter
@@ -179,16 +179,16 @@
    (id :initarg :id :type xcb:sync:ALARM)
    (value-mask :initarg :value-mask :type xcb:CARD32)
    (value-list :initform
-	       '(expression
-		 (xcb:-fieldref 'value-mask)
-		 cases
-		 ((1 counter)
-		  (2 valueType)
-		  (4 value)
-		  (8 testType)
-		  (16 delta)
-		  (32 events)))
-	       :type xcb:-switch)
+               '(expression
+                 (xcb:-fieldref 'value-mask)
+                 cases
+                 ((1 counter)
+                  (2 valueType)
+                  (4 value)
+                  (8 testType)
+                  (16 delta)
+                  (32 events)))
+               :type xcb:-switch)
    (counter :initarg :counter :type xcb:sync:COUNTER)
    (valueType :initarg :valueType :type xcb:CARD32)
    (value :initarg :value :type xcb:sync:INT64)
@@ -202,16 +202,16 @@
    (id :initarg :id :type xcb:sync:ALARM)
    (value-mask :initarg :value-mask :type xcb:CARD32)
    (value-list :initform
-	       '(expression
-		 (xcb:-fieldref 'value-mask)
-		 cases
-		 ((1 counter)
-		  (2 valueType)
-		  (4 value)
-		  (8 testType)
-		  (16 delta)
-		  (32 events)))
-	       :type xcb:-switch)
+               '(expression
+                 (xcb:-fieldref 'value-mask)
+                 cases
+                 ((1 counter)
+                  (2 valueType)
+                  (4 value)
+                  (8 testType)
+                  (16 delta)
+                  (32 events)))
+               :type xcb:-switch)
    (counter :initarg :counter :type xcb:sync:COUNTER)
    (valueType :initarg :valueType :type xcb:CARD32)
    (value :initarg :value :type xcb:sync:INT64)
@@ -294,8 +294,8 @@
   (xcb:-request)
   ((~opcode :initform 19 :type xcb:-u1)
    (fence-list~ :initform
-		'(name fence-list type xcb:sync:FENCE size nil)
-		:type xcb:-list)
+                '(name fence-list type xcb:sync:FENCE size nil)
+                :type xcb:-list)
    (fence-list :initarg :fence-list :type xcb:-ignore)))
 
 (defclass xcb:sync:CounterNotify

@@ -59,14 +59,14 @@ Here are some predefined candidates:
 (defmacro xcb-debug:compile-time-function-name ()
   "Get the name of outermost definition at expansion time."
   (let* ((frame (cl-find-if
-		 (lambda (frame)
-		   (ignore-errors
-		     (let ((clause (car (cl-third frame))))
-		       (or (equal clause 'defalias)
-			   (equal clause 'cl-defmethod)))))
-		 (reverse (xcb-debug:-call-stack))))
-	 (defn (cl-third frame))
-	 (deftype (car defn)))
+                 (lambda (frame)
+                   (ignore-errors
+                     (let ((clause (car (cl-third frame))))
+                       (or (equal clause 'defalias)
+                           (equal clause 'cl-defmethod)))))
+                 (reverse (xcb-debug:-call-stack))))
+         (defn (cl-third frame))
+         (deftype (car defn)))
     (cl-case deftype
       ((defalias) (symbol-name (cl-cadadr defn)))
       ((cl-defmethod) (symbol-name (cadr defn)))

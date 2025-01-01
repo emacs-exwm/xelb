@@ -90,15 +90,15 @@
    (type :initarg :type :type xcb:CARD8)
    (pad~0 :initform 1 :type xcb:-pad)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'name-size))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'name-size))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)
    (pad~1 :initform 4 :type xcb:-pad-align)
    (formats~ :initform
-	     '(name formats type xcb:xv:Format size
-		    (xcb:-fieldref 'num-formats))
-	     :type xcb:-list)
+             '(name formats type xcb:xv:Format size
+                    (xcb:-fieldref 'num-formats))
+             :type xcb:-list)
    (formats :initarg :formats :type xcb:-ignore)))
 
 (defclass xcb:xv:EncodingInfo
@@ -110,9 +110,9 @@
    (pad~0 :initform 2 :type xcb:-pad)
    (rate :initarg :rate :type xcb:xv:Rational)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'name-size))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'name-size))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)
    (pad~1 :initform 4 :type xcb:-pad-align)))
 
@@ -124,19 +124,19 @@
    (data-size :initarg :data-size :type xcb:CARD32)
    (num-planes :initarg :num-planes :type xcb:CARD32)
    (pitches~ :initform
-	     '(name pitches type xcb:CARD32 size
-		    (xcb:-fieldref 'num-planes))
-	     :type xcb:-list)
+             '(name pitches type xcb:CARD32 size
+                    (xcb:-fieldref 'num-planes))
+             :type xcb:-list)
    (pitches :initarg :pitches :type xcb:-ignore)
    (offsets~ :initform
-	     '(name offsets type xcb:CARD32 size
-		    (xcb:-fieldref 'num-planes))
-	     :type xcb:-list)
+             '(name offsets type xcb:CARD32 size
+                    (xcb:-fieldref 'num-planes))
+             :type xcb:-list)
    (offsets :initarg :offsets :type xcb:-ignore)
    (data~ :initform
-	  '(name data type xcb:CARD8 size
-		 (xcb:-fieldref 'data-size))
-	  :type xcb:-list)
+          '(name data type xcb:CARD8 size
+                 (xcb:-fieldref 'data-size))
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:xv:AttributeInfo
@@ -146,9 +146,9 @@
    (max :initarg :max :type xcb:INT32)
    (size :initarg :size :type xcb:CARD32)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'size))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'size))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)
    (pad~0 :initform 4 :type xcb:-pad-align)))
 
@@ -159,8 +159,8 @@
    (byte-order :initarg :byte-order :type xcb:CARD8)
    (pad~0 :initform 2 :type xcb:-pad)
    (guid~ :initform
-	  '(name guid type xcb:CARD8 size 16)
-	  :type xcb:-list)
+          '(name guid type xcb:CARD8 size 16)
+          :type xcb:-list)
    (guid :initarg :guid :type xcb:-ignore)
    (bpp :initarg :bpp :type xcb:CARD8)
    (num-planes :initarg :num-planes :type xcb:CARD8)
@@ -182,8 +182,8 @@
    (vvert-u-period :initarg :vvert-u-period :type xcb:CARD32)
    (vvert-v-period :initarg :vvert-v-period :type xcb:CARD32)
    (vcomp-order~ :initform
-		 '(name vcomp-order type xcb:CARD8 size 32)
-		 :type xcb:-list)
+                 '(name vcomp-order type xcb:CARD8 size 32)
+                 :type xcb:-list)
    (vcomp-order :initarg :vcomp-order :type xcb:-ignore)
    (vscanline-order :initarg :vscanline-order :type xcb:CARD8)
    (pad~4 :initform 11 :type xcb:-pad)))
@@ -242,9 +242,9 @@
    (num-adaptors :initarg :num-adaptors :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (info~ :initform
-	  '(name info type xcb:xv:AdaptorInfo size
-		 (xcb:-fieldref 'num-adaptors))
-	  :type xcb:-list)
+          '(name info type xcb:xv:AdaptorInfo size
+                 (xcb:-fieldref 'num-adaptors))
+          :type xcb:-list)
    (info :initarg :info :type xcb:-ignore)))
 
 (defclass xcb:xv:QueryEncodings
@@ -259,9 +259,9 @@
    (num-encodings :initarg :num-encodings :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (info~ :initform
-	  '(name info type xcb:xv:EncodingInfo size
-		 (xcb:-fieldref 'num-encodings))
-	  :type xcb:-list)
+          '(name info type xcb:xv:EncodingInfo size
+                 (xcb:-fieldref 'num-encodings))
+          :type xcb:-list)
    (info :initarg :info :type xcb:-ignore)))
 
 (defclass xcb:xv:GrabPort
@@ -411,9 +411,9 @@
    (text-size :initarg :text-size :type xcb:CARD32)
    (pad~1 :initform 16 :type xcb:-pad)
    (attributes~ :initform
-		'(name attributes type xcb:xv:AttributeInfo size
-		       (xcb:-fieldref 'num-attributes))
-		:type xcb:-list)
+                '(name attributes type xcb:xv:AttributeInfo size
+                       (xcb:-fieldref 'num-attributes))
+                :type xcb:-list)
    (attributes :initarg :attributes :type xcb:-ignore)))
 
 (defclass xcb:xv:ListImageFormats
@@ -428,9 +428,9 @@
    (num-formats :initarg :num-formats :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (format~ :initform
-	    '(name format type xcb:xv:ImageFormatInfo size
-		   (xcb:-fieldref 'num-formats))
-	    :type xcb:-list)
+            '(name format type xcb:xv:ImageFormatInfo size
+                   (xcb:-fieldref 'num-formats))
+            :type xcb:-list)
    (format :initarg :format :type xcb:-ignore)))
 
 (defclass xcb:xv:QueryImageAttributes
@@ -451,14 +451,14 @@
    (height :initarg :height :type xcb:CARD16)
    (pad~1 :initform 12 :type xcb:-pad)
    (pitches~ :initform
-	     '(name pitches type xcb:CARD32 size
-		    (xcb:-fieldref 'num-planes))
-	     :type xcb:-list)
+             '(name pitches type xcb:CARD32 size
+                    (xcb:-fieldref 'num-planes))
+             :type xcb:-list)
    (pitches :initarg :pitches :type xcb:-ignore)
    (offsets~ :initform
-	     '(name offsets type xcb:CARD32 size
-		    (xcb:-fieldref 'num-planes))
-	     :type xcb:-list)
+             '(name offsets type xcb:CARD32 size
+                    (xcb:-fieldref 'num-planes))
+             :type xcb:-list)
    (offsets :initarg :offsets :type xcb:-ignore)))
 
 (defclass xcb:xv:PutImage
@@ -479,8 +479,8 @@
    (width :initarg :width :type xcb:CARD16)
    (height :initarg :height :type xcb:CARD16)
    (data~ :initform
-	  '(name data type xcb:CARD8 size nil)
-	  :type xcb:-list)
+          '(name data type xcb:CARD8 size nil)
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:xv:ShmPutImage

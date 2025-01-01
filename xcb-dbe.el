@@ -61,9 +61,9 @@
   (xcb:-struct)
   ((n-infos :initarg :n-infos :type xcb:CARD32)
    (infos~ :initform
-	   '(name infos type xcb:dbe:VisualInfo size
-		  (xcb:-fieldref 'n-infos))
-	   :type xcb:-list)
+           '(name infos type xcb:dbe:VisualInfo size
+                  (xcb:-fieldref 'n-infos))
+           :type xcb:-list)
    (infos :initarg :infos :type xcb:-ignore)))
 
 (defclass xcb:dbe:BadBuffer
@@ -104,9 +104,9 @@
   ((~opcode :initform 3 :type xcb:-u1)
    (n-actions :initarg :n-actions :type xcb:CARD32)
    (actions~ :initform
-	     '(name actions type xcb:dbe:SwapInfo size
-		    (xcb:-fieldref 'n-actions))
-	     :type xcb:-list)
+             '(name actions type xcb:dbe:SwapInfo size
+                    (xcb:-fieldref 'n-actions))
+             :type xcb:-list)
    (actions :initarg :actions :type xcb:-ignore)))
 
 (defclass xcb:dbe:BeginIdiom
@@ -122,9 +122,9 @@
   ((~opcode :initform 6 :type xcb:-u1)
    (n-drawables :initarg :n-drawables :type xcb:CARD32)
    (drawables~ :initform
-	       '(name drawables type xcb:DRAWABLE size
-		      (xcb:-fieldref 'n-drawables))
-	       :type xcb:-list)
+               '(name drawables type xcb:DRAWABLE size
+                      (xcb:-fieldref 'n-drawables))
+               :type xcb:-list)
    (drawables :initarg :drawables :type xcb:-ignore)))
 (defclass xcb:dbe:GetVisualInfo~reply
   (xcb:-reply)
@@ -134,9 +134,9 @@
    (n-supported-visuals :initarg :n-supported-visuals :type xcb:CARD32)
    (pad~1 :initform 20 :type xcb:-pad)
    (supported-visuals~ :initform
-		       '(name supported-visuals type xcb:dbe:VisualInfos size
-			      (xcb:-fieldref 'n-supported-visuals))
-		       :type xcb:-list)
+                       '(name supported-visuals type xcb:dbe:VisualInfos size
+                              (xcb:-fieldref 'n-supported-visuals))
+                       :type xcb:-list)
    (supported-visuals :initarg :supported-visuals :type xcb:-ignore)))
 
 (defclass xcb:dbe:GetBackBufferAttributes

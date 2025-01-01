@@ -79,9 +79,9 @@
   (xcb:-struct)
   ((nRates :initarg :nRates :type xcb:CARD16)
    (rates~ :initform
-	   '(name rates type xcb:CARD16 size
-		  (xcb:-fieldref 'nRates))
-	   :type xcb:-list)
+           '(name rates type xcb:CARD16 size
+                  (xcb:-fieldref 'nRates))
+           :type xcb:-list)
    (rates :initarg :rates :type xcb:-ignore)))
 
 (defclass xcb:randr:QueryVersion
@@ -159,16 +159,16 @@
    (nInfo :initarg :nInfo :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (sizes~ :initform
-	   '(name sizes type xcb:randr:ScreenSize size
-		  (xcb:-fieldref 'nSizes))
-	   :type xcb:-list)
+           '(name sizes type xcb:randr:ScreenSize size
+                  (xcb:-fieldref 'nSizes))
+           :type xcb:-list)
    (sizes :initarg :sizes :type xcb:-ignore)
    (rates~ :initform
-	   '(name rates type xcb:randr:RefreshRates size
-		  (-
-		   (xcb:-fieldref 'nInfo)
-		   (xcb:-fieldref 'nSizes)))
-	   :type xcb:-list)
+           '(name rates type xcb:randr:RefreshRates size
+                  (-
+                   (xcb:-fieldref 'nInfo)
+                   (xcb:-fieldref 'nSizes)))
+           :type xcb:-list)
    (rates :initarg :rates :type xcb:-ignore)))
 
 (defclass xcb:randr:GetScreenSizeRange
@@ -243,24 +243,24 @@
    (names-len :initarg :names-len :type xcb:CARD16)
    (pad~1 :initform 8 :type xcb:-pad)
    (crtcs~ :initform
-	   '(name crtcs type xcb:randr:CRTC size
-		  (xcb:-fieldref 'num-crtcs))
-	   :type xcb:-list)
+           '(name crtcs type xcb:randr:CRTC size
+                  (xcb:-fieldref 'num-crtcs))
+           :type xcb:-list)
    (crtcs :initarg :crtcs :type xcb:-ignore)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'num-outputs))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'num-outputs))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)
    (modes~ :initform
-	   '(name modes type xcb:randr:ModeInfo size
-		  (xcb:-fieldref 'num-modes))
-	   :type xcb:-list)
+           '(name modes type xcb:randr:ModeInfo size
+                  (xcb:-fieldref 'num-modes))
+           :type xcb:-list)
    (modes :initarg :modes :type xcb:-ignore)
    (names~ :initform
-	   '(name names type xcb:BYTE size
-		  (xcb:-fieldref 'names-len))
-	   :type xcb:-list)
+           '(name names type xcb:BYTE size
+                  (xcb:-fieldref 'names-len))
+           :type xcb:-list)
    (names :initarg :names :type xcb:-ignore)))
 
 (defconst xcb:randr:Connection:Connected 0)
@@ -289,24 +289,24 @@
    (num-clones :initarg :num-clones :type xcb:CARD16)
    (name-len :initarg :name-len :type xcb:CARD16)
    (crtcs~ :initform
-	   '(name crtcs type xcb:randr:CRTC size
-		  (xcb:-fieldref 'num-crtcs))
-	   :type xcb:-list)
+           '(name crtcs type xcb:randr:CRTC size
+                  (xcb:-fieldref 'num-crtcs))
+           :type xcb:-list)
    (crtcs :initarg :crtcs :type xcb:-ignore)
    (modes~ :initform
-	   '(name modes type xcb:randr:MODE size
-		  (xcb:-fieldref 'num-modes))
-	   :type xcb:-list)
+           '(name modes type xcb:randr:MODE size
+                  (xcb:-fieldref 'num-modes))
+           :type xcb:-list)
    (modes :initarg :modes :type xcb:-ignore)
    (clones~ :initform
-	    '(name clones type xcb:randr:OUTPUT size
-		   (xcb:-fieldref 'num-clones))
-	    :type xcb:-list)
+            '(name clones type xcb:randr:OUTPUT size
+                   (xcb:-fieldref 'num-clones))
+            :type xcb:-list)
    (clones :initarg :clones :type xcb:-ignore)
    (name~ :initform
-	  '(name name type xcb:BYTE size
-		 (xcb:-fieldref 'name-len))
-	  :type xcb:-list)
+          '(name name type xcb:BYTE size
+                 (xcb:-fieldref 'name-len))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:randr:ListOutputProperties
@@ -321,9 +321,9 @@
    (num-atoms :initarg :num-atoms :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (atoms~ :initform
-	   '(name atoms type xcb:ATOM size
-		  (xcb:-fieldref 'num-atoms))
-	   :type xcb:-list)
+           '(name atoms type xcb:ATOM size
+                  (xcb:-fieldref 'num-atoms))
+           :type xcb:-list)
    (atoms :initarg :atoms :type xcb:-ignore)))
 
 (defclass xcb:randr:QueryOutputProperty
@@ -341,9 +341,9 @@
    (immutable :initarg :immutable :type xcb:BOOL)
    (pad~1 :initform 21 :type xcb:-pad)
    (validValues~ :initform
-		 '(name validValues type xcb:INT32 size
-			(xcb:-fieldref 'length))
-		 :type xcb:-list)
+                 '(name validValues type xcb:INT32 size
+                        (xcb:-fieldref 'length))
+                 :type xcb:-list)
    (validValues :initarg :validValues :type xcb:-ignore)))
 
 (defclass xcb:randr:ConfigureOutputProperty
@@ -355,8 +355,8 @@
    (range :initarg :range :type xcb:BOOL)
    (pad~0 :initform 2 :type xcb:-pad)
    (values~ :initform
-	    '(name values type xcb:INT32 size nil)
-	    :type xcb:-list)
+            '(name values type xcb:INT32 size nil)
+            :type xcb:-list)
    (values :initarg :values :type xcb:-ignore)))
 
 (defclass xcb:randr:ChangeOutputProperty
@@ -370,13 +370,13 @@
    (pad~0 :initform 2 :type xcb:-pad)
    (num-units :initarg :num-units :type xcb:CARD32)
    (data~ :initform
-	  '(name data type xcb:void size
-		 (/
-		  (*
-		   (xcb:-fieldref 'num-units)
-		   (xcb:-fieldref 'format))
-		  8))
-	  :type xcb:-list)
+          '(name data type xcb:void size
+                 (/
+                  (*
+                   (xcb:-fieldref 'num-units)
+                   (xcb:-fieldref 'format))
+                  8))
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:randr:DeleteOutputProperty
@@ -406,13 +406,13 @@
    (num-items :initarg :num-items :type xcb:CARD32)
    (pad~0 :initform 12 :type xcb:-pad)
    (data~ :initform
-	  '(name data type xcb:BYTE size
-		 (*
-		  (xcb:-fieldref 'num-items)
-		  (/
-		   (xcb:-fieldref 'format)
-		   8)))
-	  :type xcb:-list)
+          '(name data type xcb:BYTE size
+                 (*
+                  (xcb:-fieldref 'num-items)
+                  (/
+                   (xcb:-fieldref 'format)
+                   8)))
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:randr:CreateMode
@@ -421,8 +421,8 @@
    (window :initarg :window :type xcb:WINDOW)
    (mode-info :initarg :mode-info :type xcb:randr:ModeInfo)
    (name~ :initform
-	  '(name name type xcb:char size nil)
-	  :type xcb:-list)
+          '(name name type xcb:char size nil)
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 (defclass xcb:randr:CreateMode~reply
   (xcb:-reply)
@@ -470,14 +470,14 @@
    (num-outputs :initarg :num-outputs :type xcb:CARD16)
    (num-possible-outputs :initarg :num-possible-outputs :type xcb:CARD16)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'num-outputs))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'num-outputs))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)
    (possible~ :initform
-	      '(name possible type xcb:randr:OUTPUT size
-		     (xcb:-fieldref 'num-possible-outputs))
-	      :type xcb:-list)
+              '(name possible type xcb:randr:OUTPUT size
+                     (xcb:-fieldref 'num-possible-outputs))
+              :type xcb:-list)
    (possible :initarg :possible :type xcb:-ignore)))
 
 (defclass xcb:randr:SetCrtcConfig
@@ -492,8 +492,8 @@
    (rotation :initarg :rotation :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size nil)
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size nil)
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)))
 (defclass xcb:randr:SetCrtcConfig~reply
   (xcb:-reply)
@@ -527,19 +527,19 @@
    (size :initarg :size :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (red~ :initform
-	 '(name red type xcb:CARD16 size
-		(xcb:-fieldref 'size))
-	 :type xcb:-list)
+         '(name red type xcb:CARD16 size
+                (xcb:-fieldref 'size))
+         :type xcb:-list)
    (red :initarg :red :type xcb:-ignore)
    (green~ :initform
-	   '(name green type xcb:CARD16 size
-		  (xcb:-fieldref 'size))
-	   :type xcb:-list)
+           '(name green type xcb:CARD16 size
+                  (xcb:-fieldref 'size))
+           :type xcb:-list)
    (green :initarg :green :type xcb:-ignore)
    (blue~ :initform
-	  '(name blue type xcb:CARD16 size
-		 (xcb:-fieldref 'size))
-	  :type xcb:-list)
+          '(name blue type xcb:CARD16 size
+                 (xcb:-fieldref 'size))
+          :type xcb:-list)
    (blue :initarg :blue :type xcb:-ignore)))
 
 (defclass xcb:randr:SetCrtcGamma
@@ -549,19 +549,19 @@
    (size :initarg :size :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (red~ :initform
-	 '(name red type xcb:CARD16 size
-		(xcb:-fieldref 'size))
-	 :type xcb:-list)
+         '(name red type xcb:CARD16 size
+                (xcb:-fieldref 'size))
+         :type xcb:-list)
    (red :initarg :red :type xcb:-ignore)
    (green~ :initform
-	   '(name green type xcb:CARD16 size
-		  (xcb:-fieldref 'size))
-	   :type xcb:-list)
+           '(name green type xcb:CARD16 size
+                  (xcb:-fieldref 'size))
+           :type xcb:-list)
    (green :initarg :green :type xcb:-ignore)
    (blue~ :initform
-	  '(name blue type xcb:CARD16 size
-		 (xcb:-fieldref 'size))
-	  :type xcb:-list)
+          '(name blue type xcb:CARD16 size
+                 (xcb:-fieldref 'size))
+          :type xcb:-list)
    (blue :initarg :blue :type xcb:-ignore)))
 
 (defclass xcb:randr:GetScreenResourcesCurrent
@@ -581,24 +581,24 @@
    (names-len :initarg :names-len :type xcb:CARD16)
    (pad~1 :initform 8 :type xcb:-pad)
    (crtcs~ :initform
-	   '(name crtcs type xcb:randr:CRTC size
-		  (xcb:-fieldref 'num-crtcs))
-	   :type xcb:-list)
+           '(name crtcs type xcb:randr:CRTC size
+                  (xcb:-fieldref 'num-crtcs))
+           :type xcb:-list)
    (crtcs :initarg :crtcs :type xcb:-ignore)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'num-outputs))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'num-outputs))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)
    (modes~ :initform
-	   '(name modes type xcb:randr:ModeInfo size
-		  (xcb:-fieldref 'num-modes))
-	   :type xcb:-list)
+           '(name modes type xcb:randr:ModeInfo size
+                  (xcb:-fieldref 'num-modes))
+           :type xcb:-list)
    (modes :initarg :modes :type xcb:-ignore)
    (names~ :initform
-	   '(name names type xcb:BYTE size
-		  (xcb:-fieldref 'names-len))
-	   :type xcb:-list)
+           '(name names type xcb:BYTE size
+                  (xcb:-fieldref 'names-len))
+           :type xcb:-list)
    (names :initarg :names :type xcb:-ignore)))
 
 (defconst xcb:randr:Transform:Unit 1)
@@ -614,14 +614,14 @@
    (filter-len :initarg :filter-len :type xcb:CARD16)
    (pad~0 :initform 2 :type xcb:-pad)
    (filter-name~ :initform
-		 '(name filter-name type xcb:char size
-			(xcb:-fieldref 'filter-len))
-		 :type xcb:-list)
+                 '(name filter-name type xcb:char size
+                        (xcb:-fieldref 'filter-len))
+                 :type xcb:-list)
    (filter-name :initarg :filter-name :type xcb:-ignore)
    (pad~1 :initform 4 :type xcb:-pad-align)
    (filter-params~ :initform
-		   '(name filter-params type xcb:render:FIXED size nil)
-		   :type xcb:-list)
+                   '(name filter-params type xcb:render:FIXED size nil)
+                   :type xcb:-list)
    (filter-params :initarg :filter-params :type xcb:-ignore)))
 
 (defclass xcb:randr:GetCrtcTransform
@@ -643,26 +643,26 @@
    (current-len :initarg :current-len :type xcb:CARD16)
    (current-nparams :initarg :current-nparams :type xcb:CARD16)
    (pending-filter-name~ :initform
-			 '(name pending-filter-name type xcb:char size
-				(xcb:-fieldref 'pending-len))
-			 :type xcb:-list)
+                         '(name pending-filter-name type xcb:char size
+                                (xcb:-fieldref 'pending-len))
+                         :type xcb:-list)
    (pending-filter-name :initarg :pending-filter-name :type xcb:-ignore)
    (pad~3 :initform 4 :type xcb:-pad-align)
    (pending-params~ :initform
-		    '(name pending-params type xcb:render:FIXED size
-			   (xcb:-fieldref 'pending-nparams))
-		    :type xcb:-list)
+                    '(name pending-params type xcb:render:FIXED size
+                           (xcb:-fieldref 'pending-nparams))
+                    :type xcb:-list)
    (pending-params :initarg :pending-params :type xcb:-ignore)
    (current-filter-name~ :initform
-			 '(name current-filter-name type xcb:char size
-				(xcb:-fieldref 'current-len))
-			 :type xcb:-list)
+                         '(name current-filter-name type xcb:char size
+                                (xcb:-fieldref 'current-len))
+                         :type xcb:-list)
    (current-filter-name :initarg :current-filter-name :type xcb:-ignore)
    (pad~4 :initform 4 :type xcb:-pad-align)
    (current-params~ :initform
-		    '(name current-params type xcb:render:FIXED size
-			   (xcb:-fieldref 'current-nparams))
-		    :type xcb:-list)
+                    '(name current-params type xcb:render:FIXED size
+                           (xcb:-fieldref 'current-nparams))
+                    :type xcb:-list)
    (current-params :initarg :current-params :type xcb:-ignore)))
 
 (defclass xcb:randr:GetPanning
@@ -742,9 +742,9 @@
    (num-providers :initarg :num-providers :type xcb:CARD16)
    (pad~1 :initform 18 :type xcb:-pad)
    (providers~ :initform
-	       '(name providers type xcb:randr:PROVIDER size
-		      (xcb:-fieldref 'num-providers))
-	       :type xcb:-list)
+               '(name providers type xcb:randr:PROVIDER size
+                      (xcb:-fieldref 'num-providers))
+               :type xcb:-list)
    (providers :initarg :providers :type xcb:-ignore)))
 
 (defconst xcb:randr:ProviderCapability:SourceOutput 1)
@@ -770,29 +770,29 @@
    (name-len :initarg :name-len :type xcb:CARD16)
    (pad~0 :initform 8 :type xcb:-pad)
    (crtcs~ :initform
-	   '(name crtcs type xcb:randr:CRTC size
-		  (xcb:-fieldref 'num-crtcs))
-	   :type xcb:-list)
+           '(name crtcs type xcb:randr:CRTC size
+                  (xcb:-fieldref 'num-crtcs))
+           :type xcb:-list)
    (crtcs :initarg :crtcs :type xcb:-ignore)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'num-outputs))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'num-outputs))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)
    (associated-providers~ :initform
-			  '(name associated-providers type xcb:randr:PROVIDER size
-				 (xcb:-fieldref 'num-associated-providers))
-			  :type xcb:-list)
+                          '(name associated-providers type xcb:randr:PROVIDER size
+                                 (xcb:-fieldref 'num-associated-providers))
+                          :type xcb:-list)
    (associated-providers :initarg :associated-providers :type xcb:-ignore)
    (associated-capability~ :initform
-			   '(name associated-capability type xcb:CARD32 size
-				  (xcb:-fieldref 'num-associated-providers))
-			   :type xcb:-list)
+                           '(name associated-capability type xcb:CARD32 size
+                                  (xcb:-fieldref 'num-associated-providers))
+                           :type xcb:-list)
    (associated-capability :initarg :associated-capability :type xcb:-ignore)
    (name~ :initform
-	  '(name name type xcb:char size
-		 (xcb:-fieldref 'name-len))
-	  :type xcb:-list)
+          '(name name type xcb:char size
+                 (xcb:-fieldref 'name-len))
+          :type xcb:-list)
    (name :initarg :name :type xcb:-ignore)))
 
 (defclass xcb:randr:SetProviderOffloadSink
@@ -821,9 +821,9 @@
    (num-atoms :initarg :num-atoms :type xcb:CARD16)
    (pad~1 :initform 22 :type xcb:-pad)
    (atoms~ :initform
-	   '(name atoms type xcb:ATOM size
-		  (xcb:-fieldref 'num-atoms))
-	   :type xcb:-list)
+           '(name atoms type xcb:ATOM size
+                  (xcb:-fieldref 'num-atoms))
+           :type xcb:-list)
    (atoms :initarg :atoms :type xcb:-ignore)))
 
 (defclass xcb:randr:QueryProviderProperty
@@ -841,9 +841,9 @@
    (immutable :initarg :immutable :type xcb:BOOL)
    (pad~1 :initform 21 :type xcb:-pad)
    (valid-values~ :initform
-		  '(name valid-values type xcb:INT32 size
-			 (xcb:-fieldref 'length))
-		  :type xcb:-list)
+                  '(name valid-values type xcb:INT32 size
+                         (xcb:-fieldref 'length))
+                  :type xcb:-list)
    (valid-values :initarg :valid-values :type xcb:-ignore)))
 
 (defclass xcb:randr:ConfigureProviderProperty
@@ -855,8 +855,8 @@
    (range :initarg :range :type xcb:BOOL)
    (pad~0 :initform 2 :type xcb:-pad)
    (values~ :initform
-	    '(name values type xcb:INT32 size nil)
-	    :type xcb:-list)
+            '(name values type xcb:INT32 size nil)
+            :type xcb:-list)
    (values :initarg :values :type xcb:-ignore)))
 
 (defclass xcb:randr:ChangeProviderProperty
@@ -870,13 +870,13 @@
    (pad~0 :initform 2 :type xcb:-pad)
    (num-items :initarg :num-items :type xcb:CARD32)
    (data~ :initform
-	  '(name data type xcb:void size
-		 (*
-		  (xcb:-fieldref 'num-items)
-		  (/
-		   (xcb:-fieldref 'format)
-		   8)))
-	  :type xcb:-list)
+          '(name data type xcb:void size
+                 (*
+                  (xcb:-fieldref 'num-items)
+                  (/
+                   (xcb:-fieldref 'format)
+                   8)))
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:randr:DeleteProviderProperty
@@ -906,13 +906,13 @@
    (num-items :initarg :num-items :type xcb:CARD32)
    (pad~0 :initform 12 :type xcb:-pad)
    (data~ :initform
-	  '(name data type xcb:void size
-		 (*
-		  (xcb:-fieldref 'num-items)
-		  (/
-		   (xcb:-fieldref 'format)
-		   8)))
-	  :type xcb:-list)
+          '(name data type xcb:void size
+                 (*
+                  (xcb:-fieldref 'num-items)
+                  (/
+                   (xcb:-fieldref 'format)
+                   8)))
+          :type xcb:-list)
    (data :initarg :data :type xcb:-ignore)))
 
 (defclass xcb:randr:ScreenChangeNotify
@@ -1008,9 +1008,9 @@
    (width-in-millimeters :initarg :width-in-millimeters :type xcb:CARD32)
    (height-in-millimeters :initarg :height-in-millimeters :type xcb:CARD32)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'nOutput))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'nOutput))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)))
 
 (defclass xcb:randr:GetMonitors
@@ -1028,9 +1028,9 @@
    (nOutputs :initarg :nOutputs :type xcb:CARD32)
    (pad~1 :initform 12 :type xcb:-pad)
    (monitors~ :initform
-	      '(name monitors type xcb:randr:MonitorInfo size
-		     (xcb:-fieldref 'nMonitors))
-	      :type xcb:-list)
+              '(name monitors type xcb:randr:MonitorInfo size
+                     (xcb:-fieldref 'nMonitors))
+              :type xcb:-list)
    (monitors :initarg :monitors :type xcb:-ignore)))
 
 (defclass xcb:randr:SetMonitor
@@ -1053,14 +1053,14 @@
    (num-crtcs :initarg :num-crtcs :type xcb:CARD16)
    (num-outputs :initarg :num-outputs :type xcb:CARD16)
    (crtcs~ :initform
-	   '(name crtcs type xcb:randr:CRTC size
-		  (xcb:-fieldref 'num-crtcs))
-	   :type xcb:-list)
+           '(name crtcs type xcb:randr:CRTC size
+                  (xcb:-fieldref 'num-crtcs))
+           :type xcb:-list)
    (crtcs :initarg :crtcs :type xcb:-ignore)
    (outputs~ :initform
-	     '(name outputs type xcb:randr:OUTPUT size
-		    (xcb:-fieldref 'num-outputs))
-	     :type xcb:-list)
+             '(name outputs type xcb:randr:OUTPUT size
+                    (xcb:-fieldref 'num-outputs))
+             :type xcb:-list)
    (outputs :initarg :outputs :type xcb:-ignore)))
 (defclass xcb:randr:CreateLease~reply
   (xcb:-reply)

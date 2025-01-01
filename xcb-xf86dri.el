@@ -75,9 +75,9 @@
    (bus-id-len :initarg :bus-id-len :type xcb:CARD32)
    (pad~1 :initform 12 :type xcb:-pad)
    (bus-id~ :initform
-	    '(name bus-id type xcb:char size
-		   (xcb:-fieldref 'bus-id-len))
-	    :type xcb:-list)
+            '(name bus-id type xcb:char size
+                   (xcb:-fieldref 'bus-id-len))
+            :type xcb:-list)
    (bus-id :initarg :bus-id :type xcb:-ignore)))
 
 (defclass xcb:xf86dri:CloseConnection
@@ -100,9 +100,9 @@
    (client-driver-name-len :initarg :client-driver-name-len :type xcb:CARD32)
    (pad~1 :initform 8 :type xcb:-pad)
    (client-driver-name~ :initform
-			'(name client-driver-name type xcb:char size
-			       (xcb:-fieldref 'client-driver-name-len))
-			:type xcb:-list)
+                        '(name client-driver-name type xcb:char size
+                               (xcb:-fieldref 'client-driver-name-len))
+                        :type xcb:-list)
    (client-driver-name :initarg :client-driver-name :type xcb:-ignore)))
 
 (defclass xcb:xf86dri:CreateContext
@@ -163,14 +163,14 @@
    (back-y :initarg :back-y :type xcb:INT16)
    (num-back-clip-rects :initarg :num-back-clip-rects :type xcb:CARD32)
    (clip-rects~ :initform
-		'(name clip-rects type xcb:xf86dri:DrmClipRect size
-		       (xcb:-fieldref 'num-clip-rects))
-		:type xcb:-list)
+                '(name clip-rects type xcb:xf86dri:DrmClipRect size
+                       (xcb:-fieldref 'num-clip-rects))
+                :type xcb:-list)
    (clip-rects :initarg :clip-rects :type xcb:-ignore)
    (back-clip-rects~ :initform
-		     '(name back-clip-rects type xcb:xf86dri:DrmClipRect size
-			    (xcb:-fieldref 'num-back-clip-rects))
-		     :type xcb:-list)
+                     '(name back-clip-rects type xcb:xf86dri:DrmClipRect size
+                            (xcb:-fieldref 'num-back-clip-rects))
+                     :type xcb:-list)
    (back-clip-rects :initarg :back-clip-rects :type xcb:-ignore)))
 
 (defclass xcb:xf86dri:GetDeviceInfo
@@ -189,9 +189,9 @@
    (framebuffer-stride :initarg :framebuffer-stride :type xcb:CARD32)
    (device-private-size :initarg :device-private-size :type xcb:CARD32)
    (device-private~ :initform
-		    '(name device-private type xcb:CARD32 size
-			   (xcb:-fieldref 'device-private-size))
-		    :type xcb:-list)
+                    '(name device-private type xcb:CARD32 size
+                           (xcb:-fieldref 'device-private-size))
+                    :type xcb:-list)
    (device-private :initarg :device-private :type xcb:-ignore)))
 
 (defclass xcb:xf86dri:AuthConnection
