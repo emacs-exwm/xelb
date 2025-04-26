@@ -54,6 +54,10 @@
 (require 'eieio)
 (require 'xcb-debug)
 
+;; Require subr-x on Emacs < 29 for when-let*, it has since been moved to
+;; subr (autoloaded).
+(eval-when-compile (when (< emacs-major-version 29) (require 'subr-x)))
+
 (define-minor-mode xcb:debug
   "Debug-logging enabled if non-nil."
   :group 'debug
