@@ -54,6 +54,13 @@
 (require 'eieio)
 (require 'xcb-debug)
 
+;; We can't require `xcb-xkb' because it requires us.
+(eieio-declare-slots xkbType)
+;; We can't require `xcb-xim' because it requires us.
+(eieio-declare-slots extensions) ;; xim:query-extension
+;; We can't require `xcb-present' because it requires us.
+(eieio-declare-slots ~sequence evtype) ;xcb:present:Generic
+
 ;; Require subr-x on Emacs < 29 for when-let*, it has since been moved to
 ;; subr (autoloaded).
 (eval-when-compile (when (< emacs-major-version 29) (require 'subr-x)))
@@ -831,6 +838,9 @@ This method auto-pads short results to 32 bytes."
           ;; XKB event.
           (setf (slot-value obj 'xkbType) (aref event-number 0))
         ;; Generic event.
+        ;; FIXME: I see `extension' and `evtype' fields in
+        ;; `xcb:present:Generic' but no `extensions' (which I find
+        ;; only in `xim:query-extension' and `xim:query-extension-reply').
         (setf (slot-value obj 'extensions) (aref event-number 0)
               (slot-value obj 'evtype) (aref event-number 1))))
     (when (slot-exists-p obj '~sequence)
