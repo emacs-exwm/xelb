@@ -56,8 +56,8 @@
 
 ;; We can't require `xcb-xkb' because it requires us.
 (eieio-declare-slots xkbType)
-;; We can't require `xcb-xim' because it requires us.
-(eieio-declare-slots extensions) ;; xim:query-extension
+;; We can't require `xcb-preset' because it requires us.
+(eieio-declare-slots extension) ;; xcb:preset:Generic
 ;; We can't require `xcb-present' because it requires us.
 (eieio-declare-slots ~sequence evtype) ;xcb:present:Generic
 
@@ -838,10 +838,7 @@ This method auto-pads short results to 32 bytes."
           ;; XKB event.
           (setf (slot-value obj 'xkbType) (aref event-number 0))
         ;; Generic event.
-        ;; FIXME: I see `extension' and `evtype' fields in
-        ;; `xcb:present:Generic' but no `extensions' (which I find
-        ;; only in `xim:query-extension' and `xim:query-extension-reply').
-        (setf (slot-value obj 'extensions) (aref event-number 0)
+        (setf (slot-value obj 'extension) (aref event-number 0)
               (slot-value obj 'evtype) (aref event-number 1))))
     (when (slot-exists-p obj '~sequence)
       (setf (slot-value obj '~sequence) (or sequence 0)))
