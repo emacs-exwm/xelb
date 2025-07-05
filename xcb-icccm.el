@@ -228,8 +228,8 @@ This method automatically decodes the value (as string)."
                       'compound-text-with-extensions)
                      ((or (eq type xcb:Atom:TEXT) (eq type xcb:Atom:C_STRING))
                       'no-conversion)
-                     (t (error "[XELB:ICCCM] Unsupported encoding: %d"
-                               type)))))))
+                     (t (error "[XELB:ICCCM] Unsupported encoding: %s (%d)"
+                               (x-get-atom-name type) type)))))))
     retval))
 
 (defclass xcb:icccm:-ChangeProperty-text (xcb:icccm:-ChangeProperty)
@@ -254,7 +254,8 @@ This method automatically encodes the data (which is a string)."
                    'compound-text-with-extensions)
                   ((or (eq type xcb:Atom:TEXT) (eq type xcb:Atom:C_STRING))
                    'no-conversion)
-                  (t (error "[XELB:ICCCM] Unsupported encoding: %d" type)))))))
+                  (t (error "[XELB:ICCCM] Unsupported encoding: %s (%d)"
+                            (x-get-atom-name type) type)))))))
   (cl-call-next-method obj))
 
 ;;;; Abstract classes for getting/changing single field properties
