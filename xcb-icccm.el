@@ -47,9 +47,12 @@
 
 (eval-and-compile
   (defconst xcb:icccm:-atoms
-    '(UTF8_STRING COMPOUND_TEXT TEXT C_STRING MANAGER
-                  WM_PROTOCOLS WM_TAKE_FOCUS WM_DELETE_WINDOW
-                  WM_STATE WM_CHANGE_STATE WM_S0)
+    '(;; Standard atoms
+      UTF8_STRING COMPOUND_TEXT TEXT C_STRING MANAGER
+      WM_PROTOCOLS WM_TAKE_FOCUS WM_DELETE_WINDOW
+      WM_STATE WM_CHANGE_STATE WM_S0
+      ;; Illegal alias of UTF8_STRING used by Valve's Steam.
+      UTF-8)
     "Atoms involved in ICCCM.")
 
   (dolist (atom xcb:icccm:-atoms)
@@ -222,11 +225,14 @@ This method automatically decodes the value (as string)."
         (setf value
               (decode-coding-string
                (apply #'unibyte-string (append value nil))
-               (cond ((= type xcb:Atom:UTF8_STRING) 'utf-8)
+               (cond ((or (= type xcb:Atom:UTF8_STRING)
+                          (= type xcb:Atom:UTF-8))
+                      'utf-8)
                      ((= type xcb:Atom:STRING) 'iso-latin-1)
                      ((= type xcb:Atom:COMPOUND_TEXT)
                       'compound-text-with-extensions)
-                     ((or (eq type xcb:Atom:TEXT) (eq type xcb:Atom:C_STRING))
+                     ((or (= type xcb:Atom:TEXT)
+                          (= type xcb:Atom:C_STRING))
                       'no-conversion)
                      (t (error "[XELB:ICCCM] Unsupported encoding: %s (%d)"
                                (x-get-atom-name type) type)))))))
