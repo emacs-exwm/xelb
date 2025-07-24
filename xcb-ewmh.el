@@ -31,7 +31,7 @@
 ;; + Initializing this library auto loads and initializes 'xcb-icccm'.
 
 ;; References:
-;; + EWMH (http://standards.freedesktop.org/wm-spec/wm-spec-latest.html)
+;; + EWMH (https://specifications.freedesktop.org/wm-spec/latest/)
 ;; + xcb/util-wm (git://anongit.freedesktop.org/xcb/util-wm)
 
 ;;; Code:

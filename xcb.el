@@ -48,7 +48,7 @@
 ;; + Use XC-MISC extension for `xcb:generate-id' when IDs are used up.
 
 ;; References:
-;; + X protocol (http://www.x.org/releases/X11R7.7/doc/xproto/x11protocol.txt)
+;; + X protocol (https://www.x.org/releases/X11R7.7/doc/xproto/x11protocol.txt)
 
 ;;; Code:
 

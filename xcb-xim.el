@@ -33,7 +33,7 @@
 ;; + Add extension support.
 
 ;; References:
-;; + XIM (http://www.x.org/releases/X11R7.7/doc/libX11/XIM/xim.txt)
+;; + XIM (https://www.x.org/releases/X11R7.7/doc/libX11/XIM/xim.txt)
 
 ;;; Code:
 

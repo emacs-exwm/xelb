@@ -33,7 +33,7 @@
 ;;   'xcb:KeyButMask:Mod*'.
 
 ;; References:
-;; + X protocol (http://www.x.org/releases/X11R7.7/doc/xproto/x11protocol.txt)
+;; + X protocol (https://www.x.org/releases/X11R7.7/doc/xproto/x11protocol.txt)
 ;; + XKB protocol (https://www.x.org/releases/X11R7.7/doc/kbproto/xkbproto.txt)
 ;; + xcb/util-keysyms (git://anongit.freedesktop.org/xcb/util-keysyms)
 

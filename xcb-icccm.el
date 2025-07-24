@@ -35,7 +35,7 @@
 ;;   simply saved as global variables.
 
 ;; References:
-;; + ICCCM (http://www.x.org/releases/X11R7.7/doc/xorg-docs/icccm/icccm.txt)
+;; + ICCCM (https://www.x.org/releases/X11R7.7/doc/xorg-docs/icccm/icccm.txt)
 ;; + xcb/util-wm (git://anongit.freedesktop.org/xcb/util-wm)
 
 ;;; Code:
