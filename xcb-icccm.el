@@ -143,34 +143,33 @@ A valid timestamp (rather than `xcb:Time:CurrentTime') must be supplied.")
 according to BYTE-ARRAY.
 
 This method automatically format the value as 8, 16 or 32 bits array."
-  (let ((retval (cl-call-next-method obj byte-array))
-        tmp)
+  (let ((retval (cl-call-next-method obj byte-array)))
     (with-slots (~lsb length format value-len value) obj
       (if (or (= 0 value-len) (= 0 length))
           (setf value nil)              ;no available value
-        (setq tmp value                 ;long-offset is always 0
-              value nil)
-        (pcase format
-          (8
-           (cl-assert (= value-len (length tmp)))
-           (setf value tmp))
-          (16
-           (cl-assert (= (* 2 value-len) (length tmp)))
-           (setf value (make-vector value-len 0))
-           (if ~lsb
-               (dotimes (idx value-len)
-                 (aset value idx (xcb:-unpack-u2-lsb tmp (* 2 idx))))
-             (dotimes (idx value-len)
-               (aset value idx (xcb:-unpack-u2 tmp (* 2 idx))))))
-          (32
-           (cl-assert (= (* 4 value-len) (length tmp)))
-           (setf value (make-vector value-len 0))
-           (if ~lsb
-               (dotimes (idx value-len)
-                 (aset value idx (xcb:-unpack-u4-lsb tmp (* 4 idx))))
-             (dotimes (idx value-len)
-               (aset value idx (xcb:-unpack-u4 tmp (* 4 idx))))))
-          (_ (cl-assert nil)))))
+        (let ((tmp value))              ;long-offset is always 0
+          (pcase format
+            (8
+             (cl-assert (= value-len (length tmp))))
+            (16
+             (cl-assert (= (* 2 value-len) (length tmp)))
+             (let ((newval (make-vector value-len 0)))
+               (if ~lsb
+                   (dotimes (idx value-len)
+                     (aset newval idx (xcb:-unpack-u2-lsb tmp (* 2 idx))))
+                 (dotimes (idx value-len)
+                   (aset newval idx (xcb:-unpack-u2 tmp (* 2 idx)))))
+               (setf value newval)))
+            (32
+             (cl-assert (= (* 4 value-len) (length tmp)))
+             (let ((newval (make-vector value-len 0)))
+               (if ~lsb
+                   (dotimes (idx value-len)
+                     (aset newval idx (xcb:-unpack-u4-lsb tmp (* 4 idx))))
+                 (dotimes (idx value-len)
+                   (aset newval idx (xcb:-unpack-u4 tmp (* 4 idx)))))
+               (setf value newval)))
+            (_ (cl-assert nil))))))
     retval))
 
 (defclass xcb:icccm:-ChangeProperty (xcb:ChangeProperty)
