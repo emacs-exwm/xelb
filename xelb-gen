@@ -89,7 +89,7 @@
      (intern-soft (concat "xcb:" name))
      ;; Defined by an imported extension.
      (cl-dolist (i xelb-imports)
-       (when-let ((type (intern-soft (concat i name))))
+       (when-let* ((type (intern-soft (concat i name))))
          (cl-return type)))
      ;; Not defined.
      (error "Undefined type: %s" name))))
