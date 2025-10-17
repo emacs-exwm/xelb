@@ -62,59 +62,59 @@
    (pad~0 :initform 21 :type xcb:-pad)))
 
 (defclass xcb:glx:BadContext
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 0)))
 
 (defclass xcb:glx:BadContextState
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 1)))
 
 (defclass xcb:glx:BadDrawable
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 2)))
 
 (defclass xcb:glx:BadPixmap
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 3)))
 
 (defclass xcb:glx:BadContextTag
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 4)))
 
 (defclass xcb:glx:BadCurrentWindow
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 5)))
 
 (defclass xcb:glx:BadRenderRequest
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 6)))
 
 (defclass xcb:glx:BadLargeRequest
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 7)))
 
 (defclass xcb:glx:UnsupportedPrivateRequest
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 8)))
 
 (defclass xcb:glx:BadFBConfig
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 9)))
 
 (defclass xcb:glx:BadPbuffer
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 10)))
 
 (defclass xcb:glx:BadCurrentDrawable
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 11)))
 
 (defclass xcb:glx:BadWindow
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 12)))
 
 (defclass xcb:glx:GLXBadProfileARB
-  (xcb:-error xcb:glx:Generic)
+  (xcb:glx:Generic)
   ((~code :initform 13)))
 
 (defclass xcb:glx:PbufferClobber

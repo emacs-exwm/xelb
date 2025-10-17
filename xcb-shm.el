@@ -48,7 +48,7 @@
    (offset :initarg :offset :type xcb:CARD32)))
 
 (defclass xcb:shm:BadSeg
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 0)))
 
 (defclass xcb:shm:QueryVersion

@@ -795,63 +795,63 @@
    (pad~0 :initform 1 :type xcb:-pad)))
 
 (defclass xcb:Window
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 3)))
 
 (defclass xcb:Pixmap
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 4)))
 
 (defclass xcb:Atom
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 5)))
 
 (defclass xcb:Cursor
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 6)))
 
 (defclass xcb:Font
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 7)))
 
 (defclass xcb:Match
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 8)))
 
 (defclass xcb:Drawable
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 9)))
 
 (defclass xcb:Access
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 10)))
 
 (defclass xcb:Alloc
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 11)))
 
 (defclass xcb:Colormap
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 12)))
 
 (defclass xcb:GContext
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 13)))
 
 (defclass xcb:IDChoice
-  (xcb:-error xcb:Value)
+  (xcb:Value)
   ((~code :initform 14)))
 
 (defclass xcb:Name
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 15)))
 
 (defclass xcb:Length
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 16)))
 
 (defclass xcb:Implementation
-  (xcb:-error xcb:Request)
+  (xcb:Request)
   ((~code :initform 17)))
 
 (defconst xcb:WindowClass:CopyFromParent 0)

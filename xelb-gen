@@ -479,7 +479,7 @@ The `combine-adjacent' attribute is simply ignored."
          (refname (xelb-resolve-type refname))
          (error-number (string-to-number (xelb-node-attr node 'number))))
     (setq xelb-error-alist (nconc xelb-error-alist `((,error-number . ,name))))
-    `((defclass ,name (xcb:-error ,refname) ;Shadow the method of ref
+    `((defclass ,name (,refname) ;Shadow the method of ref
         ((~code :initform ,error-number))))))
 
 (defun xelb-parse-eventstruct (node)
