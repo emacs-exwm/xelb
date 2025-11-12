@@ -916,6 +916,13 @@ The optional argument CTX is for <paramref>."
         (setf (slot-value obj (eieio-slot-descriptor-name slot)) (car tmp))))
     (slot-value obj '~size)))
 
+(defun xcb:unmarshal-new (type byte-array)
+  "Construct a new object of type TYPE and unmarshal BYTE-ARRAY into it.
+Return the new object."
+  (let ((obj (make-instance type)))
+    (xcb:unmarshal obj byte-array)
+    obj))
+
 
 
 (provide 'xcb-types)
