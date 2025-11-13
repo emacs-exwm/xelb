@@ -245,26 +245,20 @@
         (when (>= (length cache) data-len)
           (xcb:-log "Setup response: %s" cache)
           (pcase (aref cache 0)
-            (0
-             ;; Connection failed.
-             (setq obj (make-instance 'xcb:SetupFailed))
-             (xcb:unmarshal obj cache)
-             (setq cache (substring cache data-len))
+            (0 ;; Connection failed.
+             (setf obj (xcb:unmarshal-new 'xcb:SetupFailed cache)
+                   cache (substring cache data-len))
              (error "[XELB] Connection failed: %s" (slot-value obj 'reason)))
-            (1
-             ;; Connection established.
-             (setf (slot-value connection 'message-cache) [])
-             (set-process-filter process #'xcb:-connection-filter)
-             (setq obj (make-instance 'xcb:Setup))
-             (xcb:unmarshal obj cache)
-             (setq cache (substring cache data-len))
-             (setf (slot-value connection 'setup-data) obj)
-             (setf (slot-value connection 'connected) t))
-            (2
-             ;; Authentication required.
-             (setq obj (make-instance 'xcb:SetupAuthenticate))
-             (xcb:unmarshal obj cache)
-             (setq cache (substring cache data-len))
+            (1 ;; Connection established.
+             (setf obj (xcb:unmarshal-new 'xcb:Setup cache)
+                   cache (substring cache data-len)
+                   (slot-value connection 'message-cache) []
+                   (process-filter process) #'xcb:-connection-filter
+                   (slot-value connection 'setup-data) obj
+                   (slot-value connection 'connected) t))
+            (2 ;; Authentication required.
+             (setf obj (xcb:unmarshal-new 'xcb:SetupAuthenticate cache)
+                   cache (substring cache data-len))
              (error "[XELB] Authentication not supported: %s"
                     (slot-value obj 'reason)))
             (x (error "Unrecognized setup status: %d" x)))))
@@ -652,31 +646,26 @@ Otherwise no error will ever be reported."
   (let* ((reply-plist (slot-value obj 'reply-plist))
          (reply-data (plist-get reply-plist sequence))
          (error-plist (slot-value obj 'error-plist))
-         (error-data (plist-get error-plist sequence))
-         class-name reply replies error errors)
-    (if (symbolp reply-data)
-        (setq replies nil)              ;no reply
-      (setq class-name (xcb:-request-class->reply-class (car reply-data)))
-      (if multiple
-          ;; Multiple replies
-          (dolist (i (cdr reply-data))
-            (setq reply (make-instance class-name))
-            (xcb:unmarshal reply i)
-            (setq replies (nconc replies (list reply))))
-        ;; Single reply
-        (setq reply-data (cadr reply-data)
-              replies (make-instance class-name))
-        (xcb:unmarshal replies reply-data)))
-    (setq errors
-          (mapcar (lambda (i)
-                    (setq error (make-instance
-                                 (xcb:-error-number->class obj (car i))))
-                    (xcb:unmarshal error (cdr i))
-                    error)
-                  error-data))
-    (cl-remf (slot-value obj 'reply-plist) sequence)
-    (cl-remf (slot-value obj 'error-plist) sequence)
-    (list replies errors)))
+         (error-data (plist-get error-plist sequence)))
+    (prog1 (list
+            ;; replies
+            (unless (symbolp reply-data) ;no reply
+              (let ((class-name (xcb:-request-class->reply-class
+                                 (car reply-data))))
+                (if multiple
+                    ;; Multiple replies
+                    (cl-loop
+                     for reply in (cdr reply-data)
+                     collect (xcb:unmarshal-new class-name reply))
+                  ;; Single reply
+                  (xcb:unmarshal-new class-name (cadr reply-data)))))
+            ;; errors
+            (cl-loop
+             for (errno . err) in error-data
+             for class = (xcb:-error-number->class obj errno)
+             collect (xcb:unmarshal-new class err)))
+      (cl-remf (slot-value obj 'reply-plist) sequence)
+      (cl-remf (slot-value obj 'error-plist) sequence))))
 
 (defmacro xcb:+reply (obj sequence &optional multiple)
   "Return the reply of a request of which the sequence number is SEQUENCE.
@@ -693,22 +682,18 @@ MULTIPLE value, or some replies may be lost!"
   (when (plist-member (slot-value obj 'reply-plist) sequence)
     (error "This method is intended for requests with no reply"))
   (xcb:flush obj)                      ;or we may have to wait forever
-  (let ((error-plist (slot-value obj 'error-plist))
-        error-obj tmp)
+  (let ((error-plist (slot-value obj 'error-plist)))
     (unless (plist-member error-plist sequence)
       (error "This method shall be called after `xcb:+request-checked'"))
     (when (> sequence (slot-value obj 'last-seen-sequence))
       (xcb:aux:sync obj))         ;wait until the request is processed
-    (setq error-obj
-          (mapcar (lambda (i)
-                    (setq tmp (cdr i)
-                          i (make-instance
-                             (xcb:-error-number->class obj (car i))))
-                    (xcb:unmarshal i tmp)
-                    i)
-                  (plist-get error-plist sequence)))
-    (cl-remf (slot-value obj 'error-plist) sequence)
-    error-obj))
+    (prog1
+        (cl-loop
+         with error-data = (plist-get error-plist sequence)
+         for (errno . data) in error-data
+         for class = (xcb:-error-number->class obj errno)
+         collect (xcb:unmarshal-new class data))
+      (cl-remf (slot-value obj 'error-plist) sequence))))
 
 (defmacro xcb:request-check (obj sequence)
   "Return the error of the request of which the sequence number is SEQUENCE.
