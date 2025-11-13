@@ -257,7 +257,7 @@
                     (insert-file-contents path) (buffer-string))))
           xcb:lsb                       ;override global byte order
           best-size chunks
-          magic file-header file-header-toc chunk-header chunk)
+          magic file-header file-header-toc chunk-header)
       ;; Determine byte order
       (setq magic (substring data 0 4))
       (if (string= xcb:cursor:-file-magic-lsb magic)
@@ -265,14 +265,16 @@
         (if (string= xcb:cursor:-file-magic-msb magic)
             (setq xcb:lsb nil)          ;MSB first
           (throw 'return nil)))
-      (setq file-header (make-instance 'xcb:cursor:-file-header))
-      ;;
-      (xcb:unmarshal file-header (substring data 0 16))
+      (setq file-header (xcb:unmarshal-new 'xcb:cursor:-file-header
+                                           (substring data 0 16)))
       ;; FIXME: checks
-      (setq file-header-toc (make-instance 'xcb:cursor:-file-header-toc))
-      (xcb:unmarshal file-header-toc
-                     (substring data 12 (+ 16 (* 12 (slot-value file-header
-                                                                'ntoc)))))
+      (let ((ntoc (slot-value file-header 'ntoc)))
+      (setq file-header-toc
+            (xcb:unmarshal-new 'xcb:cursor:-file-header-toc
+                               ;; We start 4 bytes back (16-4=12) to
+                               ;; include the `ntoc' field in
+                               ;; `file-header-toc'.
+                               (substring data 12 (+ 16 (* 12 ntoc)))))
       (with-slots (toc) file-header-toc
         (let ((target (plist-get
                        (plist-get (slot-value obj 'extra-plist) 'cursor)
@@ -304,16 +306,14 @@
                           (/= version xcb:cursor:-file-chunk-image-version))
                   (throw 'return nil)))
               ;; Parse this chunk
-              (setq chunk (make-instance 'xcb:cursor:-file-chunk-image))
-              (xcb:unmarshal chunk (substring data (+ position 16)
-                                              (+ position 36
-                                                 (* 4
-                                                    (slot-value chunk-header
-                                                                'width)
-                                                    (slot-value chunk-header
-                                                                'height)))))
-              (setq chunks (nconc chunks (list chunk))))))
-        (list xcb:lsb chunks)))))
+              (with-slots (width height) chunk-header
+                (push (xcb:unmarshal-new
+                       'xcb:cursor:-file-chunk-image
+                       (substring data
+                                  (+ position 16)
+                                  (+ position 36 (* 4 width height))))
+                      chunks))))))
+        (list xcb:lsb (nreverse chunks))))))
 
 (cl-defmethod xcb:cursor:-load-cursor ((obj xcb:connection) file)
   "Load a cursor file FILE."

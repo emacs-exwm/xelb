@@ -152,9 +152,8 @@ This method must be called before using any other method in this module."
   "Handle a \\='NewKeyboardNotify' event."
   (let ((device-id (xcb:-get-extra-plist obj 'keysyms 'device-id))
         (callback (xcb:-get-extra-plist obj 'keysyms 'callback))
-        (obj1 (make-instance 'xcb:xkb:NewKeyboardNotify))
+        (obj1 (xcb:unmarshal-new 'xcb:xkb:NewKeyboardNotify data))
         device updated)
-    (xcb:unmarshal obj1 data)
     (with-slots (deviceID oldDeviceID requestMajor requestMinor changed) obj1
       (if (= 0 (logand changed xcb:xkb:NKNDetail:DeviceID))
           (when (/= 0 (logand changed xcb:xkb:NKNDetail:Keycodes))
@@ -185,9 +184,8 @@ This method must be called before using any other method in this module."
   "Handle \\='MapNotify' event."
   (let ((device-id (xcb:-get-extra-plist obj 'keysyms 'device-id))
         (callback (xcb:-get-extra-plist obj 'keysyms 'callback))
-        (obj1 (make-instance 'xcb:xkb:MapNotify))
+        (obj1 (xcb:unmarshal-new 'xcb:xkb:MapNotify data))
         updated)
-    (xcb:unmarshal obj1 data)
     (with-slots (deviceID changed firstType nTypes firstKeySym nKeySyms) obj1
       ;; Ensure this event is for the current device.
       (when (/= 0 (logand changed xcb:xkb:MapPart:KeyTypes))
