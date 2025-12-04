@@ -345,8 +345,9 @@ Consider let-bind it rather than change its global value."))
    (pad~0 :initform '(xim:PADDING (xcb:-fieldref 'length)) :type xcb:-pad)))
 
 (defconst xim:error-flag:invalid-both 0)
-(defconst xim:error-flag:invalid-im-id 1)
-(defconst xim:error-flag:invalid-ic-id 2)
+(defconst xim:error-flag:invalid-ic-id 1)
+(defconst xim:error-flag:invalid-im-id 2)
+(defconst xim:error-flag:valid-both 3)
 
 (defconst xim:error-code:bad-alloc 1)
 (defconst xim:error-code:bad-style 2)
