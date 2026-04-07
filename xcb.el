@@ -58,6 +58,12 @@
 
 (defvar xcb:connection-timeout 3 "Connection timeout.")
 
+(defvar xcb:socket-directory
+  (file-name-concat
+   (if (eq system-type 'android) (temporary-file-directory) "/tmp/")
+   ".X11-unix/")
+  "Directory containing X11 Unix Domain sockets.")
+
 ;;;; X connection related
 
 (defclass xcb:connection (xcb:--struct)
@@ -113,7 +119,7 @@
 
 (defun xcb:display->socket (display)
   "Convert X11 display DISPLAY to its corresponding socket."
-  (concat "/tmp/.X11-unix/X"
+  (concat xcb:socket-directory "X"
           (replace-regexp-in-string ".*:\\([^\\.]+\\).*" "\\1" display)))
 
 (defun xcb:connect-to-display-with-auth-info (&optional display auth _screen)
