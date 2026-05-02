@@ -266,7 +266,7 @@ Return COUNT-th match."
                    t))
         (when (= count 0)
           (throw 'return (slot-value f 'id))
-          (cl-decf count))))))
+          (decf count))))))
 
 (defun xcb:renderutil:find-standard (formats format)
   "Search FORMATS for a standard format matching format ID FORMAT."

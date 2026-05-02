@@ -25,6 +25,8 @@
 
 ;;; Code:
 
+(require 'compat)
+
 (defvar xcb-debug:buffer "*XELB-DEBUG*" "Buffer to write debug messages to.")
 
 (defvar xcb-debug:backtrace-start-frame 5
@@ -53,7 +55,7 @@ Here are some predefined candidates:
         (index xcb-debug:backtrace-start-frame))
     (while (setq frame (backtrace-frame index))
       (push frame frames)
-      (cl-incf index))
+      (incf index))
     (cl-remove-if-not 'car frames)))
 
 (defmacro xcb-debug:compile-time-function-name ()

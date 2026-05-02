@@ -355,7 +355,7 @@ FIRST-KEYCODE and COUNT specify the keycode range to update."
                 (`kp-numlock
                  (setq xcb:keysyms:num-lock-mask
                        (logior xcb:keysyms:num-lock-mask mask))))))
-          (cl-incf col)))))
+          (incf col)))))
   ;; Meta fallbacks to Alt.
   (unless (/= 0 xcb:keysyms:meta-mask)
     (setq xcb:keysyms:meta-mask xcb:keysyms:alt-mask
@@ -427,7 +427,7 @@ keycode.  The caller is responsible for checking which modifiers to use."
                 (with-slots (active (mods-mask* mods-mask) level) entry
                   (when (and (= 1 active)
                              (= (logand modifiers mods-mask) mods-mask*))
-                    (cl-incf index level)
+                    (incf index level)
                     (when (= 1 hasPreserve)
                       (setq preserve (slot-value (elt preserve*
                                                       (cl-position entry map))
@@ -457,7 +457,7 @@ Return 0 if conversion fails."
                 (setq continue t)
                 (when (= keysym (elt syms index))
                   (throw 'break (+ i min-keycode))))))
-          (cl-incf index))
+          (incf index))
         0))))
 
 ;; This list is largely base on 'lispy_function_keys' in 'keyboard.c'.

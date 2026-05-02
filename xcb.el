@@ -289,7 +289,7 @@ The result would be 29 or 61 bits, depending on the machine."
                             sequence16)))
       ;; `xcb:-cache-request' ensures sequence number never wraps.
       (when (> sequence request-sequence)
-        (cl-decf sequence #x10000))
+        (decf sequence #x10000))
       sequence)))
 
 (defun xcb:-connection-filter (process message)
@@ -416,7 +416,7 @@ Concurrency is disabled as it breaks the orders of errors, replies and events."
   "Process cached events."
   (with-slots (event-lock event-queue) conn
     (unless (< 0 event-lock)
-      (cl-incf event-lock)
+      (incf event-lock)
       (unwind-protect
           (let (event data synthetic)
             (while (setq event (pop event-queue))
@@ -425,7 +425,7 @@ Concurrency is disabled as it breaks the orders of errors, replies and events."
               (dolist (listener (aref event 0))
                 (xcb-debug:backtrace-on-error
                  (funcall listener data synthetic)))))
-        (cl-decf event-lock)))))
+        (decf event-lock)))))
 
 (cl-defmethod xcb:disconnect ((obj xcb:connection))
   "Disconnect from X server."
@@ -479,11 +479,11 @@ classes of EVENT (since they have the same event number)."
   (let ((cache (slot-value obj 'request-cache)))
     (when (< 0 (length cache))
       (setf (slot-value obj 'request-cache) []) ;should be cleared ASAP
-      (cl-incf (slot-value obj 'event-lock))
+      (incf (slot-value obj 'event-lock))
       (unwind-protect
           (process-send-string (slot-value obj 'process)
                                (apply #'unibyte-string (append cache nil)))
-        (cl-decf (slot-value obj 'event-lock)))
+        (decf (slot-value obj 'event-lock)))
       (xcb:-process-events obj))))
 
 (cl-defmethod xcb:get-extension-data ((obj xcb:connection) namespace)
@@ -556,10 +556,10 @@ classes of EVENT (since they have the same event number)."
          (cache (slot-value obj 'request-cache)))
     (when extension-opcode
       (setq msg (vconcat (vector extension-opcode) msg))
-      (cl-incf len))
+      (incf len))
     (when (> 2 (length msg))   ;for short message (e.g. GetInputFocus)
       (setq msg (vconcat msg [0]))
-      (cl-incf len))
+      (incf len))
     (setq msg
           (vconcat (substring msg 0 2)
                    (funcall (if (slot-value request '~lsb) #'xcb:-pack-u2-lsb
@@ -640,14 +640,14 @@ Otherwise no error will ever be reported."
     ;; Single reply
     (let ((process (slot-value obj 'process)))
       ;; Wait until the request processed
-      (cl-incf (slot-value obj 'event-lock))
+      (incf (slot-value obj 'event-lock))
       (unwind-protect
           (with-timeout (xcb:connection-timeout
                          (warn "[XELB] Retrieve reply timeout"))
             (while (and (> sequence (slot-value obj 'last-seen-sequence))
                         (<= sequence (slot-value obj 'request-sequence)))
               (accept-process-output process 1 nil 1)))
-        (cl-decf (slot-value obj 'event-lock)))
+        (decf (slot-value obj 'event-lock)))
       (xcb:-process-events obj)))
   (let* ((reply-plist (slot-value obj 'reply-plist))
          (reply-data (plist-get reply-plist sequence))
@@ -746,14 +746,14 @@ Sync by sending a GetInputFocus request and waiting until it's processed."
         (process (slot-value obj 'process)))
     (xcb:flush obj)
     ;; Wait until request processed
-    (cl-incf (slot-value obj 'event-lock))
+    (incf (slot-value obj 'event-lock))
     (unwind-protect
         (with-timeout (xcb:connection-timeout (warn "[XELB] Sync timeout"))
           (while (and (> sequence (slot-value obj 'last-seen-sequence))
                       ;; In case the sequence number has been wrapped.
                       (<= sequence (slot-value obj 'request-sequence)))
             (accept-process-output process 1 nil 1)))
-      (cl-decf (slot-value obj 'event-lock)))
+      (decf (slot-value obj 'event-lock)))
     (xcb:-process-events obj)
     ;; Discard any reply or error.
     (cl-remf (slot-value obj 'reply-plist) sequence)
