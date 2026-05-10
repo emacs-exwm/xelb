@@ -273,9 +273,9 @@ This method automatically encodes the data (which is a string)."
   "Fill in the fields in the reply of an ICCCM GetProperty (single-valued)
 request OBJ according to BYTE-ARRAY."
   (let ((retval (cl-call-next-method obj byte-array)))
-    (with-slots (value) obj
+    (with-slots (value value-len) obj
       (when value
-        (cl-assert (= 1 (length value)))
+        (cl-assert (= value-len (length value)))
         (setf value (elt value 0))))
     retval))
 
