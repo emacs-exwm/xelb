@@ -61,10 +61,6 @@
 ;; We can't require `xcb-present' because it requires us.
 (eieio-declare-slots ~sequence evtype) ;xcb:present:Generic
 
-;; Require subr-x on Emacs < 29 for when-let*, it has since been moved to
-;; subr (autoloaded).
-(eval-when-compile (when (< emacs-major-version 29) (require 'subr-x)))
-
 (define-minor-mode xcb:debug
   "Debug-logging enabled if non-nil."
   :group 'debug
