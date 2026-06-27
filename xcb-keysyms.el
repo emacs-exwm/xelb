@@ -216,27 +216,27 @@ FIRST-KEYTYPE and count specify the range of key types to update."
             partial 0
             first-keytype 0
             count 0))
-    (with-slots (deviceID present firstType nTypes totalTypes types-rtrn)
-        (xcb:+request-unchecked+reply obj
-            (make-instance 'xcb:xkb:GetMap
-                           :deviceSpec device-id
-                           :full full
-                           :partial partial
-                           :firstType first-keytype
-                           :nTypes count
-                           :firstKeySym 0
-                           :nKeySyms 0
-                           :firstKeyAction 0
-                           :nKeyActions 0
-                           :firstKeyBehavior 0
-                           :nKeyBehaviors 0
-                           :virtualMods 0
-                           :firstKeyExplicit 0
-                           :nKeyExplicit 0
-                           :firstModMapKey 0
-                           :nModMapKeys 0
-                           :firstVModMapKey 0
-                           :nVModMapKeys 0))
+    (when-let* ((map (xcb:+request-unchecked+reply obj
+                         (make-instance 'xcb:xkb:GetMap
+                                        :deviceSpec device-id
+                                        :full full
+                                        :partial partial
+                                        :firstType first-keytype
+                                        :nTypes count
+                                        :firstKeySym 0
+                                        :nKeySyms 0
+                                        :firstKeyAction 0
+                                        :nKeyActions 0
+                                        :firstKeyBehavior 0
+                                        :nKeyBehaviors 0
+                                        :virtualMods 0
+                                        :firstKeyExplicit 0
+                                        :nKeyExplicit 0
+                                        :firstModMapKey 0
+                                        :nModMapKeys 0
+                                        :firstVModMapKey 0
+                                        :nVModMapKeys 0))))
+    (with-slots (deviceID present firstType nTypes totalTypes types-rtrn) map
       (cl-assert (/= 0 (logand present xcb:xkb:MapPart:KeyTypes)))
       (setq device (or (xcb:-get-extra-plist obj 'keysyms deviceID)
                        (make-instance 'xcb:keysyms:-device)))
@@ -249,7 +249,7 @@ FIRST-KEYTYPE and count specify the range of key types to update."
                                 (substring keytypes (min (+ firstType nTypes)
                                                          totalTypes)))))
       (xcb:-set-extra-plist obj 'keysyms deviceID device)
-      deviceID)))
+      deviceID))))
 
 (cl-defmethod xcb:keysyms:-update-keycodes ((obj xcb:connection) device-id
                                             &optional first-keycode count)
